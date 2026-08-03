@@ -10,6 +10,7 @@
   nixpkgs.hostPlatform = "aarch64-darwin";
 
   users.users.mi30175 = {
+    home = "/Users/mi30175";
     shell = pkgs.fish;
   };
 
