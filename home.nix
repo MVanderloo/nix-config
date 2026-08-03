@@ -7,37 +7,37 @@
   home.homeDirectory = "/Users/mi30175";
 
   home.packages = with pkgs; [
-    # atuin
-    # bat
-    # btop
-    # cloc
-    # curl
-    # direnv
-    # duckdb
-    # dust
-    # eza
-    # fastfetch
-    # fd
-    # fzf
-    # gawk
-    # gh
-    # glab
-    # gnugrep
-    # jq
-    # just
-    # less
+    atuin
+    bat
+    btop
+    cloc
+    curl
+    direnv
+    duckdb
+    dust
+    eza
+    fastfetch
+    fd
+    fzf
+    gawk
+    gh
+    glab
+    gnugrep
+    jq
+    just
+    less
     neovim
-    # openssh
-    # sd
-    # sesh
-    # sl
-    # starship
-    # tealdeer
+    openssh
+    sd
+    sesh
+    sl
+    starship
+    tealdeer
     tmux
-    # unzip
-    # watchexec
-    # wget
-    # zoxide
+    unzip
+    watchexec
+    wget
+    zoxide
   ];
 
   programs.fish = {
