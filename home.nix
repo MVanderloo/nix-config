@@ -26,6 +26,7 @@
     jq
     just
     less
+    man
     neovim
     openssh
     sd
@@ -47,5 +48,11 @@
       fish_add_path --move /run/current-system/sw/bin
       fish_add_path --move /nix/var/nix/profiles/default/bin
     '';
+  };
+
+  services.gpg-agent = {
+    enable = true;
+    defaultCacheTtl = 1800;
+    enableSshSupport = true;
   };
 }
