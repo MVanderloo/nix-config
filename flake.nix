@@ -11,23 +11,23 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nix-darwin, home-manager, nixpkgs, ... }:
-  {
-    darwinConfigurations.work = nix-darwin.lib.darwinSystem {
-      modules = [
-        ./configuration.nix
+  outputs =
+    { nix-darwin, home-manager, ... }:
+    {
+      darwinConfigurations.work = nix-darwin.lib.darwinSystem {
+        modules = [
+          ./configuration.nix
 
-        home-manager.darwinModules.home-manager
+          home-manager.darwinModules.home-manager
 
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-
-          home-manager.users.mi30175 = {
-            imports = [ ./home.nix ];
-          };
-        }
-      ];
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.mi30175 = import ./home.nix;
+            };
+          }
+        ];
+      };
     };
-  };
 }
