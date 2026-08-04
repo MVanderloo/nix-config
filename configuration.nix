@@ -4,8 +4,8 @@
   nix.settings.experimental-features = "nix-command flakes";
   nix.enable = false;
 
-  system.configurationRevision = null;
   system.stateVersion = 6;
+  system.primaryUser = "mi30175";
 
   nixpkgs.hostPlatform = "aarch64-darwin";
 
@@ -15,4 +15,5 @@
   };
 
   programs.fish.enable = true;
+  homebrew.enable = true;
 }

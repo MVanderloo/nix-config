@@ -12,22 +12,39 @@
   };
 
   outputs =
-    { nix-darwin, home-manager, ... }:
+    inputs@{
+      self,
+      nixpkgs,
+      nix-darwin,
+      home-manager,
+      ...
+    }:
+    let
+      system = "aarch64-darwin";
+      username = "mi30175";
+
+      pkgs = import nixpkgs { inherit system; };
+
+      homeModule = import ./home.nix;
+    in
     {
       darwinConfigurations.work = nix-darwin.lib.darwinSystem {
+        inherit system;
+
         modules = [
           ./configuration.nix
-
           home-manager.darwinModules.home-manager
-
           {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.mi30175 = import ./home.nix;
-            };
+            home-manager.users.${username} = homeModule;
           }
         ];
       };
+
+      homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [ homeModule ];
+      };
+
+      formatter.${system} = pkgs.nixfmt;
     };
 }
