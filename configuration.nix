@@ -10,7 +10,7 @@
     NIX_SSL_CERT_FILE = "/nix/var/nix/profiles/default/etc/ssl/certs/ca-bundle.crt";
   };
 
-  ids.uids.nixbld = 352;
+  ids.uids.nixbld = 351;
 
   system.stateVersion = 7;
   # system.primaryUser = "mi30175";
