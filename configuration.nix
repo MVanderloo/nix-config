@@ -2,10 +2,18 @@
 
 {
   nix.settings.experimental-features = "nix-command flakes";
-  nix.settings.trusted-users = ["root" "mi30175"];
+  nix.envVars = {
+    HTTP_PROXY = "http://llproxy.llan.ll.mit.edu:8080";
+    HTTPS_PROXY = "http://llproxy.llan.ll.mit.edu:8080";
+    ALL_PROXY = "http://llproxy.llan.ll.mit.edu:8080";
+    NO_PROXY = ".ll.mit.edu,.mit.edu,localhost,127.0.0.1";
+    NIX_SSL_CERT_FILE = "/nix/var/nix/profiles/default/etc/ssl/certs/ca-bundle.crt";
+  };
 
-  system.stateVersion = 6;
-  system.primaryUser = "mi30175";
+  ids.uids.nixbld = 352;
+
+  system.stateVersion = 7;
+  # system.primaryUser = "mi30175";
 
   nixpkgs.hostPlatform = "aarch64-darwin";
 
@@ -14,6 +22,6 @@
     shell = pkgs.fish;
   };
 
-  programs.fish.enable = true;
+   programs.fish.enable = true;
   # homebrew.enable = true;
 }
