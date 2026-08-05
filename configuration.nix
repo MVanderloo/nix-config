@@ -2,6 +2,7 @@
 
 {
   nix.settings.experimental-features = "nix-command flakes";
+  nix.settings.trusted-users = ["root" "mi30175"];
 
   system.stateVersion = 6;
   system.primaryUser = "mi30175";
@@ -14,5 +15,5 @@
   };
 
   programs.fish.enable = true;
-  homebrew.enable = true;
+  # homebrew.enable = true;
 }

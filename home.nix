@@ -57,18 +57,18 @@
     btop.enable = false;
     delta.enable = false;
     # devenv.enable = false;
-    direnv.enable = true;
+    # direnv.enable = true;
     docker-cli.enable = false;
     eza.enable = false;
     fd.enable = false;
-    fish = {
-      enable = true;
-
-      shellInit = ''
-        fish_add_path --move /run/current-system/sw/bin
-        fish_add_path --move /nix/var/nix/profiles/default/bin
-      '';
-    };
+    # fish = {
+    #   enable = true;
+    #
+    #   shellInit = ''
+    #     fish_add_path --move /run/current-system/sw/bin
+    #     fish_add_path --move /nix/var/nix/profiles/default/bin
+    #   '';
+    # };
     fzf.enable = false;
     gh.enable = false;
     gh-dash.enable = false;
@@ -77,7 +77,7 @@
     gpg = {
       enable = false;
     };
-    home-manager.enable = true;
+    # home-manager.enable = true;
     jq.enable = true;
     jujutsu.enable = true;
     lazygit.enable = true;
@@ -107,7 +107,7 @@
   };
 
 programs.aerospace = {
-  enable = true;
+  enable = false;
 
   settings = {
     key-mapping = {
