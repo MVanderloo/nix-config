@@ -7,7 +7,6 @@
     HTTPS_PROXY = "http://llproxy.llan.ll.mit.edu:8080";
     ALL_PROXY = "http://llproxy.llan.ll.mit.edu:8080";
     NO_PROXY = ".ll.mit.edu,.mit.edu,localhost,127.0.0.1";
-    NIX_SSL_CERT_FILE = "/nix/var/nix/profiles/default/etc/ssl/certs/ca-bundle.crt";
   };
 
   ids.uids.nixbld = 351;
