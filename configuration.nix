@@ -13,15 +13,14 @@
   ids.uids.nixbld = 351;
 
   system.stateVersion = 7;
-  # system.primaryUser = "mi30175";
+  system.primaryUser = "mi30175";
 
-  nixpkgs.hostPlatform = "aarch64-darwin";
+  homebrew.enable = true;
 
   users.users.mi30175 = {
     home = "/Users/mi30175";
     shell = pkgs.fish;
   };
 
-   programs.fish.enable = true;
-  # homebrew.enable = true;
+  programs.fish.enable = true;
 }
