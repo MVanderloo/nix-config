@@ -33,7 +33,6 @@
       just
       less
       man
-      neovim
       nixd
       nixfmt
       openssh
@@ -61,6 +60,7 @@
     docker-cli.enable = false;
     eza.enable = false;
     fd.enable = false;
+    fish.enable = true;
     # fish = {
     #   enable = true;
     #
@@ -85,6 +85,12 @@
       enable = true;
       generateCaches = false;
       package = pkgs.man-db;
+    };
+    neovim = {
+      enable = true;
+      defaultEditor = true;
+      vimAlias = true;
+      vimdiffAlias = true;
     };
   };
 
