@@ -2,7 +2,6 @@
 
 {
   nix.settings.experimental-features = "nix-command flakes";
-  nix.enable = false;
 
   system.stateVersion = 6;
   system.primaryUser = "mi30175";
