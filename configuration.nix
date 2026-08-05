@@ -9,6 +9,10 @@
     NO_PROXY = ".ll.mit.edu,.mit.edu,localhost,127.0.0.1";
   };
 
+  # security.pam.services.sudo_local.text = ''
+  # auth       sufficient     pam_u2f.so authfile=/etc/u2f_keys cue
+  # '';
+
   ids.uids.nixbld = 351;
 
   system.stateVersion = 7;
