@@ -10,17 +10,12 @@
     homeDirectory = "/Users/mi30175";
 
     packages = with pkgs; [
-      atuin
-      bat
-      btop
       cloc
       curl
       deadnix
-      direnv
       docker
       duckdb
       dust
-      eza
       fastfetch
       fd
       fzf
@@ -28,10 +23,7 @@
       gh
       glab
       gnugrep
-      jq
-      jujutsu
       just
-      less
       man
       nixd
       nixfmt
@@ -51,14 +43,47 @@
   };
 
   programs = {
-    atuin.enable = false;
-    bat.enable = false;
-    btop.enable = false;
-    delta.enable = false;
+    atuin = {
+      enable = true;
+      flags = [ "--disable-up-arrow" ];
+    };
+    bat = {
+      enable = true;
+      config = {
+        theme = "ansi";
+      };
+      # TODO configure fully
+      # extraPackages = with pkgs.bat-extras; [ batdiff batman batgrep batwatch ];
+      # syntaxes = ;
+    };
+    btop.enable = true; # TODO configure
+    delta = {
+      enable = true;
+      enableGitIntegration = true;
+      enableJujutsuIntegration = true;
+      # TODO set options
+      options = {};
+    };
     # devenv.enable = false;
-    # direnv.enable = true;
+    direnv = {
+      enable = true;
+      enableFishIntegration = true;
+      # nix-direnv.enable = true; # TODO try this
+    };
     docker-cli.enable = false;
-    eza.enable = false;
+    eza = {
+      enable = true;
+      enableFishIntegration = true;
+      # TODO check all these options
+      icons = "auto";
+      extraOptions = [
+	"--classify"
+	"--group-directories-first"
+	"--time-style=long-iso"
+	"--group"
+	"--color-scale=size"
+      ];
+    };
     fd.enable = false;
     fish.enable = true;
     fzf.enable = false;
@@ -73,6 +98,15 @@
     jq.enable = true;
     jujutsu.enable = true;
     lazygit.enable = true;
+    less = {
+      enable = true;
+      config = ''
+      #command
+      h left-scroll
+      l right-scroll
+      '';
+      # options = ; # explore this
+    };
     man = {
       enable = true;
       generateCaches = false;
