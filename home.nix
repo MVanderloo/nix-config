@@ -61,14 +61,6 @@
     eza.enable = false;
     fd.enable = false;
     fish.enable = true;
-    # fish = {
-    #   enable = true;
-    #
-    #   shellInit = ''
-    #     fish_add_path --move /run/current-system/sw/bin
-    #     fish_add_path --move /nix/var/nix/profiles/default/bin
-    #   '';
-    # };
     fzf.enable = false;
     gh.enable = false;
     gh-dash.enable = false;
