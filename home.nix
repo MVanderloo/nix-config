@@ -42,8 +42,40 @@
   programs = {
     atuin = {
       enable = true;
-      flags = [ "--disable-up-arrow" ];
+      # flags = [ "--disable-up-arrow" ];
       forceOverwriteSettings = true;
+      daemon.enable = true;
+      settings = {
+        update_check = false;
+
+        style = "compact";
+        inline_height = 15;
+        show_numeric_shortcuts = false;
+        max_preview_height = 4;
+        show_help = false;
+        show_tabs = false;
+        prefers_reduced_motion = true;
+        ui.columns = [
+          "exit"
+          "time"
+          "duration"
+          "command"
+        ];
+
+        search_mode = "daemon-fuzzy";
+        secrets_filter = true;
+        enter_accept = true;
+        command_chaining = true;
+        filter_mode = "host";
+        search.filters = [
+          "workspace"
+          "host"
+          "directory"
+          "global"
+        ];
+
+        filter_mode_shell_up_key_binding = "session";
+      };
     };
     bat = {
       enable = true;
@@ -77,6 +109,7 @@
       enable = true;
       enableFishIntegration = true;
       # TODO check all these options
+      colors = "auto";
       icons = "auto";
       extraOptions = [
         "--classify"
