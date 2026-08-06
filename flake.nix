@@ -6,6 +6,7 @@
     darwin.url = "github:nix-darwin/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -15,10 +16,15 @@
       darwin,
       ...
     }:
+    let
+      system = "aarch64-darwin";
+      pkgs = nixpkgs.legacyPackages.${system};
+    in
     {
+      formatter.${system} = pkgs.nixfmt-tree;
       darwinConfigurations = {
         work = darwin.lib.darwinSystem {
-          system = "aarch64-darwin";
+          inherit system;
           modules = [
             ./configuration.nix
             home-manager.darwinModules.home-manager

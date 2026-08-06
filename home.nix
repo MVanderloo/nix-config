@@ -9,36 +9,34 @@
     username = "mi30175";
     homeDirectory = "/Users/mi30175";
 
+    shellAliases = {
+      tree = "eza --tree";
+      vim = "nvim";
+      ".." = "cd ..";
+    };
+
     packages = with pkgs; [
       cloc
       curl
       deadnix
       docker
       duckdb
-      dust
-      fastfetch
-      fd
-      fzf
       gawk
       gh
       glab
       gnugrep
       just
-      man
       nixd
       nixfmt
-      openssh
+      neovim
       sd
       sesh
       sl
-      starship
       statix
-      tealdeer
       tmux
       unzip
       watchexec
       wget
-      zoxide
     ];
   };
 
@@ -62,9 +60,13 @@
       enableGitIntegration = true;
       enableJujutsuIntegration = true;
       # TODO set options
-      options = {};
+      options = { };
     };
     # devenv.enable = false;
+    dircolors = {
+      enable = true;
+      enableFishIntegration = true;
+    };
     direnv = {
       enable = true;
       enableFishIntegration = true;
@@ -77,15 +79,36 @@
       # TODO check all these options
       icons = "auto";
       extraOptions = [
-	"--classify"
-	"--group-directories-first"
-	"--time-style=long-iso"
-	"--group"
-	"--color-scale=size"
+        "--classify"
+        "--group-directories-first"
+        "--time-style=long-iso"
+        "--group"
+        "--color-scale=size"
       ];
     };
-    fd.enable = false;
-    fish.enable = true;
+    fd = {
+      enable = true;
+      hidden = true;
+      ignores = [
+        ".git"
+        ".jj"
+        ".venv"
+        "node_modules"
+      ];
+      extraOptions = [
+        "--no-ignore"
+      ];
+    };
+    fish = {
+      enable = true;
+      functions = {
+        fish_greeting.body = "";
+        ls_after_cd = {
+          onVariable = "PWD";
+          body = "ls -a";
+        };
+      };
+    };
     fzf.enable = false;
     gh.enable = false;
     gh-dash.enable = false;
@@ -96,14 +119,48 @@
     };
     # home-manager.enable = true;
     jq.enable = true;
-    jujutsu.enable = true;
+    jujutsu = {
+      enable = true;
+      ediff = true;
+      settings = {
+        user = {
+          email = "me@mvanderloo.com";
+          name = "Michael van der Loo";
+        };
+        ui = {
+          default-command = "logstatus";
+          editor = "nvim";
+          # pager = [ "less" "-SFRX" ];
+        };
+        git.push-new-bookmarks = true;
+        aliases = {
+          rebase-all = [
+            "rebase"
+            "-s"
+            "(::trunk())+ & mutable()"
+            "-d"
+            "trunk()"
+          ];
+          accuse = [
+            "file"
+            "annotate"
+          ];
+          logstatus = [
+            "log"
+            "-T"
+            "log_with_current_files"
+          ];
+        };
+        template-aliases.log_with_current_files = "builtin_log_compact ++ if(current_working_copy, diff.summary())";
+      };
+    };
     lazygit.enable = true;
     less = {
       enable = true;
       config = ''
-      #command
-      h left-scroll
-      l right-scroll
+        #command
+        h left-scroll
+        l right-scroll
       '';
       # options = ; # explore this
     };
@@ -112,11 +169,49 @@
       generateCaches = false;
       package = pkgs.man-db;
     };
-    neovim = {
+    # neovim = {
+    #   enable = true;
+    #   defaultEditor = true;
+    #   vimAlias = true;
+    #   vimdiffAlias = true;
+    # };
+    fastfetch = {
       enable = true;
-      defaultEditor = true;
-      vimAlias = true;
-      vimdiffAlias = true;
+    };
+    sesh = {
+      enable = false;
+    };
+    # ssh = {
+    #   enable = true;
+    #   enableDefaultConfig = false;
+    #   settings."*" = {
+    #     ForwardAgent = true;
+    #     AddKeysToAgent = "yes";
+    #     Compression = true;
+    #     ServerAliveInterval = 0;
+    #     ServerAliveCountMax = 3;
+    #     HashKnownHosts = false;
+    #     UserKnownHostsFile = "~/.ssh/known_hosts";
+    #     ControlMaster = "yes";
+    #     ControlPath = "~/.ssh/master-%r@%n:%p";
+    #     ControlPersist = "no";
+    #   };
+    # };
+    starship = {
+      enable = true;
+      enableFishIntegration = true;
+      presets = [ "nerd-font-symbols" ];
+      extraPackages = [ pkgs.jj-starship ];
+    };
+    tealdeer = {
+      enable = true;
+    };
+    tmux = {
+      enable = false;
+    };
+    zoxide = {
+      enable = true;
+      enableFishIntegration = true;
     };
   };
 
@@ -138,117 +233,117 @@
     # };
   };
 
-programs.aerospace = {
-  enable = false;
+  programs.aerospace = {
+    enable = false;
 
-  settings = {
-    key-mapping = {
-      preset = "qwerty";
-    };
-
-    # https://nikitabobko.github.io/AeroSpace/guide#normalization
-    enable-normalization-flatten-containers = true;
-    enable-normalization-opposite-orientation-for-nested-containers = true;
-
-    default-root-container-layout = "tiles";
-    default-root-container-orientation = "horizontal";
-
-    # Mouse follows focus when focused monitor changes
-    on-focused-monitor-changed = [ "move-mouse monitor-lazy-center" ];
-    automatically-unhide-macos-hidden-apps = true;
-
-    gaps = {
-      inner = {
-        horizontal = 8;
-        vertical = 8;
+    settings = {
+      key-mapping = {
+        preset = "qwerty";
       };
 
-      outer = {
-        left = 4;
-        bottom = 4;
-        top = 4;
-        right = 4;
-      };
-    };
+      # https://nikitabobko.github.io/AeroSpace/guide#normalization
+      enable-normalization-flatten-containers = true;
+      enable-normalization-opposite-orientation-for-nested-containers = true;
 
-    mode = {
-      main = {
-        binding = {
-          cmd-r = "reload-config";
-          cmd-enter = "exec-and-forget open -n /Applications/Ghostty.app/";
-          cmd-t = "exec-and-forget open -n /Applications/Ghostty.app/";
-          cmd-b = "exec-and-forget open -na \"Google Chrome\"";
-          cmd-d = "exec-and-forget open -a Raycast";
+      default-root-container-layout = "tiles";
+      default-root-container-orientation = "horizontal";
 
-          cmd-slash = "layout tiles horizontal vertical";
-          cmd-shift-slash = "layout accordion horizontal vertical";
+      # Mouse follows focus when focused monitor changes
+      on-focused-monitor-changed = [ "move-mouse monitor-lazy-center" ];
+      automatically-unhide-macos-hidden-apps = true;
 
-          cmd-w = "close";
+      gaps = {
+        inner = {
+          horizontal = 8;
+          vertical = 8;
+        };
 
-          cmd-h = "focus left";
-          cmd-j = "focus down";
-          cmd-k = "focus up";
-          cmd-l = "focus right";
-
-          cmd-semicolon = "macos-native-minimize";
-
-          cmd-shift-h = "move left";
-          cmd-shift-j = "move down";
-          cmd-shift-k = "move up";
-          cmd-shift-l = "move right";
-
-          cmd-alt-h = "join-with left";
-          cmd-alt-j = "join-with down";
-          cmd-alt-k = "join-with up";
-          cmd-alt-l = "join-with right";
-
-          cmd-f = "fullscreen";
-          cmd-shift-f = "macos-native-fullscreen";
-
-          cmd-comma = "workspace prev";
-          cmd-shift-comma = "move-node-to-workspace --focus-follows-window prev";
-          cmd-period = "workspace next";
-          cmd-shift-period = "move-node-to-workspace --focus-follows-window next";
-
-          cmd-1 = "workspace 1";
-          cmd-2 = "workspace 2";
-          cmd-3 = "workspace 3";
-          cmd-4 = "workspace 4";
-          cmd-5 = "workspace 5";
-          cmd-6 = "workspace 6";
-          cmd-7 = "workspace 7";
-          cmd-8 = "workspace 8";
-          cmd-9 = "workspace 9";
-          cmd-0 = "workspace 10";
-
-          cmd-shift-1 = "move-node-to-workspace 1";
-          cmd-shift-2 = "move-node-to-workspace 2";
-          cmd-shift-3 = "move-node-to-workspace 3";
-          cmd-shift-4 = "move-node-to-workspace 4";
-          cmd-shift-5 = "move-node-to-workspace 5";
-          cmd-shift-6 = "move-node-to-workspace 6";
-          cmd-shift-7 = "move-node-to-workspace 7";
-          cmd-shift-8 = "move-node-to-workspace 8";
-          cmd-shift-9 = "move-node-to-workspace 9";
-          cmd-shift-0 = "move-node-to-workspace 10";
-
-          cmd-e = "balance-sizes";
-          cmd-shift-r = "mode resize";
+        outer = {
+          left = 4;
+          bottom = 4;
+          top = 4;
+          right = 4;
         };
       };
 
-      resize = {
-        binding = {
-          h = "resize width -50";
-          j = "resize height +50";
-          k = "resize height -50";
-          l = "resize width +50";
+      mode = {
+        main = {
+          binding = {
+            cmd-r = "reload-config";
+            cmd-enter = "exec-and-forget open -n /Applications/Ghostty.app/";
+            cmd-t = "exec-and-forget open -n /Applications/Ghostty.app/";
+            cmd-b = "exec-and-forget open -na \"Google Chrome\"";
+            cmd-d = "exec-and-forget open -a Raycast";
 
-          cmd-shift-r = "mode main";
-          esc = "mode main";
+            cmd-slash = "layout tiles horizontal vertical";
+            cmd-shift-slash = "layout accordion horizontal vertical";
+
+            cmd-w = "close";
+
+            cmd-h = "focus left";
+            cmd-j = "focus down";
+            cmd-k = "focus up";
+            cmd-l = "focus right";
+
+            cmd-semicolon = "macos-native-minimize";
+
+            cmd-shift-h = "move left";
+            cmd-shift-j = "move down";
+            cmd-shift-k = "move up";
+            cmd-shift-l = "move right";
+
+            cmd-alt-h = "join-with left";
+            cmd-alt-j = "join-with down";
+            cmd-alt-k = "join-with up";
+            cmd-alt-l = "join-with right";
+
+            cmd-f = "fullscreen";
+            cmd-shift-f = "macos-native-fullscreen";
+
+            cmd-comma = "workspace prev";
+            cmd-shift-comma = "move-node-to-workspace --focus-follows-window prev";
+            cmd-period = "workspace next";
+            cmd-shift-period = "move-node-to-workspace --focus-follows-window next";
+
+            cmd-1 = "workspace 1";
+            cmd-2 = "workspace 2";
+            cmd-3 = "workspace 3";
+            cmd-4 = "workspace 4";
+            cmd-5 = "workspace 5";
+            cmd-6 = "workspace 6";
+            cmd-7 = "workspace 7";
+            cmd-8 = "workspace 8";
+            cmd-9 = "workspace 9";
+            cmd-0 = "workspace 10";
+
+            cmd-shift-1 = "move-node-to-workspace 1";
+            cmd-shift-2 = "move-node-to-workspace 2";
+            cmd-shift-3 = "move-node-to-workspace 3";
+            cmd-shift-4 = "move-node-to-workspace 4";
+            cmd-shift-5 = "move-node-to-workspace 5";
+            cmd-shift-6 = "move-node-to-workspace 6";
+            cmd-shift-7 = "move-node-to-workspace 7";
+            cmd-shift-8 = "move-node-to-workspace 8";
+            cmd-shift-9 = "move-node-to-workspace 9";
+            cmd-shift-0 = "move-node-to-workspace 10";
+
+            cmd-e = "balance-sizes";
+            cmd-shift-r = "mode resize";
+          };
+        };
+
+        resize = {
+          binding = {
+            h = "resize width -50";
+            j = "resize height +50";
+            k = "resize height -50";
+            l = "resize width +50";
+
+            cmd-shift-r = "mode main";
+            esc = "mode main";
+          };
         };
       };
     };
   };
-};
 }
