@@ -5,13 +5,12 @@
 
   home = {
     stateVersion = "26.05";
-
     username = "mi30175";
     homeDirectory = "/Users/mi30175";
+    preferXdgDirectories = true;
 
     shellAliases = {
       tree = "eza --tree";
-      vim = "nvim";
       ".." = "cd ..";
     };
 
@@ -21,6 +20,7 @@
       deadnix
       docker
       duckdb
+      fzf
       gawk
       gh
       glab
@@ -28,7 +28,6 @@
       just
       nixd
       nixfmt
-      neovim
       sd
       sesh
       sl
@@ -44,6 +43,7 @@
     atuin = {
       enable = true;
       flags = [ "--disable-up-arrow" ];
+      forceOverwriteSettings = true;
     };
     bat = {
       enable = true;
@@ -90,33 +90,62 @@
       enable = true;
       hidden = true;
       ignores = [
-        ".git"
-        ".jj"
-        ".venv"
-        "node_modules"
+        ".git/"
+        ".jj/"
+        ".venv/"
+        "node_modules/"
       ];
       extraOptions = [
-        "--no-ignore"
+        "--no-ignore-vcs"
       ];
     };
     fish = {
       enable = true;
+      interactiveShellInit = ''
+        fish_vi_cursor
+      '';
       functions = {
         fish_greeting.body = "";
+        fish_user_keybindings = ''
+          fish_default_key_bindings -M insert
+          bind -M insert ctrl-p up-or-search
+          bind -M insert ctrl-n down-or-search
+        '';
         ls_after_cd = {
           onVariable = "PWD";
           body = "ls -a";
         };
       };
     };
-    fzf.enable = false;
+    fastfetch.enable = true;
+    fzf = {
+      enable = true;
+      defaultOptions = [
+        "--border=bold"
+        "--color=border:7"
+        "--color=prompt:2"
+        "--scrollbar=''"
+        "--gutter=' '"
+        "--info=inline-right"
+        "--color=info:8"
+        "--marker=' '"
+        "--color=marker:1"
+        "--pointer='󰁕'"
+        "--color=pointer:9"
+        "--color=label:15:bold"
+        "--color=spinner:9"
+        "--color=header:4"
+        "--color=fg:8:bold,fg+:15,selected-fg:15:bold"
+        "--color=bg:-1,bg+:-1,selected-bg:-1"
+        "--color=hl:10:bold,hl+:10:bold,selected-hl:10:bold"
+      ];
+      historyWidget.command = ""; # use atuin
+    };
     gh.enable = false;
     gh-dash.enable = false;
     ghostty.enable = false;
     git.enable = false;
-    gpg = {
-      enable = false;
-    };
+    gpg.enable = false;
     # home-manager.enable = true;
     jq.enable = true;
     jujutsu = {
@@ -169,14 +198,24 @@
       generateCaches = false;
       package = pkgs.man-db;
     };
-    # neovim = {
-    #   enable = true;
-    #   defaultEditor = true;
-    #   vimAlias = true;
-    #   vimdiffAlias = true;
-    # };
-    fastfetch = {
+    neovim = {
       enable = true;
+      defaultEditor = true;
+      vimAlias = true;
+      vimdiffAlias = true;
+      sideloadInitLua = true;
+    };
+    pi-coding-agent = {
+      enable = true;
+    };
+    ripgrep = {
+      enable = true;
+      # TODO this doesn't seem to work
+      # arguments = [
+      #   "--max-columns=150"
+      #   "--max-columns-preview"
+      #   "--smart-case"
+      # ];
     };
     sesh = {
       enable = false;
@@ -208,6 +247,10 @@
     };
     tmux = {
       enable = false;
+    };
+    yazi = {
+      enable = true;
+      enableFishIntegration = true;
     };
     zoxide = {
       enable = true;
