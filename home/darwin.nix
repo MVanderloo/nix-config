@@ -6,6 +6,13 @@
   home = {
     username = "mi30175";
     homeDirectory = "/Users/mi30175";
+    shellAliases = {
+      copy = "pbcopy";
+    };
+
+    packages = with pkgs; [
+      nodejs_22
+    ];
   };
 
   services = {
