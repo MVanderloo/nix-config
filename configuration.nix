@@ -1,15 +1,27 @@
 { pkgs, ... }:
-
 {
-  nix.settings = {
-    experimental-features = "nix-command flakes";
-    use-xdg-base-directories = true;
+  nix = {
+    settings = {
+      experimental-features = "nix-command flakes";
+      use-xdg-base-directories = true;
+    };
+    envVars = {
+      HTTP_PROXY = "http://llproxy.llan.ll.mit.edu:8080";
+      HTTPS_PROXY = "http://llproxy.llan.ll.mit.edu:8080";
+      ALL_PROXY = "http://llproxy.llan.ll.mit.edu:8080";
+      NO_PROXY = ".ll.mit.edu,.mit.edu,localhost,127.0.0.1";
+    };
   };
   ids.uids.nixbld = 351;
 
   system = {
     stateVersion = 7;
     primaryUser = "mi30175";
+  };
+
+  users.users.mi30175 = {
+    home = "/Users/mi30175";
+    shell = pkgs.fish;
   };
 
   environment.variables = {
@@ -19,23 +31,18 @@
     NO_PROXY = ".ll.mit.edu,.mit.edu,localhost,127.0.0.1";
   };
 
-  users.users.mi30175 = {
-    home = "/Users/mi30175";
-    shell = pkgs.fish;
-  };
-
   programs.fish.enable = true;
 
   homebrew = {
     enable = true;
     onActivation = {
-      autoUpdate = true;
-      upgrade = true;
+      autoUpdate = false;
+      upgrade = false;
       cleanup = "none";
     };
+    # brews = [ ];
     casks = [
-      "ghostty"
+      # "ghostty"
     ];
-    # brews = [ ];   # formulae, if any
   };
 }

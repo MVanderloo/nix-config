@@ -25,8 +25,7 @@
     fish.interactiveShellInit = ''eval "$(/opt/homebrew/bin/brew shellenv)"'';
     ghostty = {
       enable = true;
-      # Use brew cask since nix-darwin cannot build native Mac apps
-      package = null;
+      package = pkgs.ghostty-bin;
       settings = {
         config-file = "?${config.home.homeDirectory}/.config/ghostty/local";
 
