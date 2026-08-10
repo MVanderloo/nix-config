@@ -11,7 +11,16 @@
     };
 
     packages = with pkgs; [
+      awscli2
+      clickhouse
+      docker
+      docker-compose
+      duckdb
       nodejs_22
+      ollama
+      podman
+      podman-compose
+      uv
     ];
   };
 
