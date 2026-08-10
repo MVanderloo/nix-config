@@ -70,7 +70,6 @@
     fastfetch.enable = true;
     gh.enable = false;
     gh-dash.enable = false;
-    ghostty.enable = false;
     git.enable = false;
     gpg.enable = false;
     jujutsu = {

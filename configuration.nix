@@ -23,12 +23,23 @@
   system.stateVersion = 7;
   system.primaryUser = "mi30175";
 
-  # homebrew.enable = true;
-
   users.users.mi30175 = {
     home = "/Users/mi30175";
     shell = pkgs.fish;
   };
 
   programs.fish.enable = true;
+
+  homebrew = {
+    enable = true;
+    onActivation = {
+      autoUpdate = true;
+      upgrade = true;
+      cleanup = "none";
+    };
+    casks = [
+      "ghostty"
+    ];
+    # brews = [ ];   # formulae, if any
+  };
 }

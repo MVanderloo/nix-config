@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   imports = [ ./common.nix ];
@@ -77,6 +77,7 @@
       enable = true;
       interactiveShellInit = ''
         fish_vi_cursor
+        eval "$(/opt/homebrew/bin/brew shellenv)"
       '';
       functions = {
         fish_greeting.body = "";
@@ -114,6 +115,53 @@
       ];
       historyWidget.command = ""; # use atuin
     };
+    ghostty = {
+      enable = true;
+      package = null; # Use brew cask since nix-darwin cannot build Mac specific
+      settings = {
+        config-file = "?${config.home.homeDirectory}/.config/ghostty/local";
+
+        quit-after-last-window-closed = true;
+        confirm-close-surface = false;
+
+        font-feature = [
+          "ss01"
+          "ss02"
+          "ss03"
+          "ss04"
+          "ss05"
+          "ss06"
+          "ss07"
+          "ss08"
+          "ss09"
+          "calt"
+          "liga"
+        ];
+
+        window-padding-x = 8;
+        window-padding-y = 8;
+
+        macos-titlebar-style = "hidden";
+        macos-dock-drop-behavior = "window";
+
+        macos-icon = "custom-style";
+        macos-icon-frame = "plastic";
+        macos-icon-ghost-color = "black";
+        macos-icon-screen-color = "black";
+
+        window-inherit-working-directory = false;
+
+        keybind = [
+          "clear"
+          "super+ctrl+r=reload_config"
+          "super+==increase_font_size:1"
+          "super++=increase_font_size:1"
+          "super+-=decrease_font_size:1"
+          "paste=paste_from_clipboard"
+          "super+v=paste_from_clipboard"
+        ];
+      };
+    };
     jq.enable = true;
     neovim = {
       enable = true;
@@ -136,20 +184,21 @@
       defaultCacheTtl = 1800;
       enableSshSupport = true;
     };
-    # jankyborders = {
-    #   enable = true;
-    #   settings = {
-    #     style = "round";
-    #     width = 6.0;
-    #     hidpi = "off";
-    #     active_color = "0xFFFFFFFF"; #"0xffe2e2e3";
-    #     inactive_color = "0x00000000"; # "0xff414550";
-    #   };
-    # };
+    jankyborders = {
+      enable = true;
+      settings = {
+        style = "round";
+        width = 6.0;
+        hidpi = "off";
+        active_color = "0xFFFFFFFF"; # "0xffe2e2e3";
+        inactive_color = "0x00000000"; # "0xff414550";
+      };
+    };
   };
 
   programs.aerospace = {
-    enable = false;
+    enable = true;
+    launchd.enable = true;
 
     settings = {
       key-mapping = {
@@ -185,9 +234,9 @@
         main = {
           binding = {
             cmd-r = "reload-config";
-            cmd-enter = "exec-and-forget open -n /Applications/Ghostty.app/";
-            cmd-t = "exec-and-forget open -n /Applications/Ghostty.app/";
-            cmd-b = "exec-and-forget open -na \"Google Chrome\"";
+            cmd-enter = "exec-and-forget open -na Ghostty";
+            cmd-t = "exec-and-forget open -na Ghostty";
+            cmd-b = "exec-and-forget open -na Google\\ Chrome";
             cmd-d = "exec-and-forget open -a Raycast";
 
             cmd-slash = "layout tiles horizontal vertical";
