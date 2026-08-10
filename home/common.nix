@@ -5,6 +5,7 @@
 
   home = {
     stateVersion = "26.05";
+    preferXdgDirectories = true;
 
     packages = with pkgs; [
       cloc
@@ -22,10 +23,16 @@
       sd
       sl
       statix
+      tmux
       unzip
       watchexec
       wget
     ];
+
+    shellAliases = {
+      tree = "eza --tree";
+      ".." = "cd ..";
+    };
   };
 
   services = {
@@ -167,7 +174,10 @@
       ];
       historyWidget.command = ""; # use atuin
     };
-    gh.enable = false;
+    gh = {
+      enable = true;
+      settings.protocol = "ssh";
+    };
     gh-dash.enable = false;
     git.enable = false;
     jq.enable = true;
