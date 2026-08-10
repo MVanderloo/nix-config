@@ -1,5 +1,4 @@
-{ inputs, pkgs, config, ... }:
-
+{ inputs, pkgs, ... }:
 {
   xdg.enable = true;
 
@@ -8,6 +7,7 @@
     preferXdgDirectories = true;
 
     packages = with pkgs; [
+      inputs.neovim-config.packages.${pkgs.system}.default
       choose
       cloc
       coreutils
@@ -31,10 +31,16 @@
 
     shellAliases = {
       tree = "eza --tree";
-      "-" = "cd -";
+      vim = "nvim";
+      vimdiff = "nvim -d";
       ".." = "cd ..";
       "..." = "cd ...";
       "...." = "cd ....";
+    };
+
+    sessionVariables = {
+      EDITOR = "nvim";
+      VISUAL = "nvim";
     };
   };
 
@@ -234,13 +240,13 @@
       generateCaches = false;
       package = pkgs.man-db;
     };
-    neovim = {
-      enable = true;
-      defaultEditor = true;
-      vimAlias = true;
-      vimdiffAlias = true;
-      sideloadInitLua = true;
-    };
+    # neovim = {
+    #   enable = true;
+    #   defaultEditor = true;
+    #   vimAlias = true;
+    #   vimdiffAlias = true;
+    #   sideloadInitLua = true;
+    # };
     pi-coding-agent.enable = true;
     ripgrep.enable = true;
     sesh.enable = false;

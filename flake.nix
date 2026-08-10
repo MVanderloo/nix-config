@@ -10,6 +10,9 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    neovim-config.url = "github:mvanderloo/neovim-config";
+    neovim-config.inputs.nixpkgs.follows = "nixpkgs";
+
     # nix-homebrew.url = "github:zhaofengli/nix-homebrew";
     # homebrew-core = {
     #   url = "github:homebrew/homebrew-core";

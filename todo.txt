@@ -1,5 +1,3 @@
 - learn fzf keybindings in shell
 - have ctrl-t allow multiselect
-- turn neovim config into a flake with all dependencies
 - remove unnecessary homebrew packages and enable zap
-- merge home-manager stuff into home/common.nix
