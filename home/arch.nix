@@ -9,58 +9,34 @@
 
     # Home Manager is pretty good at managing dotfiles. The primary way to manage
     # plain files is through 'home.file'.
-    file = {
-      # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-      # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-      # # symlink to the Nix store copy.
-      # ".screenrc".source = dotfiles/screenrc;
+    # file = {
+    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
+    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
+    # # symlink to the Nix store copy.
+    # ".screenrc".source = dotfiles/screenrc;
 
-      # # You can also set the file content immediately.
-      # ".gradle/gradle.properties".text = ''
-      #   org.gradle.console=verbose
-      #   org.gradle.daemon.idletimeout=3600000
-      # '';
-    };
+    # # You can also set the file content immediately.
+    # ".gradle/gradle.properties".text = ''
+    #   org.gradle.console=verbose
+    #   org.gradle.daemon.idletimeout=3600000
+    # '';
+    # };
 
-    sessionVariables = {
-      # EDITOR = "emacs";
-    };
+    # sessionVariables = {
+    #   # EDITOR = "emacs";
+    # };
 
-    packages = with pkgs; [
-      dust
-    ];
+    # packages = with pkgs; [
+    # ];
   };
 
   programs = {
     atuin = {
-      enable = true;
-      flags = [ "--disable-up-arrow" ];
-    };
-    docker-cli.enable = true;
-    fd = {
-      enable = true;
-      hidden = true;
-      ignores = [
-        ".git"
-        "node_modules"
-        ".venv"
-      ];
-      extraOptions = [
-        "--no-ignore"
-      ];
-    };
-    fish = {
-      enable = true;
-      preferAbbrs = true;
-      functions = {
-        fish_greeting.body = "";
-        ls_after_cd = {
-          onVariable = "PWD";
-          body = "ls --all";
-        };
+      settings = {
+        sync_address = "http:omega:8888";
       };
     };
-    fzf.enable = false;
+    docker-cli.enable = true;
     home-manager.enable = true;
     ssh = {
       enable = true;
@@ -81,12 +57,6 @@
   };
 
   services = {
-    gpg-agent = {
-      enable = false;
-      defaultCacheTtl = 1800;
-      enableSshSupport = true;
-    };
-    ssh-agent.enable = false;
     syncthing.enable = false;
   };
 }
