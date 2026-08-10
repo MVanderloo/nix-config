@@ -1,5 +1,5 @@
 {
-  description = "Work Mac";
+  description = "System configs (nix-darwin + home-manager)";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
@@ -21,7 +21,6 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in
     {
-      formatter.${system} = pkgs.nixfmt-tree;
       darwinConfigurations = {
         work = darwin.lib.darwinSystem {
           inherit system;
@@ -29,13 +28,28 @@
             ./configuration.nix
             home-manager.darwinModules.home-manager
             {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = { inherit inputs; };
-              home-manager.users.mi30175 = ./home.nix;
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = { inherit inputs; };
+                users.mi30175 = ./home/darwin.nix;
+              };
             }
           ];
         };
+      };
+
+      homeConfigurations = {
+        arch = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = { inherit inputs; };
+          modules = [ ./home/arch.nix ];
+        };
+      };
+
+      formatter = {
+        aarch64-darwin = pkgs.nixfmt-tree;
+        x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-tree;
       };
     };
 }

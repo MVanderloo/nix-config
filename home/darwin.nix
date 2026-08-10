@@ -1,10 +1,9 @@
 { pkgs, ... }:
 
 {
-  xdg.enable = true;
+  imports = [ ./common.nix ];
 
   home = {
-    stateVersion = "26.05";
     username = "mi30175";
     homeDirectory = "/Users/mi30175";
     preferXdgDirectories = true;
@@ -15,34 +14,16 @@
     };
 
     packages = with pkgs; [
-      cloc
-      curl
-      deadnix
-      docker
-      duckdb
       fzf
-      gawk
       gh
-      glab
-      gnugrep
-      just
-      nixd
-      nixfmt
-      sd
       sesh
-      sl
-      statix
       tmux
-      unzip
-      watchexec
-      wget
     ];
   };
 
   programs = {
     atuin = {
       enable = true;
-      # flags = [ "--disable-up-arrow" ];
       forceOverwriteSettings = true;
       daemon.enable = true;
       settings = {
@@ -77,48 +58,8 @@
         filter_mode_shell_up_key_binding = "session";
       };
     };
-    bat = {
-      enable = true;
-      config = {
-        theme = "ansi";
-      };
-      # TODO configure fully
-      # extraPackages = with pkgs.bat-extras; [ batdiff batman batgrep batwatch ];
-      # syntaxes = ;
-    };
-    btop.enable = true; # TODO configure
-    delta = {
-      enable = true;
-      enableGitIntegration = true;
-      enableJujutsuIntegration = true;
-      # TODO set options
-      options = { };
-    };
-    # devenv.enable = false;
-    dircolors = {
-      enable = true;
-      enableFishIntegration = true;
-    };
-    direnv = {
-      enable = true;
-      enableFishIntegration = true;
-      # nix-direnv.enable = true; # TODO try this
-    };
     docker-cli.enable = false;
-    eza = {
-      enable = true;
-      enableFishIntegration = true;
-      # TODO check all these options
-      colors = "auto";
-      icons = "auto";
-      extraOptions = [
-        "--classify"
-        "--group-directories-first"
-        "--time-style=long-iso"
-        "--group"
-        "--color-scale=size"
-      ];
-    };
+    eza.colors = "auto";
     fd = {
       enable = true;
       hidden = true;
@@ -150,7 +91,6 @@
         };
       };
     };
-    fastfetch.enable = true;
     fzf = {
       enable = true;
       defaultOptions = [
@@ -174,63 +114,7 @@
       ];
       historyWidget.command = ""; # use atuin
     };
-    gh.enable = false;
-    gh-dash.enable = false;
-    ghostty.enable = false;
-    git.enable = false;
-    gpg.enable = false;
-    # home-manager.enable = true;
     jq.enable = true;
-    jujutsu = {
-      enable = true;
-      ediff = true;
-      settings = {
-        user = {
-          email = "me@mvanderloo.com";
-          name = "Michael van der Loo";
-        };
-        ui = {
-          default-command = "logstatus";
-          editor = "nvim";
-          # pager = [ "less" "-SFRX" ];
-        };
-        git.push-new-bookmarks = true;
-        aliases = {
-          rebase-all = [
-            "rebase"
-            "-s"
-            "(::trunk())+ & mutable()"
-            "-d"
-            "trunk()"
-          ];
-          accuse = [
-            "file"
-            "annotate"
-          ];
-          logstatus = [
-            "log"
-            "-T"
-            "log_with_current_files"
-          ];
-        };
-        template-aliases.log_with_current_files = "builtin_log_compact ++ if(current_working_copy, diff.summary())";
-      };
-    };
-    lazygit.enable = true;
-    less = {
-      enable = true;
-      config = ''
-        #command
-        h left-scroll
-        l right-scroll
-      '';
-      # options = ; # explore this
-    };
-    man = {
-      enable = true;
-      generateCaches = false;
-      package = pkgs.man-db;
-    };
     neovim = {
       enable = true;
       defaultEditor = true;
@@ -238,54 +122,9 @@
       vimdiffAlias = true;
       sideloadInitLua = true;
     };
-    pi-coding-agent = {
-      enable = true;
-    };
-    ripgrep = {
-      enable = true;
-      # TODO this doesn't seem to work
-      # arguments = [
-      #   "--max-columns=150"
-      #   "--max-columns-preview"
-      #   "--smart-case"
-      # ];
-    };
-    sesh = {
-      enable = false;
-    };
-    # ssh = {
-    #   enable = true;
-    #   enableDefaultConfig = false;
-    #   settings."*" = {
-    #     ForwardAgent = true;
-    #     AddKeysToAgent = "yes";
-    #     Compression = true;
-    #     ServerAliveInterval = 0;
-    #     ServerAliveCountMax = 3;
-    #     HashKnownHosts = false;
-    #     UserKnownHostsFile = "~/.ssh/known_hosts";
-    #     ControlMaster = "yes";
-    #     ControlPath = "~/.ssh/master-%r@%n:%p";
-    #     ControlPersist = "no";
-    #   };
-    # };
-    starship = {
-      enable = true;
-      enableFishIntegration = true;
-      presets = [ "nerd-font-symbols" ];
-      extraPackages = [ pkgs.jj-starship ];
-    };
-    tealdeer = {
-      enable = true;
-    };
-    tmux = {
-      enable = false;
-    };
+    pi-coding-agent.enable = true;
+    ripgrep.enable = true;
     yazi = {
-      enable = true;
-      enableFishIntegration = true;
-    };
-    zoxide = {
       enable = true;
       enableFishIntegration = true;
     };
