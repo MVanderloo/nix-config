@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ inputs, pkgs, config, ... }:
 
 {
   xdg.enable = true;
@@ -8,21 +8,21 @@
     preferXdgDirectories = true;
 
     packages = with pkgs; [
+      choose
       cloc
+      coreutils
       curl
-      deadnix
-      docker
-      duckdb
       dust
       gawk
+      git-filter-repo
       glab
       gnugrep
+      gnused
       just
-      nixd
-      nixfmt
+      openssh
+      rename
       sd
       sl
-      statix
       tmux
       unzip
       watchexec
@@ -31,7 +31,10 @@
 
     shellAliases = {
       tree = "eza --tree";
+      "-" = "cd -";
       ".." = "cd ..";
+      "..." = "cd ...";
+      "...." = "cd ....";
     };
   };
 
