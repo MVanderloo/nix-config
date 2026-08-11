@@ -231,6 +231,7 @@
     };
     fish = {
       enable = true;
+      # TODO: cursor is not what I want
       interactiveShellInit = ''
         fish_vi_cursor
       '';
