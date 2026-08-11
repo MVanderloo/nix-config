@@ -11,10 +11,10 @@
     };
 
     packages = with pkgs; [
-      awscli2
-      clickhouse
       # docker
       # docker-compose
+      awscli2
+      clickhouse
       duckdb
       nodejs_22
       ollama
