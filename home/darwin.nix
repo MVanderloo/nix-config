@@ -43,6 +43,7 @@
     };
     ollama.enable = true;
     podman.enable = true;
+    tldr-update.enable = true;
   };
 
   programs = {
