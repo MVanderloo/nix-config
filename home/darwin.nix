@@ -41,6 +41,7 @@
         inactive_color = "0x00000000"; # "0xff414550";
       };
     };
+    ollama.enable = true;
     podman.enable = true;
   };
 
