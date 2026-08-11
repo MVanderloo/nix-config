@@ -38,6 +38,7 @@
     # brews = [ ];
     casks = [
       "keepassxc"
+      "raycast"
     ];
   };
 
