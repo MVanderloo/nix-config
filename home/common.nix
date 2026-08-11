@@ -7,13 +7,12 @@
     preferXdgDirectories = true;
 
     packages = with pkgs; [
-      inputs.neovim-config.packages.${pkgs.system}.default
       choose
       cloc
       coreutils
-      findutils
       curl
       dust
+      findutils
       gawk
       git-filter-repo
       glab
@@ -28,6 +27,7 @@
       unzip
       watchexec
       wget
+      inputs.neovim-config.packages.${pkgs.system}.default
     ];
 
     shellAliases = {
