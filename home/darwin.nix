@@ -18,6 +18,7 @@
       duckdb
       nodejs_22
       ollama
+      parquet-tools
       podman
       podman-compose
       uv
