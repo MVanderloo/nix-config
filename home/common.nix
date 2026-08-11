@@ -11,6 +11,7 @@
       cloc
       coreutils
       curl
+      diffnav
       dust
       findutils
       gawk
@@ -20,13 +21,18 @@
       gnused
       just
       openssh
+      prek
       rename
+      rsync
       sd
       sl
       tmux
+      tuicr
+      tuxedo
       unzip
       watchexec
       wget
+      worktrunk
       inputs.neovim-config.packages.${pkgs.system}.default
     ];
 
