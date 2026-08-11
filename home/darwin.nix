@@ -29,7 +29,7 @@
     gpg-agent = {
       enable = true;
       defaultCacheTtl = 1800;
-      enableSshSupport = true;
+      # enableSshSupport = true;
     };
     jankyborders = {
       enable = true;
