@@ -111,7 +111,6 @@
       enableFishIntegration = true;
       # nix-direnv.enable = true; # TODO try this
     };
-    docker-cli.enable = false;
     eza = {
       enable = true;
       colors = "auto"; # does this do anything?
