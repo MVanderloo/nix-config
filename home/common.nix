@@ -11,6 +11,7 @@
       choose
       cloc
       coreutils
+      findutils
       curl
       dust
       gawk
