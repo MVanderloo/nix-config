@@ -132,7 +132,88 @@
         "--color-scale=size"
       ];
     };
-    fastfetch.enable = true;
+    fastfetch = {
+      enable = true;
+
+      settings = {
+        logo.padding.top = 2;
+        display.separator = " ";
+        modules = [
+          "title"
+          "separator"
+          {
+            type = "os";
+            key = "{icon} OS";
+            keyColor = "yellow";
+            format = "{2}";
+          }
+          {
+            type = "packages";
+            key = "├󰏖";
+            keyColor = "yellow";
+          }
+          {
+            type = "terminal";
+            key = "├";
+            keyColor = "yellow";
+          }
+          {
+            type = "shell";
+            key = "└";
+            keyColor = "yellow";
+          }
+          "break"
+          {
+            type = "host";
+            key = "󰌢 PC";
+            keyColor = "green";
+          }
+          {
+            type = "cpu";
+            key = "├󰻠";
+            keyColor = "green";
+          }
+          {
+            type = "gpu";
+            key = "├󰍛";
+            keyColor = "green";
+          }
+          {
+            type = "disk";
+            key = "├";
+            keyColor = "green";
+          }
+          {
+            type = "memory";
+            key = "├󰑭";
+            keyColor = "green";
+          }
+          {
+            type = "uptime";
+            key = "└󰅐";
+            keyColor = "green";
+          }
+          "break"
+          {
+            type = "sound";
+            key = " SOUND";
+            keyColor = "cyan";
+          }
+          {
+            type = "player";
+            key = "├󰥠";
+            keyColor = "cyan";
+          }
+          {
+            type = "media";
+            key = "└󰝚";
+            keyColor = "cyan";
+          }
+          "break"
+          "colors"
+        ];
+      };
+    };
     fd = {
       # TODO: revisit this
       # fzf ctrl-t seems to see ignored directories still
