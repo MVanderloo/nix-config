@@ -13,8 +13,8 @@
     packages = with pkgs; [
       awscli2
       clickhouse
-      docker
-      docker-compose
+      # docker
+      # docker-compose
       duckdb
       nodejs_22
       ollama
@@ -25,6 +25,7 @@
   };
 
   services = {
+    # colima.enable = true;
     gpg-agent = {
       enable = true;
       defaultCacheTtl = 1800;
@@ -40,6 +41,7 @@
         inactive_color = "0x00000000"; # "0xff414550";
       };
     };
+    podman.enable = true;
   };
 
   programs = {
@@ -157,6 +159,7 @@
         };
       };
     };
+    # docker-cli.enable = true;
     fish.interactiveShellInit = ''eval "$(/opt/homebrew/bin/brew shellenv)"'';
     ghostty = {
       enable = true;
