@@ -52,9 +52,7 @@
       launchd.enable = true;
 
       settings = {
-        key-mapping = {
-          preset = "qwerty";
-        };
+        key-mapping.preset = "qwerty";
 
         # https://nikitabobko.github.io/AeroSpace/guide#normalization
         enable-normalization-flatten-containers = true;
@@ -166,6 +164,9 @@
     ghostty = {
       enable = true;
       package = pkgs.ghostty-bin;
+      enableFishIntegration = true;
+      installBatSyntax = true;
+      clearDefaultKeybinds = true;
       settings = {
         config-file = "?${config.home.homeDirectory}/.config/ghostty/local";
 
@@ -200,7 +201,6 @@
         window-inherit-working-directory = false;
 
         keybind = [
-          "clear"
           "super+ctrl+r=reload_config"
           "super+==increase_font_size:1"
           "super++=increase_font_size:1"
