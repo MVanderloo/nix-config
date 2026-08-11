@@ -162,6 +162,7 @@
     };
     # docker-cli.enable = true;
     fish.interactiveShellInit = ''eval "$(/opt/homebrew/bin/brew shellenv)"'';
+    git.includes = [ { path = "~/.config/git/local"; } ];
     ghostty = {
       enable = true;
       package = pkgs.ghostty-bin;
