@@ -1,3 +1,16 @@
 - learn fzf keybindings in shell
 - have ctrl-t allow multiselect
 - remove unnecessary homebrew packages and enable zap
+- rename repo
+- integrate worktrunk, pi
+- ssh and gpg config
+- color schemes
+- consider packages: pv, python
+- fonts
+- pinentry ?
+- gcroots
+- glab, gh
+- aerospace floating window config (keepassxc)
+- configure python, yazi
+- fix git aliases
+- fish alt-e doesn't open in editor
