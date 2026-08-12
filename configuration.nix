@@ -49,7 +49,8 @@
     keyboard = {
       enableKeyMapping = true;
       remapCapsLockToControl = true;
-      swapRightCommandAndRightOption = true;
+      # would love to have this only on the builtin keyboard
+      # swapRightCommandAndRightOption = true;
     };
 
     defaults = {

@@ -13,5 +13,4 @@
 - aerospace floating window config (keepassxc)
 - configure python, yazi
 - fix git aliases
-- fish alt-e doesn't open in editor
 - screenshot keybindings
