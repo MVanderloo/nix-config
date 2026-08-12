@@ -1,5 +1,5 @@
 {
-  description = "System configs (nix-darwin + home-manager)";
+  description = "Nix Configuration";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
@@ -12,16 +12,6 @@
 
     neovim-config.url = "github:mvanderloo/neovim-config";
     neovim-config.inputs.nixpkgs.follows = "nixpkgs";
-
-    # nix-homebrew.url = "github:zhaofengli/nix-homebrew";
-    # homebrew-core = {
-    #   url = "github:homebrew/homebrew-core";
-    #   flake = false;
-    # };
-    # homebrew-cask = {
-    #   url = "github:homebrew/homebrew-cask";
-    #   flake = false;
-    # };
   };
 
   outputs =
@@ -32,28 +22,26 @@
       ...
     }:
     {
-      darwinConfigurations.work = darwin.lib.darwinSystem {
+      darwinConfigurations.work-mac = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = [
-          ./configuration.nix
+          ./hosts/work-mac.nix
           home-manager.darwinModules.home-manager
           {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
               extraSpecialArgs = { inherit inputs; };
-              users.mi30175 = ./home/darwin.nix;
+              users.mi30175 = ./home/work-mac.nix;
             };
           }
         ];
       };
 
-      homeConfigurations = {
-        arch = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs; };
-          modules = [ ./home/arch.nix ];
-        };
+      homeConfigurations.tau = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = { inherit inputs; };
+        modules = [ ./home/tau.nix ];
       };
 
       formatter = nixpkgs.lib.genAttrs [ "aarch64-darwin" "x86_64-linux" ] (

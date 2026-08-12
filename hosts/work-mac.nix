@@ -31,9 +31,9 @@
   homebrew = {
     enable = true;
     onActivation = {
-      autoUpdate = false;
-      upgrade = false;
-      cleanup = "none";
+      autoUpdate = true;
+      upgrade = true;
+      cleanup = "zap";
     };
     # brews = [ ];
     casks = [
@@ -54,7 +54,7 @@
     };
 
     defaults = {
-      ".GlobalPreferences"."com.apple.mouse.scaling" = -1.0;
+      ".GlobalPreferences"."com.apple.mouse.scaling" = 4.0;
       controlcenter = {
         AirDrop = false;
         BatteryShowPercentage = true;
@@ -154,6 +154,7 @@
         askForPasswordDelay = 0;
       };
       CustomUserPreferences = {
+        # disable Apple Intelligence
         "com.apple.CloudSubscriptionFeatures.optIn"."545129924" = false;
       };
     };
