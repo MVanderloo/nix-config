@@ -93,7 +93,7 @@
         };
         commit = {
           verbose = true;
-          gpgSign = true;
+          gpgSign = false;
         };
         core = {
           compression = 9;

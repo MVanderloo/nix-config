@@ -43,6 +43,11 @@
         extraSpecialArgs = { inherit inputs; };
         modules = [ ./home-manager/tau.nix ];
       };
+      homeConfigurations.delta = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = { inherit inputs; };
+        modules = [ ./home-manager/delta.nix ];
+      };
 
       formatter = nixpkgs.lib.genAttrs [ "aarch64-darwin" "x86_64-linux" ] (
         sys: nixpkgs.legacyPackages.${sys}.nixfmt-tree
