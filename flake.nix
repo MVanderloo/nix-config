@@ -29,9 +29,6 @@
       nixpkgs,
       home-manager,
       darwin,
-      # nix-homebrew,
-      # homebrew-cask,
-      # homebrew-core,
       ...
     }:
     {
@@ -48,24 +45,6 @@
               users.mi30175 = ./home/darwin.nix;
             };
           }
-
-          # nix-homebrew.darwinModules.nix-homebrew
-          # {
-          #   nix-homebrew = {
-          #     enable = true;
-          #     enableRosetta = true;
-          #     user = "mi30175";
-          #     mutableTaps = false;
-          #     taps."homebrew/homebrew-cask" = homebrew-cask;
-          #     # taps."homebrew/homebrew-core" = homebrew-core;
-          #   };
-          # }
-          # {
-          #   homebrew.taps = [
-          #     "homebrew/homebrew-cask"
-          #     # "homebrew/homebrew-core"
-          #   ];
-          # }
         ];
       };
 
