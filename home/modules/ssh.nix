@@ -1,12 +1,8 @@
 { pkgs, ... }:
 {
-  home.packages = with pkgs; [
-    openssh
-  ];
+  home.packages = with pkgs; [ openssh ];
 
-  services = {
-    ssh-agent.enable = true;
-  };
+  services.ssh-agent.enable = true;
 
   programs.ssh = {
     enable = true;
