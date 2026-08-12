@@ -1,7 +1,5 @@
 - learn fzf keybindings in shell
 - have ctrl-t allow multiselect
-- remove unnecessary homebrew packages and enable zap
-- rename repo
 - integrate worktrunk, pi
 - ssh and gpg config
 - color schemes

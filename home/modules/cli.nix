@@ -192,7 +192,6 @@
       generateCaches = false;
       package = pkgs.man-db;
     };
-    pi-coding-agent.enable = true;
     ripgrep.enable = true;
     tealdeer.enable = true;
     yazi = {
