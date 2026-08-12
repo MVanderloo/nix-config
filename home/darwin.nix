@@ -22,6 +22,11 @@
       podman
       podman-compose
       uv
+      # fonts
+      monocraft
+      nerd-fonts.fira-code
+      nerd-fonts.jetbrains-mono
+      nerd-fonts.monaspace
     ];
   };
 
