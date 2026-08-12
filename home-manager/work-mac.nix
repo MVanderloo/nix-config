@@ -55,7 +55,7 @@
   programs = {
     # docker-cli.enable = true;
     fish.interactiveShellInit = ''eval "$(/opt/homebrew/bin/brew shellenv)"'';
-    git.includes = [ { path = "~/.config/git/local"; } ];
+    git.includes = [ { path = "${config.home.homeDirectory}/git/local"; } ];
     ghostty.settings.config-file = "?${config.home.homeDirectory}/.config/ghostty/local";
   };
 }

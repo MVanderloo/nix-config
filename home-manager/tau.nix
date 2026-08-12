@@ -1,12 +1,12 @@
 {
   imports = [
-    ../home/modules/cli.nix
-    ../home/modules/editor.nix
-    ../home/modules/shell.nix
-    ../home/modules/ssh.nix
-    ../home/modules/tmux.nix
-    ../home/modules/version-control.nix
-    ../home/modules/xdg.nix
+    ./modules/cli.nix
+    ./modules/editor.nix
+    ./modules/shell.nix
+    ./modules/ssh.nix
+    ./modules/tmux.nix
+    ./modules/version-control.nix
+    ./modules/xdg.nix
   ];
 
   home = {
