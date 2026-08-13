@@ -1,15 +1,13 @@
-- learn fzf keybindings in shell
-- have ctrl-t allow multiselect
 - integrate worktrunk, pi
 - ssh and gpg config
 - color schemes
-- consider packages: pv, python
+- consider packages: pv, parallel
 - fonts
 - pinentry ?
 - gcroots
 - glab, gh
 - aerospace floating window config (keepassxc)
-- configure python, yazi
+- configure yazi
 - fix git aliases
 - screenshot keybindings
 - look into workmux
