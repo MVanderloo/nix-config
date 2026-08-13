@@ -1,7 +1,6 @@
 { pkgs, ... }:
 {
   imports = [
-    ./modules/cli.nix
     ./modules/editor.nix
     ./modules/fish.nix
     ./modules/ssh.nix

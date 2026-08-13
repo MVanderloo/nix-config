@@ -4,7 +4,6 @@
   imports = [
     ./darwin-modules/aerospace.nix
     ./darwin-modules/ghostty.nix
-    ./modules/cli.nix
     ./modules/editor.nix
     ./modules/fish.nix
     ./modules/tmux.nix
@@ -47,6 +46,7 @@
       enable = true;
       defaultCacheTtl = 1800;
       # enableSshSupport = true;
+      pinentry.package = pkgs.pinentry_mac;
     };
     ollama.enable = true;
     podman.enable = true;
@@ -56,7 +56,9 @@
   programs = {
     # docker-cli.enable = true;
     fish.interactiveShellInit = ''eval "$(/opt/homebrew/bin/brew shellenv)"'';
+    bash.initExtra = ''eval "$(/opt/homebrew/bin/brew shellenv)"'';
     git.includes = [ { path = "${config.home.homeDirectory}/.config/git/local"; } ];
     ghostty.settings.config-file = "?${config.home.homeDirectory}/.config/ghostty/local";
+    gpg.enable = true;
   };
 }
