@@ -40,9 +40,9 @@
   homebrew = {
     enable = true;
     onActivation = {
-      autoUpdate = true;
-      upgrade = true;
-      cleanup = "zap";
+      autoUpdate = false;
+      upgrade = false;
+      cleanup = "none";
     };
     # brews = [ ];
     casks = [
