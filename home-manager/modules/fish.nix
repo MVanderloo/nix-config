@@ -1,52 +1,8 @@
-{ pkgs, ... }:
 {
-  home.shellAliases = {
-    tree = "eza --tree";
-    ".." = "cd ..";
-    "..." = "cd ../..";
-    "...." = "cd ../../..";
-  };
-
+  imports = [ ./shell.nix ];
   programs = {
-    atuin = {
-      enable = true;
-      forceOverwriteSettings = true;
-      daemon.enable = true;
-      settings = {
-        update_check = false;
-
-        style = "compact";
-        inline_height = 15;
-        show_numeric_shortcuts = false;
-        max_preview_height = 4;
-        show_help = false;
-        show_tabs = false;
-        prefers_reduced_motion = true;
-        ui.columns = [
-          "exit"
-          "time"
-          "duration"
-          "command"
-        ];
-
-        search_mode = "daemon-fuzzy";
-        secrets_filter = true;
-        enter_accept = true;
-        command_chaining = true;
-        filter_mode = "host";
-        search.filters = [
-          "workspace"
-          "host"
-          "directory"
-          "global"
-        ];
-
-        filter_mode_shell_up_key_binding = "session";
-      };
-    };
     dircolors.enableFishIntegration = true;
     direnv.enableFishIntegration = true;
-    eza.enableFishIntegration = true;
     fish = {
       enable = true;
       # TODO: cursor is not what I want
@@ -67,12 +23,7 @@
       };
     };
     ghostty.enableFishIntegration = true;
-    starship = {
-      enable = true;
-      enableFishIntegration = true;
-      presets = [ "nerd-font-symbols" ];
-      extraPackages = [ pkgs.jj-starship ];
-    };
+    starship.enableFishIntegration = true;
     yazi.enableFishIntegration = true;
     zoxide.enableFishIntegration = true;
   };
