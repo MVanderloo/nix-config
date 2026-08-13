@@ -3,6 +3,7 @@
   imports = [
     ./modules/cli.nix
     ./modules/editor.nix
+    ./modules/fish.nix
     ./modules/pi.nix
     ./modules/shell.nix
     ./modules/ssh.nix

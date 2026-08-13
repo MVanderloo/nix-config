@@ -44,6 +44,9 @@
         filter_mode_shell_up_key_binding = "session";
       };
     };
+    dircolors.enableFishIntegration = true;
+    direnv.enableFishIntegration = true;
+    eza.enableFishIntegration = true;
     fish = {
       enable = true;
       # TODO: cursor is not what I want
@@ -63,11 +66,14 @@
         };
       };
     };
+    ghostty.enableFishIntegration = true;
     starship = {
       enable = true;
       enableFishIntegration = true;
       presets = [ "nerd-font-symbols" ];
       extraPackages = [ pkgs.jj-starship ];
     };
+    yazi.enableFishIntegration = true;
+    zoxide.enableFishIntegration = true;
   };
 }

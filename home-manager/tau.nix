@@ -3,7 +3,7 @@
   imports = [
     ./modules/cli.nix
     ./modules/editor.nix
-    ./modules/shell.nix
+    ./modules/fish.nix
     ./modules/ssh.nix
     ./modules/tmux.nix
     ./modules/version-control.nix

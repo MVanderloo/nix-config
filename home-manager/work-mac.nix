@@ -6,7 +6,7 @@
     ./darwin-modules/ghostty.nix
     ./modules/cli.nix
     ./modules/editor.nix
-    ./modules/shell.nix
+    ./modules/fish.nix
     ./modules/tmux.nix
     ./modules/version-control.nix
     ./modules/xdg.nix

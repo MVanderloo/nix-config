@@ -34,19 +34,14 @@
       # syntaxes = ;
     };
     btop.enable = true; # TODO configure
-    dircolors = {
-      enable = true;
-      enableFishIntegration = true;
-    };
+    dircolors.enable = true;
     direnv = {
       enable = true;
-      enableFishIntegration = true;
       # nix-direnv.enable = true; # TODO try this
     };
     eza = {
       enable = true;
       colors = "auto"; # does this do anything?
-      enableFishIntegration = true;
       # TODO check all these options
       icons = "auto";
       extraOptions = [
@@ -194,13 +189,7 @@
     };
     ripgrep.enable = true;
     tealdeer.enable = true;
-    yazi = {
-      enable = true;
-      enableFishIntegration = true;
-    };
-    zoxide = {
-      enable = true;
-      enableFishIntegration = true;
-    };
+    yazi.enable = true;
+    zoxide.enable = true;
   };
 }
