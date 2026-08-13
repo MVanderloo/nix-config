@@ -20,6 +20,7 @@
       NO_PROXY = ".ll.mit.edu,.mit.edu,localhost,127.0.0.1";
     };
   };
+
   ids.uids.nixbld = 351;
 
   users.users.mi30175 = {
@@ -49,5 +50,4 @@
       "raycast"
     ];
   };
-
 }
