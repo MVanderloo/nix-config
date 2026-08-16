@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   imports = [
     ./modules/cli.nix
@@ -13,6 +14,10 @@
     stateVersion = "26.05";
     username = "mv";
     homeDirectory = "/home/mv";
+
+    packages = with pkgs; [
+      rayfish
+    ];
   };
 
   programs = {

@@ -21,7 +21,13 @@
       darwin,
       ...
     }:
+    let
+      packages = final: _: {
+        rayfish = final.callPackage ./packages/rayfish.nix { };
+      };
+    in
     {
+
       darwinConfigurations.work-mac = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = [
@@ -39,12 +45,12 @@
       };
 
       homeConfigurations.tau = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        pkgs = nixpkgs.legacyPackages.x86_64-linux.extend packages;
         extraSpecialArgs = { inherit inputs; };
         modules = [ ./home-manager/tau.nix ];
       };
       homeConfigurations.delta = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        pkgs = nixpkgs.legacyPackages.x86_64-linux.extend packages;
         extraSpecialArgs = { inherit inputs; };
         modules = [ ./home-manager/delta.nix ];
       };

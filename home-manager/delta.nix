@@ -16,6 +16,7 @@
     homeDirectory = "/home/mv";
 
     packages = with pkgs; [
+      rayfish
       bun
       pi-coding-agent
       uv
