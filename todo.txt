@@ -12,3 +12,8 @@
 - configure python, yazi
 - fix git aliases
 - screenshot keybindings
+- look into workmux
+- fix bash and zsh configs so that there is feature parity. Bonus: respect XDG
+- create standalone .bashrc, .tmux.conf, and .vimrc for copying onto servers
+- try new niri and aerospace keybindings to have better window movement behavior
+- nvim [z for spell
