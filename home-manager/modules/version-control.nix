@@ -1,13 +1,18 @@
 { pkgs, ... }:
 {
-  home.packages = with pkgs; [
-    diffnav
-    git-filter-repo
-    glab
-    prek
-    tuicr
-    worktrunk
-  ];
+  home = {
+    packages = with pkgs; [
+      diffnav
+      git-filter-repo
+      glab
+      prek
+      tuicr
+      worktrunk
+    ];
+
+    shellAliases.lag = "lazygit";
+  };
+
   programs = {
     delta = {
       enable = true;
