@@ -226,8 +226,6 @@
       enableNushellIntegration = false;
     };
     fd = {
-      # TODO: revisit this
-      # fzf ctrl-t seems to see ignored directories still
       enable = true;
       hidden = true;
       ignores = [
@@ -242,6 +240,19 @@
     };
     fzf = {
       enable = true;
+      defaultCommand = "fd";
+      changeDirWidget = {
+        command = "fd --type d";
+        options = [ "--preview 'eza --tree --level=3 --color=always {}'" ];
+      };
+      fileWidget = {
+        command = "fd";
+        options = [
+          "--preview 'bat --color=always --style=plain {} 2>/dev/null || eza --tree --level=2 --color=always {}'"
+          "--preview-window=right:60%:border-left"
+        ];
+      };
+      historyWidget.command = ""; # use atuin
       defaultOptions = [
         "--border=bold"
         "--color=border:7"
@@ -261,7 +272,6 @@
         "--color=bg:-1,bg+:-1,selected-bg:-1"
         "--color=hl:10:bold,hl+:10:bold,selected-hl:10:bold"
       ];
-      historyWidget.command = ""; # use atuin
     };
     less = {
       enable = true;
