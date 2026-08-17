@@ -12,6 +12,9 @@
 
     neovim-config.url = "github:mvanderloo/neovim-config";
     neovim-config.inputs.nixpkgs.follows = "nixpkgs";
+
+    maki.url = "github:tontinton/maki";
+    maki.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -19,11 +22,13 @@
       nixpkgs,
       home-manager,
       darwin,
+      maki,
       ...
     }:
     let
-      packages = final: _: {
+      packages = final: prev: {
         rayfish = final.callPackage ./packages/rayfish.nix { };
+        maki = maki.packages.${prev.system}.default;
       };
     in
     {
@@ -34,6 +39,7 @@
           ./hosts/work-mac.nix
           home-manager.darwinModules.home-manager
           {
+            nixpkgs.overlays = [ packages ];
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
@@ -41,6 +47,16 @@
               users.mi30175 = ./home-manager/work-mac.nix;
             };
           }
+        ];
+      };
+
+      nixosConfigurations.tau = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./hosts/tau.nix
+          home-manager.nixosModules.home-manager
+          { nixpkgs.overlays = [ packages ]; }
         ];
       };
 

@@ -26,6 +26,7 @@
       awscli2
       clickhouse
       duckdb
+      maki
       nodejs_22
       ollama
       parquet-tools

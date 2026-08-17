@@ -1,9 +1,8 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./modules/cli.nix
     ./modules/editor.nix
-    ./modules/pi.nix
     ./modules/shell.nix
     ./modules/ssh.nix
     ./modules/tmux.nix
@@ -18,23 +17,13 @@
 
     packages = with pkgs; [
       rayfish
-      uv
       maki
     ];
   };
 
   programs = {
     atuin.settings.sync_address = "http:omega:8888";
-    git.includes = [ { path = "${config.home.homeDirectory}/.config/git/local"; } ];
+    docker-cli.enable = true;
     home-manager.enable = true;
-    pi-coding-agent.models.providers.ollama = {
-      api = "openai-completions";
-      apiKey = "ollama";
-      baseUrl = "http://localhost:11434/v1";
-      models = [
-        { id = "qwen3.5:latest"; }
-        { id = "gemma4:latest"; }
-      ];
-    };
   };
 }
