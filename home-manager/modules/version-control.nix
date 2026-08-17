@@ -9,8 +9,6 @@
       tuicr
       worktrunk
     ];
-
-    shellAliases.lag = "lazygit";
   };
 
   programs = {
@@ -248,6 +246,9 @@
         template-aliases.log_with_current_files = "builtin_log_compact ++ if(current_working_copy, diff.summary())";
       };
     };
-    lazygit.enable = true;
+    lazygit = {
+      enable = true;
+      shellWrapperName = "lag";
+    };
   };
 }

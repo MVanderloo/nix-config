@@ -29,10 +29,11 @@
       "..." = "cd ../..";
       "...." = "cd ../../..";
       tree = "eza --tree --level=3";
-      trea = "eza --tree --level=3";
+      trea = "eza -a --tree --level=3";
       ls = "eza";
       la = "eza -a";
       ll = "eza -la";
+      lg = "eza -la --no-permissions --no-filesize --no-user --no-time -I '.git|.jj' --git --git-repos";
     };
 
     # XDG-compliant Readline config
@@ -213,10 +214,9 @@
       icons = "auto";
       extraOptions = [
         "--classify"
+        "--color-scale=size"
         "--group-directories-first"
         "--time-style=long-iso"
-        "--group"
-        "--color-scale=size"
       ];
       # these default to true for some reason
       enableBashIntegration = false;
