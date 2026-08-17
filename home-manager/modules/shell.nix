@@ -101,7 +101,22 @@
       # extraPackages = with pkgs.bat-extras; [ batdiff batman batgrep batwatch ];
       # syntaxes = ;
     };
-    btop.enable = true; # TODO configure
+    btop = {
+      enable = true;
+      settings = {
+        theme_background = true;
+        vim_keys = true;
+        rounded_corners = true;
+        update_ms = 1000;
+        base_10_sizes = false;
+        background_update = true;
+        base_10_bitrate = "Auto";
+        graph_symbol = "braille";
+        proc_sorting = "memory";
+        show_battery = true;
+        show_battery_watts = true;
+      };
+    };
     fastfetch = {
       enable = true;
 
