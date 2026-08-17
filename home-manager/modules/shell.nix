@@ -12,8 +12,9 @@
       gnugrep
       gnused
       just
-      rename
+      pv
       readline
+      rename
       rsync
       sd
       sl
