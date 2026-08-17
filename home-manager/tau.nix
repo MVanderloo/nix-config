@@ -10,6 +10,8 @@
     ./modules/xdg.nix
   ];
 
+  nixpkgs.config.allowUnfree = true;
+
   home = {
     stateVersion = "26.05";
     username = "mv";
@@ -17,6 +19,7 @@
 
     packages = with pkgs; [
       rayfish
+      discord
     ];
   };
 
