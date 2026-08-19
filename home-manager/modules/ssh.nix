@@ -17,7 +17,7 @@
       UserKnownHostsFile = "~/.ssh/known_hosts";
       ControlMaster = "yes";
       ControlPath = "~/.ssh/master-%r@%n:%p";
-      ControlPersist = "no";
+      ControlPersist = "10m";
     };
   };
 }
