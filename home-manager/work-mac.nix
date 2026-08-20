@@ -4,6 +4,7 @@
   imports = [
     ./darwin-modules/aerospace.nix
     ./darwin-modules/ghostty.nix
+    ./darwin-modules/llama-server.nix
     ./modules/editor.nix
     ./modules/fish.nix
     ./modules/python.nix
@@ -26,8 +27,8 @@
       awscli2
       clickhouse
       duckdb
+      hf
       nodejs_22
-      ollama
       parquet-tools
       podman
       podman-compose
@@ -48,7 +49,6 @@
       # enableSshSupport = true;
       pinentry.package = pkgs.pinentry_mac;
     };
-    ollama.enable = true;
     podman.enable = true;
     tldr-update.enable = true;
   };
