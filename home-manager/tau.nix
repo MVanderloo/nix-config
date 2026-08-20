@@ -26,6 +26,14 @@
   programs = {
     atuin.settings.sync_address = "http:omega:8888";
     docker-cli.enable = true;
+    git = {
+      userName = "Michael van der Loo";
+      userEmail = "me@mvanderloo.com";
+    };
     home-manager.enable = true;
+    jujutsu.settings.user = {
+      email = "me@mvanderloo.com";
+      name = "Michael van der Loo";
+    };
   };
 }

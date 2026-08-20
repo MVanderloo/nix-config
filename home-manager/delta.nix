@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./modules/editor.nix
@@ -27,7 +27,14 @@
 
   programs = {
     atuin.settings.sync_address = "http:omega:8888";
-    git.includes = [ { path = "${config.home.homeDirectory}/.config/git/local"; } ];
+    git = {
+      userName = "Michael van der Loo";
+      userEmail = "me@mvanderloo.com";
+    };
+    jujutsu.settings.user = {
+      email = "me@mvanderloo.com";
+      name = "Michael van der Loo";
+    };
     home-manager.enable = true;
     pi-coding-agent.models.providers.ollama = {
       api = "openai-completions";

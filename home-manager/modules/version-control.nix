@@ -221,10 +221,6 @@
       enable = true;
       # ediff = true;
       settings = {
-        user = {
-          email = "me@mvanderloo.com";
-          name = "Michael van der Loo";
-        };
         ui = {
           default-command = "logstatus";
           editor = "nvim";
