@@ -16,3 +16,4 @@
 - try new niri and aerospace keybindings to have better window movement behavior
 - nvim [z for spell
 - configure remote builder
+- darwin mouse sensitivity is too high
