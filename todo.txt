@@ -1,4 +1,4 @@
-- integrate worktrunk, pi
+- integrate worktrunk
 - ssh and gpg config
 - color schemes
 - consider packages: pv, parallel
