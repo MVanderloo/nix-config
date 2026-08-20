@@ -27,11 +27,11 @@
       awscli2
       clickhouse
       duckdb
-      hf
       nodejs_22
       parquet-tools
       podman
       podman-compose
+      python3Packages.huggingface-hub
       uv
       # fonts
       monocraft
