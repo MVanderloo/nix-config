@@ -4,6 +4,7 @@
     ./modules/editor.nix
     ./modules/fish.nix
     ./modules/pi.nix
+    ./modules/python.nix
     ./modules/shell.nix
     ./modules/ssh.nix
     ./modules/tmux.nix
@@ -17,9 +18,10 @@
     homeDirectory = "/home/mv";
 
     packages = with pkgs; [
+      maki
+      podman-compose
       rayfish
       uv
-      maki
     ];
   };
 
@@ -37,4 +39,6 @@
       ];
     };
   };
+
+  services.podman.enable = true;
 }
