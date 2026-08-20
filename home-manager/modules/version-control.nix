@@ -226,13 +226,6 @@
         };
         git.push-new-bookmarks = true;
         aliases = {
-          rebase-all = [
-            "rebase"
-            "-s"
-            "(::trunk())+ & mutable()"
-            "-d"
-            "trunk()"
-          ];
           accuse = [
             "file"
             "annotate"
@@ -241,6 +234,23 @@
             "log"
             "-T"
             "log_with_current_files"
+          ];
+          push = [
+            "git"
+            "push"
+          ];
+          rebase-all = [
+            "rebase"
+            "-s"
+            "(::trunk())+ & mutable()"
+            "-d"
+            "trunk()"
+          ];
+          update-branch = [
+            "bookmark"
+            "move"
+            "--to"
+            "@-"
           ];
         };
         template-aliases.log_with_current_files = "builtin_log_compact ++ if(current_working_copy, diff.summary())";
