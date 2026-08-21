@@ -4,22 +4,26 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
-    darwin.url = "github:nix-darwin/nix-darwin";
-    darwin.inputs.nixpkgs.follows = "nixpkgs";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
+    nixpkgs-stable.inputs = { };
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    darwin.url = "github:nix-darwin/nix-darwin";
+    darwin.inputs.nixpkgs.follows = "nixpkgs";
 
     neovim-config.url = "github:mvanderloo/neovim-config";
     neovim-config.inputs.nixpkgs.follows = "nixpkgs";
 
     maki.url = "github:tontinton/maki";
-    maki.inputs.nixpkgs.follows = "nixpkgs";
+    maki.inputs.nixpkgs.follows = "nixpkgs-stable";
   };
 
   outputs =
     inputs@{
       nixpkgs,
+      nixpkgs-stable,
       home-manager,
       darwin,
       maki,
@@ -47,16 +51,6 @@
               users.mi30175 = ./home-manager/work-mac.nix;
             };
           }
-        ];
-      };
-
-      nixosConfigurations.tau = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./hosts/tau.nix
-          home-manager.nixosModules.home-manager
-          { nixpkgs.overlays = [ packages ]; }
         ];
       };
 

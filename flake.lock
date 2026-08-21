@@ -77,7 +77,7 @@
       "inputs": {
         "crane": "crane",
         "nixpkgs": [
-          "nixpkgs"
+          "stable-nixpkgs"
         ],
         "rust-overlay": "rust-overlay"
       },
@@ -138,7 +138,8 @@
         "home-manager": "home-manager",
         "maki": "maki",
         "neovim-config": "neovim-config",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "stable-nixpkgs": "stable-nixpkgs"
       }
     },
     "rust-overlay": {
@@ -159,6 +160,22 @@
       "original": {
         "owner": "oxalica",
         "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "stable-nixpkgs": {
+      "locked": {
+        "lastModified": 1787204541,
+        "narHash": "sha256-OURZPknrTjQrlNyxPdqzyqmU/81Wes1CUP/Ft1Rv/YI=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "5880666fd9eb563038431edb35c2d0aa595884e6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-26.05",
+        "repo": "nixpkgs",
         "type": "github"
       }
     },
