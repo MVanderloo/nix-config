@@ -7,6 +7,8 @@
       quit-after-last-window-closed = true;
       confirm-close-surface = false;
 
+      shell-integration-features = "ssh-env,ssh-terminfo,sudo";
+
       font-feature = [
         "ss01"
         "ss02"
