@@ -1,4 +1,5 @@
-- integrate worktrunk
+General
+- integrate worktrunk, pi
 - ssh and gpg config
 - color schemes
 - consider packages: pv, parallel
@@ -6,7 +7,6 @@
 - pinentry ?
 - gcroots
 - glab, gh
-- aerospace floating window config (keepassxc)
 - configure yazi
 - fix git aliases
 - screenshot keybindings
@@ -15,11 +15,22 @@
 - create standalone .bashrc, .tmux.conf, and .vimrc for copying onto servers
 - try new niri and aerospace keybindings to have better window movement behavior
 - nvim [z for spell
-- configure remote builder
+- convert nvim config to nix
+- nixpkgs multiverse
+
+Darwin
+- aerospace floating window config (keepassxc)
 - darwin mouse sensitivity is too high
-- add theta to flake as managed nixos host (hosts/theta.nix)
-- theta: fix DNS — set networking.nameservers to public resolver (MagicDNS only resolves tailnet names)
-- theta: disable gdm auto-suspend (services.xserver.displayManager.gdm.autoSuspend = false) + polkit NO rule, gdm-greeter is suspending headless server
-- theta: git auth — switch repo remotes to SSH (git@github.com) via insteadOf / core.sshCommand so no headless askpass
-- theta: bootstrap git auth declaratively in shared home-manager git module
-- theta: nixos-rebuild switch after config changes
+
+NixOS
+- installable ISO
+- secrets: git, gpg, ssh, initial password, tailscale
+- disko
+- impermanance
+- Figure out better bootstrap procedure
+- map caps to ctrl in console
+- console font perhaps
+
+Theta
+- ensure everything is updated to latest (mostly firmware ig)
+- configure remote builder

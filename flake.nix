@@ -36,6 +36,23 @@
       };
     in
     {
+      nixosConfigurations.theta = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./hosts/theta/configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            nixpkgs.overlays = [ packages ];
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = { inherit inputs; };
+              users.mv = ./home-manager/theta.nix;
+            };
+          }
+        ];
+      };
 
       darwinConfigurations.work-mac = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
