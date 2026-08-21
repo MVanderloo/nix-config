@@ -27,9 +27,9 @@
 
   programs = {
     atuin.settings.sync_address = "http:omega:8888";
-    git = {
-      userName = "Michael van der Loo";
-      userEmail = "me@mvanderloo.com";
+    git.settings.user = {
+      name = "Michael van der Loo";
+      email = "me@mvanderloo.com";
     };
     jujutsu.settings.user = {
       email = "me@mvanderloo.com";
