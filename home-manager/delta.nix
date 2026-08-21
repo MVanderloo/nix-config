@@ -35,6 +35,7 @@
       email = "me@mvanderloo.com";
       name = "Michael van der Loo";
     };
+    ghostty.systemd.enable = true;
     home-manager.enable = true;
     pi-coding-agent.models.providers.ollama = {
       api = "openai-completions";
