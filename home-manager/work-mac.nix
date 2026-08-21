@@ -60,5 +60,6 @@
     git.includes = [ { path = "${config.home.homeDirectory}/.config/git/local"; } ];
     ghostty.settings.config-file = "?${config.home.homeDirectory}/.config/ghostty/local";
     gpg.enable = true;
+    ssh.settings."github.com".IdentityFile = "~/.ssh/id_ed25519";
   };
 }

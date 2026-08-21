@@ -45,6 +45,7 @@
         { id = "gemma4:latest"; }
       ];
     };
+    ssh.settings."github.com".IdentityFile = "~/.ssh/id_ed25519";
   };
 
   services.podman.enable = true;

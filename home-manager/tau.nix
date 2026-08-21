@@ -35,5 +35,6 @@
       email = "me@mvanderloo.com";
       name = "Michael van der Loo";
     };
+    ssh.settings."github.com".IdentityFile = "~/.ssh/id_ed25519";
   };
 }
