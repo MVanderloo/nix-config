@@ -1,8 +1,9 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   imports = [
     ./modules/editor.nix
     ./modules/fish.nix
+    # ./modules/llama-swap.nix
     ./modules/pi.nix
     ./modules/python.nix
     ./modules/shell.nix
@@ -40,6 +41,7 @@
     pi-coding-agent.models.providers.ollama = {
       api = "openai-completions";
       apiKey = "ollama";
+      # baseUrl = "http://localhost:8041/v1";
       baseUrl = "http://localhost:11434/v1";
       models = [
         { id = "qwen3.5:latest"; }
@@ -48,6 +50,16 @@
     };
     # ssh.settings."github.com".IdentityFile = "~/.ssh/id_ed25519";
   };
+
+  # services.llama-swap = {
+  #   enable = true;
+  #   listen = "0.0.0.0:8041";
+  #   models = {
+  #     # Download .gguf files to ~/models/ first
+  #     # qwen3.5 = { file = "${config.home.homeDirectory}/models/qwen3.5.gguf"; port = 8999; };
+  #     # gemma4 = { file = "${config.home.homeDirectory}/models/gemma4.gguf"; port = 8998; };
+  #   };
+  # };
 
   services.podman.enable = true;
 }
