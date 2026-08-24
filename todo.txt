@@ -1,33 +1,40 @@
 General
 - integrate worktrunk, pi
-- ssh and gpg config
-- color schemes
+- ssh and gpg config: GPG authenticates everything
+- synchronized color schemes
 - consider packages: pv, parallel
-- fonts
 - pinentry ?
 - gcroots
 - glab, gh
 - configure yazi
 - fix git aliases
-- screenshot keybindings
 - look into workmux
 - fix bash and zsh configs so that there is feature parity. Bonus: respect XDG
 - create standalone .bashrc, .tmux.conf, and .vimrc for copying onto servers
 - try new niri and aerospace keybindings to have better window movement behavior
-- nvim [z for spell
-- convert nvim config to nix
 - nixpkgs multiverse
 - Update tmux / prompt to make it clear when I am in ssh or not
 - move real dotfiles to dotfiles/
 - assets like wallpapers in assets/
-- make neovim clipboard through ssh
+- fish cursor
+
+Neovim
+- nvim [z for spell
 - neovim cold startup is bad
+- convert nvim config to nix
+- make neovim clipboard through ssh
+
+Tmux
+- permanent tmux rootshell session over MOSH
+- how can I name/preview sessions / windows better so I know what is happening
 
 Darwin
+- fonts
 - aerospace floating window config (keepassxc)
 - darwin mouse sensitivity is too high
 
 NixOS
+- fonts
 - installable ISO
 - secrets: git, gpg, ssh, initial password, tailscale
 - disko
