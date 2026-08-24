@@ -8,7 +8,7 @@
     };
 
     defaults = {
-      ".GlobalPreferences"."com.apple.mouse.scaling" = 4.0;
+      ".GlobalPreferences"."com.apple.mouse.scaling" = -1.0;
       controlcenter = {
         AirDrop = false;
         BatteryShowPercentage = true;
