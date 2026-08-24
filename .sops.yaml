@@ -1,0 +1,11 @@
+creation_rules:
+  - path_regex: hosts/theta/secrets\.yaml$
+    key_groups:
+      - age:
+        - age17arhsp79x04p5yehkmk3z2ryxhzumea358ug6kye96xj3x9pty6sp7glg7
+        - age18dedd604jdt683wde7wkf08fkr9x278fyzry4d0tstphf48kz5lq9vpt96
+  - path_regex: theta/secrets\.yaml$
+    key_groups:
+      - age:
+        - age17arhsp79x04p5yehkmk3z2ryxhzumea358ug6kye96xj3x9pty6sp7glg7
+        - age18dedd604jdt683wde7wkf08fkr9x278fyzry4d0tstphf48kz5lq9vpt96

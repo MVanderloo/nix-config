@@ -62,6 +62,7 @@
           home-manager.nixosModules.home-manager
           {
             nixpkgs.overlays = [ packages ];
+            sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
