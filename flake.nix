@@ -18,6 +18,15 @@
 
     maki.url = "github:tontinton/maki";
     maki.inputs.nixpkgs.follows = "nixpkgs-stable";
+
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
+
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+
+    tangled.url = "git+https://tangled.org/tangled.org/core";
+    tangled.inputs.nixpkgs.follows = "nixpkgs-stable";
   };
 
   outputs =
@@ -27,6 +36,8 @@
       home-manager,
       darwin,
       maki,
+      disko,
+      tangled,
       ...
     }:
     let
@@ -41,6 +52,13 @@
         specialArgs = { inherit inputs; };
         modules = [
           ./hosts/theta/configuration.nix
+          # ./services/atuin
+          # ./services/caddy
+          # ./services/openwebui
+          # ./services/pocket-id
+          # ./services/spindle
+          # ./services/tranquil-pds
+          inputs."sops-nix".nixosModules.sops
           home-manager.nixosModules.home-manager
           {
             nixpkgs.overlays = [ packages ];
