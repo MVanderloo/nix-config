@@ -15,8 +15,8 @@
       ServerAliveCountMax = 3;
       HashKnownHosts = false;
       UserKnownHostsFile = "~/.ssh/known_hosts";
-      ControlMaster = "yes";
-      ControlPath = "~/.ssh/master-%r@%n:%p";
+      ControlMaster = "auto";
+      ControlPath = "~/.ssh/master-%r@%h:%p";
       ControlPersist = "10m";
     };
   };
