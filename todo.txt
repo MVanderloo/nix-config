@@ -17,6 +17,7 @@ General
 - nvim [z for spell
 - convert nvim config to nix
 - nixpkgs multiverse
+- Update tmux / prompt to make it clear when I am in ssh or not
 
 Darwin
 - aerospace floating window config (keepassxc)
