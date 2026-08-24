@@ -18,6 +18,10 @@ General
 - convert nvim config to nix
 - nixpkgs multiverse
 - Update tmux / prompt to make it clear when I am in ssh or not
+- move real dotfiles to dotfiles/
+- assets like wallpapers in assets/
+- make neovim clipboard through ssh
+- neovim cold startup is bad
 
 Darwin
 - aerospace floating window config (keepassxc)
