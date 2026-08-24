@@ -18,7 +18,6 @@
       rsync
       sd
       sl
-      traceroute
       tuxedo
       unzip
       watchexec
