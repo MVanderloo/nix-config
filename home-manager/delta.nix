@@ -6,7 +6,7 @@
     ./modules/pi.nix
     ./modules/python.nix
     ./modules/shell.nix
-    ./modules/ssh.nix
+    ./modules/ssh-gpg.nix
     ./modules/tmux.nix
     ./modules/version-control.nix
     ./modules/xdg.nix
@@ -46,7 +46,7 @@
         { id = "gemma4:latest"; }
       ];
     };
-    ssh.settings."github.com".IdentityFile = "~/.ssh/id_ed25519";
+    # ssh.settings."github.com".IdentityFile = "~/.ssh/id_ed25519";
   };
 
   services.podman.enable = true;

@@ -4,7 +4,7 @@
     ./modules/editor.nix
     ./modules/fish.nix
     ./modules/ghostty.nix
-    ./modules/ssh.nix
+    ./modules/ssh-gpg.nix
     ./modules/tmux.nix
     ./modules/version-control.nix
     ./modules/xdg.nix
@@ -36,6 +36,6 @@
       name = "Michael van der Loo";
       email = "me@mvanderloo.com";
     };
-    ssh.settings."github.com".IdentityFile = "~/.ssh/id_ed25519";
+    # ssh.settings."github.com".IdentityFile = "~/.ssh/id_ed25519";
   };
 }
