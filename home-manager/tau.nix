@@ -1,5 +1,9 @@
 { pkgs, ... }:
 {
+  # TODO: configure theta as remote builder for tau
+  #   In /etc/nix/nix.conf on tau:
+  #     builders = ssh-ng://theta x86_64-linux - - nixos-test,big-parallel,kvm
+  #     builders-use-substitutes = true
   imports = [
     ./modules/editor.nix
     ./modules/fish.nix
