@@ -1,4 +1,7 @@
 {
+  config,
+  ...
+}: {
   programs.ghostty = {
     enable = true;
     installBatSyntax = true;
@@ -38,5 +41,15 @@
         "super+v=paste_from_clipboard"
       ];
     };
+  };
+
+  home.file."${config.home.homeDirectory}/.local/bin/push-ghostty-term" = {
+    executable = true;
+    text = ''
+      #!/bin/sh
+      set -eu
+      hostname="''${1:?Usage: push-ghostty-term <hostname>}"
+      infocmp -x xterm-ghostty | ssh "$hostname" -- tic -x -
+    '';
   };
 }
