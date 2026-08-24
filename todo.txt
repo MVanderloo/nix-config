@@ -33,6 +33,7 @@ NixOS
 - console font perhaps
 
 Theta
+- re-setup server using disko (currently uses legacy partition layout, need disko-formatted disk)
 - ensure everything is updated to latest (mostly firmware ig)
 - configure remote builder
 - add yubikey ssh authorized key
