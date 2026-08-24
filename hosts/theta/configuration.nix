@@ -24,7 +24,12 @@
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # networking.firewall.enable = false;
-  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 8888 ];
+  networking.firewall.interfaces.tailscale0.allowedUDPPortRanges = [
+    {
+      from = 60000;
+      to = 61000;
+    }
+  ];
   networking.nameservers = [
     "1.1.1.1"
     "8.8.8.8"
@@ -64,6 +69,10 @@
   ];
 
   # programs.mtr.enable = true;
+  programs.mosh = {
+    enable = true;
+    openFirewall = false;
+  };
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
