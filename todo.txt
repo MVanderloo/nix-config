@@ -35,3 +35,4 @@ NixOS
 Theta
 - ensure everything is updated to latest (mostly firmware ig)
 - configure remote builder
+- add yubikey ssh authorized key
