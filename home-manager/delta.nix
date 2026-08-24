@@ -32,8 +32,8 @@
       email = "me@mvanderloo.com";
     };
     jujutsu.settings.user = {
-      email = "me@mvanderloo.com";
       name = "Michael van der Loo";
+      email = "me@mvanderloo.com";
     };
     ghostty.systemd.enable = true;
     home-manager.enable = true;
