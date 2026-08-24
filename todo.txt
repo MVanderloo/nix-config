@@ -42,6 +42,15 @@ NixOS
 - Figure out better bootstrap procedure
 - map caps to ctrl in console
 - console font perhaps
+- disable root ssh
+- disable password auth, only ssh key
+- fail2ban
+- only allow ssh over VPN
+- harden SSH config
+- only open required ports
+- disable IP forwarding
+- automatic security updates
+- automated patch updates
 
 Theta
 - re-setup server using disko (currently uses legacy partition layout, need disko-formatted disk)
