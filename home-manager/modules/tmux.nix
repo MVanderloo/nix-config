@@ -131,6 +131,7 @@
 
         bind -N 'attach to root session' S run-shell 'sesh connect --root "$(pwd)"'
 
+        # --preview "sesh preview {}" --preview-window "right:50%" \
         bind -N 'session manager' s run-shell 'sesh connect "$(
           sesh list --icons | fzf-tmux --no-sort --reverse \
             -p 100%,100% --ansi --padding 0,1 --prompt="❯ " \
@@ -143,7 +144,6 @@
             --bind "ctrl-x:reload(sesh list -z --icons)" \
             --bind "ctrl-f:reload(fd -H -d 2 -t d -E .Trash . ~)" \
             --bind "ctrl-d:execute(tmux kill-session -t {2..})+reload(sesh list --icons)" \
-            # --preview "sesh preview {}" --preview-window "right:50%" \
             --preview '${config.xdg.configHome}/tmux/sesh-preview.py {}' --preview-window "right:50%" \
         )"'
       '';
