@@ -51,8 +51,8 @@
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [
-          disko.nixosModules.disko
-          ./hosts/theta/disko-config.nix
+          # disko.nixosModules.disko
+          # ./hosts/theta/disko-config.nix
           ./hosts/theta/configuration.nix
           # ./services/atuin
           # ./services/caddy
