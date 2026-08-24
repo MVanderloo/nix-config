@@ -7,7 +7,7 @@
   imports = [
     ./modules/editor.nix
     ./modules/fish.nix
-    ./modules/ghostty.nix
+    # ./modules/ghostty.nix
     ./modules/ssh-gpg.nix
     ./modules/tmux.nix
     ./modules/version-control.nix
