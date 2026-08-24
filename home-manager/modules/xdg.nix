@@ -1,10 +1,10 @@
 {
   xdg = {
     enable = true;
-    userDirs = {
-      enable = true;
-      createDirectories = true;
-    };
+    # userDirs = {
+    #   enable = true;
+    #   createDirectories = true;
+    # };
   };
   home.preferXdgDirectories = true;
 }
