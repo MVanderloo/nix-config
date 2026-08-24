@@ -49,5 +49,8 @@
       "keepassxc"
       "raycast"
     ];
+    enableFishIntegration = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
   };
 }
