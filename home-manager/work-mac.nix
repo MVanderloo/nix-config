@@ -55,6 +55,14 @@
 
   programs = {
     # docker-cli.enable = true;
+    fish.interactiveShellInit = ''
+      for f in ~/.local/env/*.env
+        test -f $f; or continue
+        for line in (cat $f | grep -v '^#' | grep '=')
+          set -gx (string split -m1 '=' $line)
+        end
+      end
+    '';
     git.includes = [ { path = "${config.home.homeDirectory}/.config/git/local"; } ];
     ghostty.settings.config-file = "?${config.home.homeDirectory}/.config/ghostty/local";
     gpg.enable = true;
