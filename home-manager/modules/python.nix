@@ -1,6 +1,15 @@
 { pkgs, config, ... }:
 {
-  home.packages = with pkgs; [ python3 ];
+  home = {
+    packages = [ pkgs.python3 ];
+
+    sessionVariables = {
+      PYTHONSTARTUP = "${config.xdg.configHome}/python/startup.py";
+      PYTHON_HISTORY = "${config.xdg.stateHome}/python/history";
+      PYTHONPYCACHEPREFIX = "${config.xdg.cacheHome}/python";
+      MPLCONFIGDIR = "${config.xdg.configHome}/matplotlib";
+    };
+  };
 
   xdg.configFile."python/startup.py".text = ''
     # REPL improvements
@@ -36,11 +45,4 @@
 
     sys.displayhook = lambda x: pprint(x) if x is not None else None
   '';
-
-  home.sessionVariables = {
-    PYTHONSTARTUP = "${config.xdg.configHome}/python/startup.py";
-    PYTHON_HISTORY = "${config.xdg.stateHome}/python/history";
-    PYTHONPYCACHEPREFIX = "${config.xdg.cacheHome}/python";
-    MPLCONFIGDIR = "${config.xdg.configHome}/matplotlib";
-  };
 }
