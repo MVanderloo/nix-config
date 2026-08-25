@@ -1,56 +1,44 @@
 { pkgs, ... }:
+let
+  user = "mi30175";
+  proxy = "http://llproxy.llan.ll.mit.edu:8080";
+  no_proxy = ".ll.mit.edu,.mit.edu,localhost,127.0.0.1";
+in
 {
   imports = [
+    ../darwin/homebrew.nix
+    ../darwin/nix-settings.nix
     ../darwin/settings.nix
   ];
+
   system = {
     stateVersion = 7;
-    primaryUser = "mi30175";
+    primaryUser = user;
   };
 
-  nix = {
-    settings = {
-      experimental-features = "nix-command flakes";
-      use-xdg-base-directories = true;
-    };
-    envVars = {
-      HTTP_PROXY = "http://llproxy.llan.ll.mit.edu:8080";
-      HTTPS_PROXY = "http://llproxy.llan.ll.mit.edu:8080";
-      ALL_PROXY = "http://llproxy.llan.ll.mit.edu:8080";
-      NO_PROXY = ".ll.mit.edu,.mit.edu,localhost,127.0.0.1";
-    };
+  # nix proxy settings
+  nix.envVars = {
+    ALL_PROXY = proxy;
+    HTTPS_PROXY = proxy;
+    HTTP_PROXY = proxy;
+    NO_PROXY = no_proxy;
   };
 
+  # system proxy settings
+  environment.variables = {
+    ALL_PROXY = proxy;
+    HTTPS_PROXY = proxy;
+    HTTP_PROXY = proxy;
+    NO_PROXY = no_proxy;
+  };
+
+  # UID 350 and 351 already existed
   ids.uids.nixbld = 351;
 
-  users.users.mi30175 = {
-    home = "/Users/mi30175";
+  users.users.${user} = {
+    home = "/Users/${user}";
     shell = pkgs.fish;
   };
 
-  environment.variables = {
-    HTTPS_PROXY = "http://llproxy.llan.ll.mit.edu:8080";
-    HTTP_PROXY = "http://llproxy.llan.ll.mit.edu:8080";
-    ALL_PROXY = "http://llproxy.llan.ll.mit.edu:8080";
-    NO_PROXY = ".ll.mit.edu,.mit.edu,localhost,127.0.0.1";
-  };
-
   programs.fish.enable = true;
-
-  homebrew = {
-    enable = true;
-    onActivation = {
-      autoUpdate = false;
-      upgrade = false;
-      cleanup = "none";
-    };
-    # brews = [ ];
-    casks = [
-      "keepassxc"
-      "raycast"
-    ];
-    enableFishIntegration = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-  };
 }
