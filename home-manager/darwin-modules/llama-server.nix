@@ -10,6 +10,10 @@ let
       file = "Qwen3.8-27B-UD-Q6_K_M.gguf";
       port = 8998;
     };
+    "Qwen3.8-27B-UD-Q4_K_M" = {
+      file = "Qwen3.8-27B-UD-Q4_K_M.gguf";
+      port = 8997;
+    };
   };
   yaml = pkgs.formats.yaml { };
   configFile = yaml.generate "llama-swap.yaml" {
