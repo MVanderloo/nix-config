@@ -19,7 +19,7 @@ let
       port = 8996;
       extraArgs = [
         "-c"
-        "8192"
+        "100000"
         "-fa"
         "on"
         "-np"
