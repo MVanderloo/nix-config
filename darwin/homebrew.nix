@@ -2,7 +2,7 @@
   homebrew = {
     enable = true;
     onActivation = {
-      autoUpdate = true;
+      autoUpdate = false;
       upgrade = false;
       extraEnv = {
         HOMEBREW_NO_ENV_HISTS = "1";
