@@ -24,6 +24,8 @@ in
     NO_PROXY = no_proxy;
   };
 
+  nixpkgs.config.allowUnfree = true;
+
   # system proxy settings
   environment.variables = {
     ALL_PROXY = proxy;
