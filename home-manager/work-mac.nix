@@ -5,6 +5,7 @@
     ./darwin-modules/aerospace.nix
     ./darwin-modules/ghostty.nix
     ./darwin-modules/llama-server.nix
+    ./darwin-modules/open-webui.nix
     ./darwin-modules/tmux.nix
     ./modules/editor.nix
     ./modules/fish.nix
