@@ -131,7 +131,7 @@
 
         bind -N 'attach to root session' S run-shell 'sesh connect --root "$(pwd)"'
 
-        # --preview "sesh preview {}" --preview-window "right:50%" \
+        # --preview "sesh preview {}" --preview-window "right:50%"
         bind -N 'session manager' s run-shell 'sesh connect "$(
           sesh list --icons | fzf-tmux --no-sort --reverse \
             -p 100%,100% --ansi --padding 0,1 --prompt="❯ " \
