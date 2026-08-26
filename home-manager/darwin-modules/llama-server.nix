@@ -15,7 +15,7 @@ let
       port = 8997;
     };
     "Qwen3.6 35B-A3B" = {
-      file = "Qwen3.6-35B-MTP-GGUF";
+      file = "Qwen3.6-35B-A3B-UD-Q4_K_M.gguf";
       port = 8996;
       extraArgs = [
         "-c"
