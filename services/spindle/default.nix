@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  inputs,
-  ...
-}:
+{ lib, inputs, ... }:
 {
   imports = [ inputs.tangled.nixosModules.spindle ];
 
@@ -16,6 +11,7 @@
         maxJobCount = 2;
         queueSize = 100;
       };
+
       pipelines = {
         nixery.nixery = "nixery.tangled.sh";
         microvm.enableKVM = false;

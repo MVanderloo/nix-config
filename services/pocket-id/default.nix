@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ config, pkgs, ... }:
 let
   hostname = "id.mvanderloo.com";
   port = 1411;
@@ -17,11 +12,6 @@ in
       inherit sopsFile;
       restartUnits = [ "podman-pocket-id.service" ];
     };
-
-    systemd.tmpfiles.rules = [
-      "d ${dataDir} 0750 root root -"
-      "d ${dataDir}/data 0750 root root -"
-    ];
 
     virtualisation.oci-containers = {
       backend = "podman";
@@ -52,18 +42,25 @@ in
       };
     };
 
-    systemd.services.podman-network-pocket-id = {
-      description = "Pocket ID podman network";
-      wantedBy = [ "multi-user.target" ];
-      before = [ "podman-pocket-id.service" ];
-      path = [ pkgs.podman ];
-      serviceConfig = {
-        Type = "oneshot";
-        RemainAfterExit = true;
+    systemd = {
+      tmpfiles.rules = [
+        "d ${dataDir} 0750 root root -"
+        "d ${dataDir}/data 0750 root root -"
+      ];
+
+      services.podman-network-pocket-id = {
+        description = "Pocket ID podman network";
+        wantedBy = [ "multi-user.target" ];
+        before = [ "podman-pocket-id.service" ];
+        path = [ pkgs.podman ];
+        serviceConfig = {
+          Type = "oneshot";
+          RemainAfterExit = true;
+        };
+        script = ''
+          podman network exists ${networkName} || podman network create ${networkName}
+        '';
       };
-      script = ''
-        podman network exists ${networkName} || podman network create ${networkName}
-      '';
     };
 
     networking.firewall.allowedTCPPorts = [ port ];

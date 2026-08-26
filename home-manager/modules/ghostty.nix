@@ -1,7 +1,8 @@
 {
   config,
   ...
-}: {
+}:
+{
   programs.ghostty = {
     enable = true;
     installBatSyntax = true;

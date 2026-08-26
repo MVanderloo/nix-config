@@ -22,9 +22,10 @@
     homeDirectory = "/home/mv";
 
     packages = with pkgs; [
-      rayfish
+      devenv
       discord
       maki
+      rayfish
     ];
   };
 

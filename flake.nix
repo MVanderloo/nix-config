@@ -92,15 +92,18 @@
         ];
       };
 
-      homeConfigurations.tau = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux.extend packages;
-        extraSpecialArgs = { inherit inputs; };
-        modules = [ ./home-manager/tau.nix ];
-      };
-      homeConfigurations.delta = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux.extend packages;
-        extraSpecialArgs = { inherit inputs; };
-        modules = [ ./home-manager/delta.nix ];
+      homeConfigurations = {
+        tau = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux.extend packages;
+          extraSpecialArgs = { inherit inputs; };
+          modules = [ ./home-manager/tau.nix ];
+        };
+
+        delta = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux.extend packages;
+          extraSpecialArgs = { inherit inputs; };
+          modules = [ ./home-manager/delta.nix ];
+        };
       };
 
       formatter = nixpkgs.lib.genAttrs [ "aarch64-darwin" "x86_64-linux" ] (

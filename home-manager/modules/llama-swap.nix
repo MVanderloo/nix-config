@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   cfg = config.services.llama-swap;
   yaml = pkgs.formats.yaml { };
@@ -19,23 +24,25 @@ in
       description = "Address and port to listen on";
     };
     models = lib.mkOption {
-      type = lib.types.attrsOf (lib.types.submodule {
-        options = {
-          file = lib.mkOption {
-            type = lib.types.path;
-            description = "Path to the .gguf model file";
+      type = lib.types.attrsOf (
+        lib.types.submodule {
+          options = {
+            file = lib.mkOption {
+              type = lib.types.path;
+              description = "Path to the .gguf model file";
+            };
+            port = lib.mkOption {
+              type = lib.types.port;
+              description = "Port for llama-server to listen on";
+            };
+            ngl = lib.mkOption {
+              type = lib.types.ints.unsigned;
+              default = 99;
+              description = "Number of GPU layers to offload";
+            };
           };
-          port = lib.mkOption {
-            type = lib.types.port;
-            description = "Port for llama-server to listen on";
-          };
-          ngl = lib.mkOption {
-            type = lib.types.ints.unsigned;
-            default = 99;
-            description = "Number of GPU layers to offload";
-          };
-        };
-      });
+        }
+      );
       default = { };
       description = "Model definitions for llama-swap";
     };
@@ -48,7 +55,10 @@ in
 
   config = lib.mkIf cfg.enable {
     home.file."models/.keep".text = "";
-    home.packages = [ pkgs.llama-swap pkgs.llama-cpp ];
+    home.packages = [
+      pkgs.llama-swap
+      pkgs.llama-cpp
+    ];
 
     systemd.user.services.llama-swap = {
       Unit = {
