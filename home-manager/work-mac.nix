@@ -21,6 +21,9 @@
     shellAliases = {
       copy = "pbcopy";
     };
+    sessionVariables = {
+      NH_FLAKE = "${config.home.homeDirectory}/Repositories/nix-config";
+    };
 
     packages = with pkgs; [
       # docker
@@ -28,6 +31,7 @@
       awscli2
       clickhouse
       duckdb
+      nh
       nodejs_22
       parquet-tools
       podman
