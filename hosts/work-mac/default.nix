@@ -1,4 +1,9 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  inputs,
+  packages,
+  ...
+}:
 let
   user = "mi30175";
   proxy = "http://llproxy.llan.ll.mit.edu:8080";
@@ -6,17 +11,27 @@ let
 in
 {
   imports = [
-    ../darwin/homebrew.nix
-    ../darwin/nix-settings.nix
-    ../darwin/settings.nix
+    ../../darwin/homebrew.nix
+    ../../darwin/nix-settings.nix
+    ../../darwin/settings.nix
+
+    inputs.home-manager.darwinModules.home-manager
   ];
+
+  nixpkgs.overlays = [ packages ];
+
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    extraSpecialArgs = { inherit inputs; };
+    users.${user} = ./home.nix;
+  };
 
   system = {
     stateVersion = 7;
     primaryUser = user;
   };
 
-  # nix proxy settings
   nix.envVars = {
     ALL_PROXY = proxy;
     HTTPS_PROXY = proxy;
@@ -26,7 +41,6 @@ in
 
   nixpkgs.config.allowUnfree = true;
 
-  # system proxy settings
   environment.variables = {
     ALL_PROXY = proxy;
     HTTPS_PROXY = proxy;
@@ -34,7 +48,6 @@ in
     NO_PROXY = no_proxy;
   };
 
-  # UID 350 and 351 already existed
   ids.uids.nixbld = 351;
 
   users.users.${user} = {

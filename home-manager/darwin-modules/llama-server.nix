@@ -30,6 +30,14 @@ let
         "2"
       ];
     };
+    "GPT-OSS 20B" = {
+      file = "gpt-oss-20b-Q4_K_M.gguf";
+      port = 8995;
+      extraArgs = [
+        "-c"
+        "100000"
+      ];
+    };
   };
   yaml = pkgs.formats.yaml { };
   mkCmd =

@@ -2,16 +2,16 @@
 
 {
   imports = [
-    ./darwin-modules/aerospace.nix
-    ./darwin-modules/ghostty.nix
-    ./darwin-modules/llama-server.nix
-    ./darwin-modules/open-webui.nix
-    ./darwin-modules/tmux.nix
-    ./modules/editor.nix
-    ./modules/fish.nix
-    ./modules/python.nix
-    ./modules/version-control.nix
-    ./modules/xdg.nix
+    ../../home-manager/darwin-modules/aerospace.nix
+    ../../home-manager/darwin-modules/ghostty.nix
+    ../../home-manager/darwin-modules/llama-server.nix
+    ../../home-manager/darwin-modules/open-webui.nix
+    ../../home-manager/darwin-modules/tmux.nix
+    ../../home-manager/modules/editor.nix
+    ../../home-manager/modules/fish.nix
+    ../../home-manager/modules/python.nix
+    ../../home-manager/modules/version-control.nix
+    ../../home-manager/modules/xdg.nix
   ];
 
   home = {

@@ -89,19 +89,8 @@
 
       darwinConfigurations.work-mac = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
-        modules = [
-          ./hosts/work-mac.nix
-          home-manager.darwinModules.home-manager
-          {
-            nixpkgs.overlays = [ packages ];
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              extraSpecialArgs = { inherit inputs; };
-              users.mi30175 = ./home-manager/work-mac.nix;
-            };
-          }
-        ];
+        specialArgs = { inherit inputs packages; };
+        modules = [ ./hosts/work-mac ];
       };
 
       homeConfigurations = {
