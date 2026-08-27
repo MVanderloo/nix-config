@@ -6,9 +6,7 @@ let
 in
 {
   imports = [
-    ../darwin/homebrew.nix
-    ../darwin/nix-settings.nix
-    ../darwin/settings.nix
+    ../../darwin
   ];
 
   system = {

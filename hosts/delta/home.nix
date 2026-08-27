@@ -1,16 +1,17 @@
 { pkgs, ... }:
 {
   imports = [
-    ./modules/editor.nix
-    ./modules/fish.nix
-    # ./modules/llama-swap.nix
-    ./modules/pi.nix
-    ./modules/python.nix
-    ./modules/shell.nix
-    ./modules/ssh-gpg.nix
-    ./modules/tmux.nix
-    ./modules/version-control.nix
-    ./modules/xdg.nix
+    ../../home-manager/modules/editor.nix
+    ../../home-manager/modules/fish.nix
+    ../../home-manager/modules/identity.nix
+    # ../../home-manager/modules/llama-swap.nix
+    ../../home-manager/modules/pi.nix
+    ../../home-manager/modules/python.nix
+    ../../home-manager/modules/shell.nix
+    ../../home-manager/modules/ssh-gpg.nix
+    ../../home-manager/modules/tmux.nix
+    ../../home-manager/modules/version-control.nix
+    ../../home-manager/modules/xdg.nix
   ];
 
   home = {
@@ -28,14 +29,6 @@
 
   programs = {
     atuin.settings.sync_address = "http:omega:8888";
-    git.settings.user = {
-      name = "Michael van der Loo";
-      email = "me@mvanderloo.com";
-    };
-    jujutsu.settings.user = {
-      name = "Michael van der Loo";
-      email = "me@mvanderloo.com";
-    };
     ghostty.systemd.enable = true;
     home-manager.enable = true;
     pi-coding-agent.models.providers.ollama = {

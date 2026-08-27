@@ -1,5 +1,4 @@
 { pkgs, ... }:
-
 {
   imports = [ ../modules/ghostty.nix ];
 

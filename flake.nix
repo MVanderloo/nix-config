@@ -54,12 +54,6 @@
           # disko.nixosModules.disko
           # ./hosts/theta/disko-config.nix
           ./hosts/theta/configuration.nix
-          # ./services/atuin
-          # ./services/caddy
-          # ./services/openwebui
-          # ./services/pocket-id
-          # ./services/spindle
-          # ./services/tranquil-pds
           inputs."sops-nix".nixosModules.sops
           home-manager.nixosModules.home-manager
           {
@@ -69,7 +63,7 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               extraSpecialArgs = { inherit inputs; };
-              users.mv = ./home-manager/theta.nix;
+              users.mv = ./hosts/theta/home.nix;
             };
           }
         ];
@@ -78,7 +72,7 @@
       darwinConfigurations.work-mac = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = [
-          ./hosts/work-mac.nix
+          ./hosts/work-mac/configuration.nix
           home-manager.darwinModules.home-manager
           {
             nixpkgs.overlays = [ packages ];
@@ -86,7 +80,7 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               extraSpecialArgs = { inherit inputs; };
-              users.mi30175 = ./home-manager/work-mac.nix;
+              users.mi30175 = ./hosts/work-mac/home.nix;
             };
           }
         ];
@@ -96,13 +90,13 @@
         tau = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux.extend packages;
           extraSpecialArgs = { inherit inputs; };
-          modules = [ ./home-manager/tau.nix ];
+          modules = [ ./hosts/tau/home.nix ];
         };
 
         delta = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux.extend packages;
           extraSpecialArgs = { inherit inputs; };
-          modules = [ ./home-manager/delta.nix ];
+          modules = [ ./hosts/delta/home.nix ];
         };
       };
 

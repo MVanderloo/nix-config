@@ -5,13 +5,14 @@
   #     builders = ssh-ng://theta x86_64-linux - - nixos-test,big-parallel,kvm
   #     builders-use-substitutes = true
   imports = [
-    ./modules/editor.nix
-    ./modules/fish.nix
-    # ./modules/ghostty.nix
-    ./modules/ssh-gpg.nix
-    ./modules/tmux.nix
-    ./modules/version-control.nix
-    ./modules/xdg.nix
+    ../../home-manager/modules/editor.nix
+    ../../home-manager/modules/fish.nix
+    ../../home-manager/modules/identity.nix
+    # ../../home-manager/modules/ghostty.nix
+    ../../home-manager/modules/ssh-gpg.nix
+    ../../home-manager/modules/tmux.nix
+    ../../home-manager/modules/version-control.nix
+    ../../home-manager/modules/xdg.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -32,15 +33,7 @@
   programs = {
     atuin.settings.sync_address = "http:omega:8888";
     docker-cli.enable = true;
-    git.settings.user = {
-      name = "Michael van der Loo";
-      email = "me@mvanderloo.com";
-    };
     home-manager.enable = true;
-    jujutsu.settings.user = {
-      name = "Michael van der Loo";
-      email = "me@mvanderloo.com";
-    };
     # ssh.settings."github.com".IdentityFile = "~/.ssh/id_ed25519";
   };
 }
