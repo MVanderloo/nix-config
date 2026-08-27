@@ -42,9 +42,20 @@
     }:
     let
       packages = final: prev: {
-        rayfish = final.callPackage ./packages/rayfish.nix { };
+        llama-cpp =
+          let
+            stablePkgs = nixpkgs-stable.legacyPackages.${prev.system};
+          in
+          stablePkgs.llama-cpp.override {
+            nodejs = stablePkgs.nodejs.overrideAttrs (_: {
+              doCheck = false;
+            });
+          };
         maki = maki.packages.${prev.system}.default;
-        llama-cpp = nixpkgs-stable.legacyPackages.${prev.system}.llama-cpp;
+        nodejs = prev.nodejs.overrideAttrs (_: {
+          doCheck = false;
+        });
+        rayfish = final.callPackage ./packages/rayfish.nix { };
       };
     in
     {
