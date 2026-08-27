@@ -68,7 +68,7 @@
             cmd-b = "exec-and-forget open -na Google\\ Chrome";
             # cmd-d = "exec-and-forget open -a Raycast";
             cmd-space = "exec-and-forget vicinae toggle";
-            cmd-d = "exec-and-forget vicinae toggle";
+            cmd-d = "exec-and-forget ${pkgs.vicinae}/bin/vicinae toggle";
 
             cmd-slash = "layout tiles horizontal vertical";
             cmd-shift-slash = "layout accordion horizontal vertical";
