@@ -14,10 +14,8 @@ General
 - nixpkgs multiverse
 - Update tmux / prompt to make it clear when I am in ssh or not
 - move real dotfiles to dotfiles/
-- assets like wallpapers in assets/
 - fish cursor
 - configure yazi: keybindings closer to nvim/oil
-- nvim 0.13 for new directory module
 - atuin global search very slow - may be because I'm building nodejs-slim from source
 - keymap for ephemeral floating btop window (bonus: keep it running so it's already populated?)
 - allow shell detect nerd fonts to change prompt
@@ -25,8 +23,9 @@ General
 Neovim
 - nvim [z for spell
 - neovim cold startup is bad
-- convert nvim config to nix
+- convert nvim config to nix (try nvf)
 - make neovim clipboard through ssh
+- try 0.13 for new directory module
 
 Tmux
 - permanent tmux rootshell session over MOSH
@@ -42,7 +41,7 @@ NixOS
 - installable ISO
 - secrets: git, gpg, ssh, initial password, tailscale
 - disko
-- impermanance
+- impermanence
 - Figure out better bootstrap procedure
 - map caps to ctrl in console
 - console font perhaps
@@ -56,6 +55,8 @@ NixOS
 - automatic security updates
 - automated patch updates
 - running nixos-rebuild over ssh breaks something
+- use nixos-hardware
+- https://github.com/serokell/deploy-rs
 
 Theta
 - re-setup server using disko (currently uses legacy partition layout, need disko-formatted disk)
