@@ -131,7 +131,6 @@
 
         bind -N 'attach to root session' S run-shell 'sesh connect --root "$(pwd)"'
 
-        # --preview "sesh preview {}" --preview-window "right:50%"
         bind -N 'session manager' s run-shell 'sesh connect "$( \
           sesh list --icons | fzf-tmux --no-sort --reverse \
             -p 100%,100% --ansi --padding 0,1 --prompt="❯ " \
@@ -144,71 +143,9 @@
             --bind "ctrl-x:reload(sesh list -z --icons)" \
             --bind "ctrl-f:reload(fd -H -d 2 -t d -E .Trash . ~)" \
             --bind "ctrl-d:execute(tmux kill-session -t {2..})+reload(sesh list --icons)" \
-            --preview '${config.xdg.configHome}/tmux/sesh-preview.py {}' --preview-window "right:50%" \
+            --preview "sesh preview {}" --preview-window "right:50%" \
         )"'
       '';
     };
   };
-
-  xdg.configFile."tmux/sesh-preview.py".text = ''
-    #!/usr/bin/env python3
-    """Preview a tmux session: render a summary tree of its windows and panes.
-
-    Used as the fzf preview in the sesh session picker. The preview arg is the
-    session id/name (e.g. `0` or `23`) from `sesh list -t`. Falls back to
-    `sesh preview` when the arg isn't a running tmux session (config/zoxide
-    directory entries), so those still render their directory/file preview.
-    """
-    import os
-    import subprocess
-    import sys
-
-
-    def run(cmd):
-        try:
-            return subprocess.run(cmd, capture_output=True, text=True, timeout=3).stdout
-        except Exception:
-            return ""
-
-
-    def main():
-        s = sys.argv[1] if len(sys.argv) > 1 else ""
-        flt = f"#{{==:#{{session_name}},{s}}}"
-
-        ses = run(
-            ["tmux", "list-sessions", "-f", flt,
-             "-F", "#{session_id} #{session_name} (#{session_windows}w)"]
-        ).strip()
-        if not ses:
-            path = os.path.expanduser(s)
-            print(run(["sesh", "preview", path]).strip() or "(no preview)")
-            return
-
-        print(f"SESSION  {ses}")
-        print("--------------------------------------------------")
-
-        win_fmt = "#{window_id}\t#{window_index}\t#{window_name}\t#{window_active}"
-        pane_fmt = "#{pane_index}\t#{pane_current_command}\t#{pane_width}x#{pane_height}\t#{pane_active}"
-
-        wins = run(["tmux", "list-windows", "-a", "-f", flt, "-F", win_fmt]).splitlines()
-        for w in wins:
-            if not w:
-                continue
-            c = w.split("\t")
-            wid, idx, name, isactive = c[0], c[1], c[2], c[3]
-            mark = "*" if isactive == "1" else " "
-            print(f"  {mark} {idx}:{name}")
-            panes = run(["tmux", "list-panes", "-t", wid, "-F", pane_fmt]).splitlines()
-            for p in panes:
-                if not p:
-                    continue
-                pc = p.split("\t")
-                ac = ">>" if len(pc) > 3 and pc[3] == "1" else "  "
-                print(f"      {ac} {pc[0]}  {pc[1]}  {pc[2]}")
-
-
-    if __name__ == "__main__":
-        main()
-  '';
-
 }
