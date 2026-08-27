@@ -18,6 +18,9 @@ General
 - fish cursor
 - configure yazi: keybindings closer to nvim/oil
 - nvim 0.13 for new directory module
+- atuin global search very slow - may be because I'm building nodejs-slim from source
+- keymap for ephemeral floating btop window (bonus: keep it running so it's already populated?)
+- allow shell detect nerd fonts to change prompt
 
 Neovim
 - nvim [z for spell
@@ -28,6 +31,7 @@ Neovim
 Tmux
 - permanent tmux rootshell session over MOSH
 - how can I name/preview sessions/windows better so I know what is happening
+- config for mobile UI
 
 Darwin
 - fonts
@@ -58,3 +62,4 @@ Theta
 - ensure everything is updated to latest (mostly firmware ig)
 - configure remote builder
 - add yubikey ssh authorized key
+- rollback to prev generation to get running
