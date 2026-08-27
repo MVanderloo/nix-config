@@ -21,9 +21,6 @@
     shellAliases = {
       copy = "pbcopy";
     };
-    sessionVariables = {
-      NH_FLAKE = "${config.home.homeDirectory}/Repositories/nix-config";
-    };
 
     packages = with pkgs; [
       # docker
@@ -31,7 +28,6 @@
       awscli2
       clickhouse
       duckdb
-      nh
       nodejs_22
       parquet-tools
       podman
@@ -71,6 +67,11 @@
     git.includes = [ { path = "${config.home.homeDirectory}/.config/git/local"; } ];
     ghostty.settings.config-file = "?${config.home.homeDirectory}/.config/ghostty/local";
     gpg.enable = true;
+    keepassxc.enable = true;
+    nh = {
+      enable = true;
+      flake = "/Users/mi30175/Repositories/nix-config";
+    };
     ssh.settings."github.com".IdentityFile = "~/.ssh/id_ed25519";
   };
 }
