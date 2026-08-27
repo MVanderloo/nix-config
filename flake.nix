@@ -44,6 +44,7 @@
       packages = final: prev: {
         rayfish = final.callPackage ./packages/rayfish.nix { };
         maki = maki.packages.${prev.system}.default;
+        llama-cpp = nixpkgs-stable.legacyPackages.${prev.system}.llama-cpp;
       };
     in
     {
