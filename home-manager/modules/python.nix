@@ -1,4 +1,9 @@
-{ pkgs, config, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 {
   home = {
     packages = [ pkgs.python3 ];
@@ -9,6 +14,10 @@
       PYTHONPYCACHEPREFIX = "${config.xdg.cacheHome}/python";
       MPLCONFIGDIR = "${config.xdg.configHome}/matplotlib";
     };
+
+    activation.createPythonStateDir = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      $DRY_RUN_CMD mkdir -p "${config.xdg.stateHome}/python"
+    '';
   };
 
   xdg.configFile."python/startup.py".text = ''
