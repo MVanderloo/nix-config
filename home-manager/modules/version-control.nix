@@ -230,6 +230,10 @@
             "file"
             "annotate"
           ];
+          fetch = [
+            "git"
+            "fetch"
+          ];
           logstatus = [
             "log"
             "-T"
