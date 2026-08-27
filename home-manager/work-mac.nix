@@ -27,6 +27,7 @@
       # docker-compose
       awscli2
       clickhouse
+      devenv
       duckdb
       nodejs_22
       parquet-tools
