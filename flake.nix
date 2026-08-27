@@ -55,6 +55,7 @@
         nodejs = prev.nodejs.overrideAttrs (_: {
           doCheck = false;
         });
+        open-webui = nixpkgs-stable.legacyPackages.${prev.system}.open-webui;
         rayfish = final.callPackage ./packages/rayfish.nix { };
       };
     in
