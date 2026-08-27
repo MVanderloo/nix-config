@@ -306,11 +306,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1787861577,
-        "narHash": "sha256-o7PI9CHbgtYpXQk0E1iCTNBDaTF4pJe1sme9u+IIy24=",
+        "lastModified": 1787867514,
+        "narHash": "sha256-f90ur/QC5WyggARiZRl/7MB8l63MQ9U5Q/bLUGVHArM=",
         "owner": "tontinton",
         "repo": "maki",
-        "rev": "57d1f90003a6948897c6185442a136da85fe5971",
+        "rev": "01d60931f2de41f319d171a74982f35185cd227d",
         "type": "github"
       },
       "original": {

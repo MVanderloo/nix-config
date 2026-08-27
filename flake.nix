@@ -41,23 +41,27 @@
       ...
     }:
     let
-      packages = final: prev: {
-        llama-cpp =
-          let
-            stablePkgs = nixpkgs-stable.legacyPackages.${prev.system};
-          in
-          stablePkgs.llama-cpp.override {
+      packages =
+        final: prev:
+        let
+          stablePkgs = import nixpkgs-stable {
+            system = prev.system;
+            config.allowUnfree = true;
+          };
+        in
+        {
+          llama-cpp = stablePkgs.llama-cpp.override {
             nodejs = stablePkgs.nodejs.overrideAttrs (_: {
               doCheck = false;
             });
           };
-        maki = maki.packages.${prev.system}.default;
-        nodejs = prev.nodejs.overrideAttrs (_: {
-          doCheck = false;
-        });
-        open-webui = nixpkgs-stable.legacyPackages.${prev.system}.open-webui;
-        rayfish = final.callPackage ./packages/rayfish.nix { };
-      };
+          maki = maki.packages.${prev.system}.default;
+          nodejs = prev.nodejs.overrideAttrs (_: {
+            doCheck = false;
+          });
+          open-webui = stablePkgs.open-webui;
+          rayfish = final.callPackage ./packages/rayfish.nix { };
+        };
     in
     {
       nixosConfigurations.theta = nixpkgs.lib.nixosSystem {

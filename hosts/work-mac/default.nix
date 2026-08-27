@@ -18,7 +18,10 @@ in
     inputs.home-manager.darwinModules.home-manager
   ];
 
-  nixpkgs.overlays = [ packages ];
+  nixpkgs = {
+    overlays = [ packages ];
+    config.allowUnfree = true;
+  };
 
   home-manager = {
     useGlobalPkgs = true;
@@ -38,8 +41,6 @@ in
     HTTP_PROXY = proxy;
     NO_PROXY = no_proxy;
   };
-
-  nixpkgs.config.allowUnfree = true;
 
   environment.variables = {
     ALL_PROXY = proxy;
