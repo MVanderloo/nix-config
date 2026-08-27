@@ -6,7 +6,6 @@ General
 - pinentry ?
 - gcroots
 - glab, gh
-- configure yazi
 - fix git aliases
 - look into workmux
 - fix bash and zsh configs so that there is feature parity. Bonus: respect XDG
@@ -17,6 +16,8 @@ General
 - move real dotfiles to dotfiles/
 - assets like wallpapers in assets/
 - fish cursor
+- configure yazi: keybindings closer to nvim/oil
+- nvim 0.13 for new directory module
 
 Neovim
 - nvim [z for spell
@@ -26,12 +27,11 @@ Neovim
 
 Tmux
 - permanent tmux rootshell session over MOSH
-- how can I name/preview sessions / windows better so I know what is happening
+- how can I name/preview sessions/windows better so I know what is happening
 
 Darwin
 - fonts
 - aerospace floating window config (keepassxc)
-- darwin mouse sensitivity is too high
 
 NixOS
 - fonts
@@ -51,6 +51,7 @@ NixOS
 - disable IP forwarding
 - automatic security updates
 - automated patch updates
+- running nixos-rebuild over ssh breaks something
 
 Theta
 - re-setup server using disko (currently uses legacy partition layout, need disko-formatted disk)
