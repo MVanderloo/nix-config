@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   imports = [
     ./modules/editor.nix
@@ -11,6 +11,7 @@
     ./modules/tmux.nix
     ./modules/version-control.nix
     ./modules/xdg.nix
+    ./modules/ghostty.nix
   ];
 
   home = {
@@ -37,7 +38,14 @@
       name = "Michael van der Loo";
       email = "me@mvanderloo.com";
     };
-    ghostty.systemd.enable = true;
+    ghostty = {
+      settings = {
+        config-file = "?${config.home.homeDirectory}/.config/ghostty/local";
+      };
+      systemd = {
+        enable = true;
+      };
+    };
     home-manager.enable = true;
     pi-coding-agent.models.providers.ollama = {
       api = "openai-completions";
