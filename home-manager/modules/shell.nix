@@ -12,6 +12,7 @@
       gnugrep
       gnused
       just
+      parallel
       pv
       readline
       rename
