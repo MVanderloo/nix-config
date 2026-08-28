@@ -19,6 +19,7 @@
     homeDirectory = "/home/mv";
 
     packages = with pkgs; [
+      codex
       maki
       podman-compose
       rayfish
