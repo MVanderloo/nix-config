@@ -16,14 +16,11 @@
     neovim-config.url = "github:mvanderloo/neovim-config";
     neovim-config.inputs.nixpkgs.follows = "nixpkgs";
 
-    maki.url = "github:tontinton/maki";
-    maki.inputs.nixpkgs.follows = "nixpkgs-stable";
-
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
 
-    sops-nix.url = "github:Mic92/sops-nix";
-    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+    maki.url = "github:tontinton/maki";
+    maki.inputs.nixpkgs.follows = "nixpkgs-stable";
   };
 
   outputs =
@@ -62,7 +59,7 @@
     {
       nixosConfigurations.theta = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit inputs packages disko; };
+        specialArgs = { inherit inputs; };
         modules = [ ./hosts/theta ];
       };
 

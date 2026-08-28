@@ -1,14 +1,14 @@
 { pkgs, ... }:
 {
-  imports = [
-    ./hardware-configuration.nix
-    ../../nixos/modules/console.nix
-  ];
-
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
   ];
+
+  users.users.mv = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" ];
+  };
 
   boot = {
     loader = {
@@ -41,11 +41,6 @@
   time.timeZone = "America/New_York";
 
   i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  #   useXkbConfig = true;
-  # };
 
   services = {
     tailscale.enable = true;
