@@ -24,9 +24,6 @@
 
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
-
-    tangled.url = "git+https://tangled.org/tangled.org/core";
-    tangled.inputs.nixpkgs.follows = "nixpkgs-stable";
   };
 
   outputs =
@@ -35,9 +32,8 @@
       nixpkgs-stable,
       home-manager,
       darwin,
-      maki,
       disko,
-      tangled,
+      maki,
       ...
     }:
     let
@@ -66,30 +62,8 @@
     {
       nixosConfigurations.theta = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
-        modules = [
-          # disko.nixosModules.disko
-          # ./hosts/theta/disko-config.nix
-          ./hosts/theta/configuration.nix
-          # ./services/atuin
-          # ./services/caddy
-          # ./services/openwebui
-          # ./services/pocket-id
-          # ./services/spindle
-          # ./services/tranquil-pds
-          inputs."sops-nix".nixosModules.sops
-          home-manager.nixosModules.home-manager
-          {
-            nixpkgs.overlays = [ packages ];
-            sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              extraSpecialArgs = { inherit inputs; };
-              users.mv = ./home-manager/theta.nix;
-            };
-          }
-        ];
+        specialArgs = { inherit inputs packages disko; };
+        modules = [ ./hosts/theta ];
       };
 
       darwinConfigurations.work-mac = darwin.lib.darwinSystem {
