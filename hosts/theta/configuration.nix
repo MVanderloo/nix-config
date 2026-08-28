@@ -44,10 +44,6 @@
 
   services = {
     tailscale.enable = true;
-    xserver.xkb = {
-      layout = "us";
-      options = "caps:escape";
-    };
     openssh = {
       enable = true;
       settings.PermitRootLogin = "no";

@@ -45,7 +45,6 @@ NixOS
 - Figure out better bootstrap procedure
 - map caps to ctrl in console
 - console font perhaps
-- disable root ssh
 - disable password auth, only ssh key
 - fail2ban
 - only allow ssh over VPN
@@ -59,8 +58,6 @@ NixOS
 - https://github.com/serokell/deploy-rs
 
 Theta
-- re-setup server using disko (currently uses legacy partition layout, need disko-formatted disk)
 - ensure everything is updated to latest (mostly firmware ig)
 - configure remote builder
 - add yubikey ssh authorized key
-- rollback to prev generation to get running

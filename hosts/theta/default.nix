@@ -5,6 +5,7 @@
     inputs.disko.nixosModules.disko
     inputs.home-manager.nixosModules.home-manager
 
+    ../../nixos/modules/console.nix
     ./configuration.nix
     ./disk.nix
     ./hardware-configuration.nix
