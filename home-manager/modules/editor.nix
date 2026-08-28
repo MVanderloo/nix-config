@@ -1,10 +1,8 @@
-{ inputs, pkgs, ... }:
+{ ... }:
 {
-  home = {
-    packages = [
-      inputs.neovim-config.packages.${pkgs.system}.default
-    ];
+  imports = [ ./neovim.nix ];
 
+  home = {
     shellAliases = {
       vim = "nvim";
       vimdiff = "nvim -d";
@@ -16,13 +14,4 @@
     };
   };
 
-  programs = {
-    # neovim = {
-    #   enable = true;
-    #   defaultEditor = true;
-    #   vimAlias = true;
-    #   vimdiffAlias = true;
-    #   sideloadInitLua = true;
-    # };
-  };
 }
