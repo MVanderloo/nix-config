@@ -23,8 +23,6 @@
     };
 
     packages = with pkgs; [
-      # docker
-      # docker-compose
       awscli2
       clickhouse
       devenv
@@ -44,11 +42,9 @@
   };
 
   services = {
-    # colima.enable = true;
     gpg-agent = {
       enable = true;
       defaultCacheTtl = 1800;
-      # enableSshSupport = true;
       pinentry.package = pkgs.pinentry_mac;
     };
     podman.enable = true;
@@ -56,7 +52,6 @@
   };
 
   programs = {
-    # docker-cli.enable = true;
     fish.interactiveShellInit = ''
       for f in ~/.local/env/*.env
         test -f $f; or continue
