@@ -3,10 +3,23 @@
 {
   imports = [ ./shell.nix ];
 
-  # Make sure the history directory exists before bash tries to write to it
-  home.activation.createBashHistoryDir = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    mkdir -p "${config.xdg.stateHome}/bash"
-  '';
+  # Home Manager generates these as traditional dotfiles. Keep the generated
+  # files, but expose them through Bash's XDG paths instead of linking them in
+  # the home directory.
+  home.file = {
+    ".bash_logout".enable = lib.mkForce false;
+    ".bash_profile".enable = lib.mkForce false;
+    ".bashrc".enable = lib.mkForce false;
+    ".profile".enable = lib.mkForce false;
+  };
+
+  xdg.configFile = {
+    "bash/bash_logout" = lib.mkIf (config.programs.bash.logoutExtra != "") {
+      source = config.home.file.".bash_logout".source;
+    };
+    "bash/bashrc".source = config.home.file.".bashrc".source;
+    "bash/profile".source = config.home.file.".profile".source;
+  };
 
   programs = {
     bash = {
