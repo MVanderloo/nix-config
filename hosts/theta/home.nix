@@ -1,4 +1,9 @@
-{ pkgs, config, ... }:
+{
+  config,
+  githubSshKey,
+  pkgs,
+  ...
+}:
 {
   imports = [
     ../../home-manager/modules/bash.nix
@@ -33,6 +38,9 @@
       enable = true;
       flake = "${config.home.homeDirectory}/nix-config";
     };
-    ssh.settings."github.com".IdentityFile = "~/.ssh/id_ed25519";
+    ssh.settings."github.com" = {
+      IdentityFile = githubSshKey;
+      IdentitiesOnly = true;
+    };
   };
 }

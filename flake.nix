@@ -23,6 +23,9 @@
 
     maki.url = "github:tontinton/maki";
     maki.inputs.nixpkgs.follows = "nixpkgs-stable";
+
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =

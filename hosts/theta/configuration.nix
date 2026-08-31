@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   nix.settings.experimental-features = [
     "nix-command"
@@ -46,6 +46,22 @@
   programs.mosh = {
     enable = true;
     openFirewall = false;
+  };
+
+  programs.ssh.knownHosts.github = {
+    hostNames = [ "github.com" ];
+    publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
+  };
+
+  sops = {
+    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+    secrets.github-ssh-key = {
+      sopsFile = ../../secrets/theta-github-ssh-key;
+      format = "binary";
+      owner = config.users.users.mv.name;
+      group = config.users.users.mv.group;
+      mode = "0400";
+    };
   };
 
   services = {

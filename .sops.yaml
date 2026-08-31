@@ -1,0 +1,10 @@
+keys:
+  - &mv age1s7d2xjdwuhqms7z40r8th55xs8w7rza4kacaghkcxeu97u6ux3qq94jnur
+  - &theta age1ksteyguuh9m656srltrvyz5vj93amndlw9gjsqqnvrf6znk6kqxss4k7qm
+
+creation_rules:
+  - path_regex: secrets/theta-github-ssh-key$
+    key_groups:
+      - age:
+          - *mv
+          - *theta

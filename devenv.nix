@@ -2,6 +2,8 @@
   packages = [
     pkgs.deadnix
     pkgs.nixd
+    pkgs.sops
+    pkgs.ssh-to-age
     pkgs.statix
   ];
 
