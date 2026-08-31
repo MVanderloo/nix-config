@@ -13,12 +13,12 @@ General
 - try new niri and aerospace keybindings to have better window movement behavior
 - nixpkgs multiverse
 - Update tmux / prompt to make it clear when I am in ssh or not
-- move real dotfiles to dotfiles/
 - fish cursor
 - configure yazi: keybindings closer to nvim/oil
 - atuin global search very slow - may be because I'm building nodejs-slim from source
 - keymap for ephemeral floating btop window (bonus: keep it running so it's already populated?)
 - allow shell detect nerd fonts to change prompt
+- move to modules/nixos/ and modules/darwin layout
 
 Neovim
 - nvim [z for spell
