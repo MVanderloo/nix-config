@@ -20,7 +20,10 @@
     homeDirectory = "/home/mv";
     stateVersion = "26.05";
 
-    packages = with pkgs; [ opencode ];
+    packages = with pkgs; [
+      codex
+      opencode
+    ];
   };
 
   programs = {
