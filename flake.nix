@@ -35,7 +35,6 @@
       nixpkgs-stable,
       home-manager,
       darwin,
-      disko,
       deploy-rs,
       maki,
       ...
@@ -45,7 +44,7 @@
         final: prev:
         let
           stablePkgs = import nixpkgs-stable {
-            system = prev.system;
+            inherit (prev) system;
             config.allowUnfree = true;
           };
         in
@@ -59,7 +58,7 @@
           nodejs = prev.nodejs.overrideAttrs (_: {
             doCheck = false;
           });
-          open-webui = stablePkgs.open-webui;
+          inherit (stablePkgs) open-webui;
           rayfish = final.callPackage ./packages/rayfish.nix { };
         };
     in
