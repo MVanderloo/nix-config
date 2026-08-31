@@ -23,9 +23,9 @@
 
     packages = with pkgs; [
       devenv
-      discord
       maki
       rayfish
+      vesktop
     ];
   };
 
