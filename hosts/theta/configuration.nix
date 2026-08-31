@@ -48,10 +48,9 @@
   };
 
   services = {
-    tailscale.enable = true;
-    openssh = {
+    tailscale = {
       enable = true;
-      settings.PermitRootLogin = "no";
+      extraSetFlags = [ "--ssh" ];
     };
     fwupd.enable = true;
   };
