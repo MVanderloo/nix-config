@@ -41,7 +41,6 @@ NixOS
 - installable ISO
 - secrets: git, gpg, ssh, initial password, tailscale
 - disko
-- impermanence
 - Figure out better bootstrap procedure
 - map caps to ctrl in console
 - console font perhaps
@@ -55,9 +54,13 @@ NixOS
 - automated patch updates
 - running nixos-rebuild over ssh breaks something
 - use nixos-hardware
-- https://github.com/serokell/deploy-rs
 
 Theta
 - ensure everything is updated to latest (mostly firmware ig)
 - configure remote builder
 - add yubikey ssh authorized key
+- finish Preservation rollout:
+  - create and seed /persist, then enable it in a boot generation
+  - make / and /var ephemeral while keeping /home persistent initially
+  - remove one preserved path at a time, quarantine old state, and validate across two reboots
+  - add a VM reboot test for preserved and ephemeral state

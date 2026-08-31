@@ -16,17 +16,24 @@
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
 
+    deploy-rs.url = "github:serokell/deploy-rs";
+    deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
+
+    preservation.url = "github:nix-community/preservation";
+
     maki.url = "github:tontinton/maki";
     maki.inputs.nixpkgs.follows = "nixpkgs-stable";
   };
 
   outputs =
     inputs@{
+      self,
       nixpkgs,
       nixpkgs-stable,
       home-manager,
       darwin,
       disko,
+      deploy-rs,
       maki,
       ...
     }:
@@ -79,6 +86,19 @@
           modules = [ ./home-manager/delta.nix ];
         };
       };
+
+      deploy.nodes.theta = {
+        hostname = "theta";
+        sshUser = "mv";
+        interactiveSudo = true;
+
+        profiles.system = {
+          user = "root";
+          path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.theta;
+        };
+      };
+
+      checks.x86_64-linux = deploy-rs.lib.x86_64-linux.deployChecks self.deploy;
 
       formatter = nixpkgs.lib.genAttrs [ "aarch64-darwin" "x86_64-linux" ] (
         sys: nixpkgs.legacyPackages.${sys}.nixfmt-tree

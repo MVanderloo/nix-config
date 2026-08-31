@@ -1,3 +1,4 @@
+{ config, lib, ... }:
 {
   disko.devices.disk.main = {
     type = "disk";
@@ -53,6 +54,15 @@
 
               "/var" = {
                 mountpoint = "/var";
+                mountOptions = [
+                  "compress=zstd"
+                  "noatime"
+                ];
+              };
+            }
+            // lib.optionalAttrs config.preservation.enable {
+              "/persist" = {
+                mountpoint = "/persist";
                 mountOptions = [
                   "compress=zstd"
                   "noatime"
