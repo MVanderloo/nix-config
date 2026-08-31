@@ -1,5 +1,10 @@
 { pkgs, ... }:
 {
+  xdg.configFile."nvim" = {
+    source = ../../dotfiles/nvim;
+    recursive = true;
+  };
+
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -7,7 +12,6 @@
     vimdiffAlias = true;
 
     extraPackages = with pkgs; [
-      # Runtime
       curl
       fd
       gcc
@@ -24,10 +28,11 @@
       emmylua-ls
       fish-lsp
       gopls
-      just-lsp
       jq-lsp
+      just-lsp
       nixd
       postgres-language-server
+      # roc
       ruff
       rust-analyzer
       systemd-lsp
@@ -47,19 +52,12 @@
       just
       nixfmt
       prettier
-      roc
       rustfmt
       shfmt
       sqruff
       stylua
       typst
       yamlfix
-      zig
     ];
-  };
-
-  xdg.configFile."nvim" = {
-    source = ../../dotfiles/nvim;
-    recursive = true;
   };
 }
