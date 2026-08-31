@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 let
-  themeName = "framework-penguin";
+  themeName = "penguin";
 
   themeScript = pkgs.writeText "${themeName}.script" ''
     Window.SetBackgroundTopColor(0, 0, 0);
@@ -81,7 +81,7 @@ let
     Plymouth.SetDisplayNormalFunction(display_normal);
   '';
 
-  frameworkPenguin =
+  penguinTheme =
     pkgs.runCommand "${themeName}-plymouth-theme"
       {
         nativeBuildInputs = [ pkgs.imagemagick ];
@@ -90,13 +90,13 @@ let
         themeDir="$out/share/plymouth/themes/${themeName}"
 
         mkdir -p "$themeDir"
-        magick ${../../assets/framework-penguin.gif} -coalesce "$themeDir/frame-%03d.png"
+        magick ${../../assets/penguin.gif} -coalesce "$themeDir/frame-%03d.png"
         cp ${themeScript} "$themeDir/${themeName}.script"
 
         cat > "$themeDir/${themeName}.plymouth" <<EOF
         [Plymouth Theme]
-        Name=Framework Penguin
-        Description=Framework penguin boot animation
+        Name=Penguin
+        Description=Penguin boot animation
         ModuleName=script
 
         [script]
@@ -110,7 +110,7 @@ in
     plymouth = {
       enable = true;
       theme = themeName;
-      themePackages = [ frameworkPenguin ];
+      themePackages = [ penguinTheme ];
     };
 
     consoleLogLevel = 3;

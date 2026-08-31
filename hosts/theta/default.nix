@@ -6,7 +6,7 @@
     inputs.home-manager.nixosModules.home-manager
 
     ../../nixos/modules/console.nix
-    ../../nixos/modules/framework-penguin-plymouth.nix
+    ../../nixos/modules/penguin-plymouth.nix
 
     ./configuration.nix
     ./disk.nix
