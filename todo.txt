@@ -39,7 +39,7 @@ Darwin
 NixOS
 - fonts
 - installable ISO
-- secrets: git, gpg, ssh, initial password, tailscale
+- secrets: gpg, SSH login, initial password, tailscale
 - disko
 - Figure out better bootstrap procedure
 - map caps to ctrl in console
