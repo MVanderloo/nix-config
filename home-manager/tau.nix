@@ -5,13 +5,13 @@
   #     builders = ssh-ng://theta x86_64-linux - - nixos-test,big-parallel,kvm
   #     builders-use-substitutes = true
   imports = [
-    ./modules/editor.nix
-    ./modules/fish.nix
-    # ./modules/ghostty.nix
-    ./modules/ssh-gpg.nix
-    ./modules/tmux.nix
-    ./modules/version-control.nix
-    ./modules/xdg.nix
+    ../modules/home-manager/editor.nix
+    ../modules/home-manager/fish.nix
+    # ../modules/home-manager/ghostty.nix
+    ../modules/home-manager/ssh-gpg.nix
+    ../modules/home-manager/tmux.nix
+    ../modules/home-manager/version-control.nix
+    ../modules/home-manager/xdg.nix
   ];
 
   nixpkgs.config.allowUnfree = true;

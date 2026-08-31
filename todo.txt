@@ -17,7 +17,6 @@ General
 - atuin global search very slow - may be because I'm building nodejs-slim from source
 - keymap for ephemeral floating btop window (bonus: keep it running so it's already populated?)
 - allow shell detect nerd fonts to change prompt
-- move to modules/nixos/ and modules/darwin layout
 - backup strategy
 
 Secrets

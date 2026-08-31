@@ -6,13 +6,13 @@
 }:
 {
   imports = [
-    ../../home-manager/modules/bash.nix
-    ../../home-manager/modules/editor.nix
-    ../../home-manager/modules/fish.nix
-    ../../home-manager/modules/ssh.nix
-    ../../home-manager/modules/tmux.nix
-    ../../home-manager/modules/version-control.nix
-    ../../home-manager/modules/xdg.nix
+    ../../modules/home-manager/bash.nix
+    ../../modules/home-manager/editor.nix
+    ../../modules/home-manager/fish.nix
+    ../../modules/home-manager/ssh.nix
+    ../../modules/home-manager/tmux.nix
+    ../../modules/home-manager/version-control.nix
+    ../../modules/home-manager/xdg.nix
   ];
 
   home = {

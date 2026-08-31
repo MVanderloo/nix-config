@@ -1,12 +1,12 @@
 { pkgs, ... }:
 {
   imports = [
-    ./modules/editor.nix
-    ./modules/fish.nix
-    ./modules/ssh.nix
-    ./modules/tmux.nix
-    ./modules/version-control.nix
-    ./modules/xdg.nix
+    ../modules/home-manager/editor.nix
+    ../modules/home-manager/fish.nix
+    ../modules/home-manager/ssh.nix
+    ../modules/home-manager/tmux.nix
+    ../modules/home-manager/version-control.nix
+    ../modules/home-manager/xdg.nix
   ];
 
   nixpkgs.config.allowUnfree = true;

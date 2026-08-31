@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  imports = [ ../modules/ghostty.nix ];
+  imports = [ ../ghostty.nix ];
 
   programs.ghostty = {
     package = pkgs.ghostty-bin;

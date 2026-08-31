@@ -1,17 +1,17 @@
 { pkgs, config, ... }:
 {
   imports = [
-    ./modules/editor.nix
-    ./modules/fish.nix
-    # ./modules/llama-swap.nix
-    ./modules/pi.nix
-    ./modules/python.nix
-    ./modules/shell.nix
-    ./modules/ssh-gpg.nix
-    ./modules/tmux.nix
-    ./modules/version-control.nix
-    ./modules/xdg.nix
-    ./modules/ghostty.nix
+    ../modules/home-manager/editor.nix
+    ../modules/home-manager/fish.nix
+    # ../modules/home-manager/llama-swap.nix
+    ../modules/home-manager/pi.nix
+    ../modules/home-manager/python.nix
+    ../modules/home-manager/shell.nix
+    ../modules/home-manager/ssh-gpg.nix
+    ../modules/home-manager/tmux.nix
+    ../modules/home-manager/version-control.nix
+    ../modules/home-manager/xdg.nix
+    ../modules/home-manager/ghostty.nix
   ];
 
   home = {
