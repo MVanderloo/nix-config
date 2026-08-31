@@ -2,7 +2,6 @@ General
 - integrate worktrunk, pi
 - ssh and gpg config: GPG authenticates everything
 - synchronized color schemes
-- consider packages: pv, parallel
 - pinentry ?
 - gcroots
 - glab, gh
@@ -19,31 +18,27 @@ General
 - keymap for ephemeral floating btop window (bonus: keep it running so it's already populated?)
 - allow shell detect nerd fonts to change prompt
 - move to modules/nixos/ and modules/darwin layout
+- backup strategy
+
+Secrets
+- per device SSH key
+- master GPG key stored on yubikeys for all secrets and SSH access
+- SOPS setup for per machine secrets
+- bootstrap procedure: create ssh, git auth, tailscale, onepassword, etc.
 
 Neovim
 - nvim [z for spell
 - neovim cold startup is bad
 - convert nvim config to nix (try nvf)
-- make neovim clipboard through ssh
+- make neovim clipboard work through ssh
 - try 0.13 for new directory module
 
 Tmux
-- permanent tmux rootshell session over MOSH
 - how can I name/preview sessions/windows better so I know what is happening
 - config for mobile UI
 
-Darwin
-- fonts
-- aerospace floating window config (keepassxc)
-
 NixOS
-- fonts
 - installable ISO
-- secrets: gpg, SSH login, initial password, tailscale
-- disko
-- Figure out better bootstrap procedure
-- map caps to ctrl in console
-- console font perhaps
 - disable password auth, only ssh key
 - fail2ban
 - only allow ssh over VPN
@@ -53,12 +48,11 @@ NixOS
 - automatic security updates
 - automated patch updates
 - running nixos-rebuild over ssh breaks something
-- use nixos-hardware
+- checkout nixos-hardware for custom hardware patches
 
 Theta
-- ensure everything is updated to latest (mostly firmware ig)
+- ensure firmware is updated
 - configure remote builder
-- add yubikey ssh authorized key
 - finish Preservation rollout:
   - create and seed /persist, then enable it in a boot generation
   - make / and /var ephemeral while keeping /home persistent initially
