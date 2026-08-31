@@ -42,6 +42,11 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
 
+  programs.mosh = {
+    enable = true;
+    openFirewall = false;
+  };
+
   services = {
     tailscale.enable = true;
     openssh = {
