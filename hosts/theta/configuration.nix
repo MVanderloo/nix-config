@@ -4,6 +4,7 @@
     "nix-command"
     "flakes"
   ];
+  nix.settings.use-xdg-base-directories = true;
 
   users.users.mv = {
     isNormalUser = true;

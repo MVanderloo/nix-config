@@ -1,6 +1,7 @@
 { pkgs, config, ... }:
 {
   imports = [
+    ../../home-manager/modules/bash.nix
     ../../home-manager/modules/editor.nix
     ../../home-manager/modules/fish.nix
     ../../home-manager/modules/ssh.nix
