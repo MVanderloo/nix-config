@@ -22,6 +22,7 @@
 
     packages = with pkgs; [
       codex
+      devenv
       opencode
     ];
   };
