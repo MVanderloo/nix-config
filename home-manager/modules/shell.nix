@@ -12,6 +12,7 @@
       gnugrep
       gnused
       just
+      nh
       parallel
       pv
       readline
@@ -288,6 +289,7 @@
       generateCaches = false;
       package = pkgs.man-db;
     };
+    nh.enable = true;
     starship = {
       enable = true;
       presets = [ "nerd-font-symbols" ];

@@ -69,10 +69,7 @@
     ghostty.settings.config-file = "?${config.home.homeDirectory}/.config/ghostty/local";
     gpg.enable = true;
     keepassxc.enable = true;
-    nh = {
-      enable = true;
-      flake = "/Users/mi30175/Repositories/nix-config";
-    };
+    nh.flake = "/Users/mi30175/Repositories/nix-config";
     ssh.settings."github.com".IdentityFile = "~/.ssh/id_ed25519";
   };
 }
