@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   imports = [
     ../../home-manager/modules/editor.nix
@@ -27,6 +27,10 @@
     jujutsu.settings.user = {
       name = "Michael van der Loo";
       email = "me@mvanderloo.com";
+    };
+    nh = {
+      enable = true;
+      flake = "${config.home.homeDirectory}/nix-config";
     };
     ssh.settings."github.com".IdentityFile = "~/.ssh/id_ed25519";
   };
