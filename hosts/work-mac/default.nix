@@ -1,7 +1,6 @@
 {
-  pkgs,
   inputs,
-  packages,
+  pkgs,
   ...
 }:
 let
@@ -17,11 +16,6 @@ in
 
     inputs.home-manager.darwinModules.home-manager
   ];
-
-  nixpkgs = {
-    overlays = [ packages ];
-    config.allowUnfree = true;
-  };
 
   home-manager = {
     useGlobalPkgs = true;
