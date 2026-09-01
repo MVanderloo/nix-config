@@ -1,4 +1,5 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
+
 {
   # TODO: configure theta as remote builder for tau
   #   In /etc/nix/nix.conf on tau:
@@ -41,6 +42,7 @@
       name = "Michael van der Loo";
       email = "me@mvanderloo.com";
     };
+    nh.flake = "${config.home.homeDirectory}/Repositories/nix-config";
     # ssh.settings."github.com".IdentityFile = "~/.ssh/id_ed25519";
   };
 }

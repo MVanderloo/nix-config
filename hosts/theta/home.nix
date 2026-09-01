@@ -38,10 +38,7 @@
       name = "Michael van der Loo";
       email = "me@mvanderloo.com";
     };
-    nh = {
-      enable = true;
-      flake = "${config.home.homeDirectory}/nix-config";
-    };
+    nh.flake = "${config.home.homeDirectory}/nix-config";
     ssh.settings."github.com" = {
       IdentityFile = githubSshKey;
       IdentitiesOnly = true;
