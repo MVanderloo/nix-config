@@ -6,8 +6,8 @@
   #     builders = ssh-ng://theta x86_64-linux - - nixos-test,big-parallel,kvm
   #     builders-use-substitutes = true
   imports = [
-    # ../modules/home-manager/ghostty.nix
     ../modules/home-manager/fish.nix
+    ../modules/home-manager/ghostty.nix
     ../modules/home-manager/neovim.nix
     ../modules/home-manager/ssh-gpg.nix
     ../modules/home-manager/tmux.nix
