@@ -101,13 +101,13 @@
       };
 
       homeConfigurations = {
-        tau = home-manager.lib.homeManagerConfiguration {
+        "mv@tau" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${linuxSystem}.extend overlay;
           extraSpecialArgs = { inherit inputs; };
           modules = [ ./hosts/tau.nix ];
         };
 
-        delta = home-manager.lib.homeManagerConfiguration {
+        "mv@delta" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${linuxSystem}.extend overlay;
           extraSpecialArgs = { inherit inputs; };
           modules = [ ./hosts/delta.nix ];
