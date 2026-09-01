@@ -3,6 +3,7 @@
   users.users.mv = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
+    linger = true;
   };
 
   boot = {
@@ -20,12 +21,15 @@
     # firewall.allowedTCPPorts = [ ... ];
     # firewall.allowedUDPPorts = [ ... ];
     # firewall.enable = false;
-    firewall.interfaces.tailscale0.allowedUDPPortRanges = [
-      {
-        from = 60000;
-        to = 61000;
-      }
-    ];
+    firewall.interfaces.tailscale0 = {
+      allowedTCPPorts = [ 22000 ];
+      allowedUDPPortRanges = [
+        {
+          from = 60000;
+          to = 61000;
+        }
+      ];
+    };
 
     nameservers = [
       "1.1.1.1"
