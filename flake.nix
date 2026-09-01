@@ -79,13 +79,13 @@
         tau = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux.extend packages;
           extraSpecialArgs = { inherit inputs; };
-          modules = [ ./home-manager/tau.nix ];
+          modules = [ ./hosts/tau.nix ];
         };
 
         delta = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux.extend packages;
           extraSpecialArgs = { inherit inputs; };
-          modules = [ ./home-manager/delta.nix ];
+          modules = [ ./hosts/delta.nix ];
         };
       };
 
