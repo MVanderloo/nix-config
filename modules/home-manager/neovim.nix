@@ -1,9 +1,22 @@
 { pkgs, ... }:
+
 {
   xdg.configFile."nvim" = {
     source = ../../dotfiles/nvim;
     recursive = true;
   };
+
+  # home = {
+  #   shellAliases = {
+  #     vim = "nvim";
+  #     vimdiff = "nvim -d";
+  #   };
+  #
+  #   sessionVariables = {
+  #     EDITOR = "nvim";
+  #     VISUAL = "nvim";
+  #   };
+  # };
 
   programs.neovim = {
     enable = true;

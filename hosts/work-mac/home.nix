@@ -7,8 +7,8 @@
     ../../modules/home-manager/darwin/llama-server.nix
     ../../modules/home-manager/darwin/open-webui.nix
     ../../modules/home-manager/darwin/tmux.nix
-    ../../modules/home-manager/editor.nix
     ../../modules/home-manager/fish.nix
+    ../../modules/home-manager/neovim.nix
     ../../modules/home-manager/python.nix
     ../../modules/home-manager/version-control.nix
     ../../modules/home-manager/xdg.nix
