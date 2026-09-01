@@ -52,6 +52,17 @@ NixOS
 Theta
 - ensure firmware is updated
 - configure remote builder
+- finish Hermes Agent setup after deploying its container:
+  - rebuild theta so the SOPS template and container are restarted
+  - run `sudo podman exec -it --user hermes hermes-agent hermes auth add openai-codex`
+    and complete the ChatGPT device-code login
+  - if Tailscale Serve reports that HTTPS is disabled, follow its admin-console
+    link once to enable tailnet certificates, then restart
+    `hermes-agent-tailscale-serve.service`
+  - verify Hermes WebUI at https://theta.bongo-sidemirror.ts.net and use that
+    URL plus the dashboard password in Hermex
+  - verify the native dashboard at https://theta.bongo-sidemirror.ts.net:9443
+    from a tailnet device
 - finish Preservation rollout:
   - create and seed /persist, then enable it in a boot generation
   - make / and /var ephemeral while keeping /home persistent initially

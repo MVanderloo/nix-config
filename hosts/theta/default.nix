@@ -11,6 +11,7 @@
     ../../modules/nixos/bash.nix
     ../../modules/nixos/console.nix
     ../../modules/nixos/penguin-plymouth.nix
+    ../../modules/nixos/services/hermes-agent.nix
 
     ./configuration.nix
     ./disk.nix
