@@ -43,14 +43,16 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
 
-  programs.mosh = {
-    enable = true;
-    openFirewall = false;
-  };
+  programs = {
+    mosh = {
+      enable = true;
+      openFirewall = false;
+    };
 
-  programs.ssh.knownHosts.github = {
-    hostNames = [ "github.com" ];
-    publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
+    ssh.knownHosts.github = {
+      hostNames = [ "github.com" ];
+      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
+    };
   };
 
   sops = {
