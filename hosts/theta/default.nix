@@ -18,12 +18,13 @@
   ];
 
   home-manager = {
+    users.mv = ./home.nix;
+
     useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = {
       inherit inputs;
       githubSshKey = config.sops.secrets.github-ssh-key.path;
     };
-    users.mv = ./home.nix;
   };
 }
