@@ -1,11 +1,5 @@
 { config, pkgs, ... }:
 {
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-  nix.settings.use-xdg-base-directories = true;
-
   users.users.mv = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];

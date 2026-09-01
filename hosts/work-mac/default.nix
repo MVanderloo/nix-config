@@ -11,8 +11,8 @@ let
 in
 {
   imports = [
+    ../../modules/nix-settings.nix
     ../../modules/darwin/homebrew.nix
-    ../../modules/darwin/nix-settings.nix
     ../../modules/darwin/settings.nix
 
     inputs.home-manager.darwinModules.home-manager

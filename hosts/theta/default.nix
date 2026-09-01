@@ -7,6 +7,7 @@
     inputs.preservation.nixosModules.preservation
     inputs.sops-nix.nixosModules.sops
 
+    ../../modules/nix-settings.nix
     ../../modules/nixos/bash.nix
     ../../modules/nixos/console.nix
     ../../modules/nixos/penguin-plymouth.nix
