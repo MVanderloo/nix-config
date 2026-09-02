@@ -104,13 +104,13 @@
         "mv@tau" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${linuxSystem}.extend overlay;
           extraSpecialArgs = { inherit inputs; };
-          modules = [ ./hosts/tau.nix ];
+          modules = [ ./hosts/tau ];
         };
 
         "mv@delta" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${linuxSystem}.extend overlay;
           extraSpecialArgs = { inherit inputs; };
-          modules = [ ./hosts/delta.nix ];
+          modules = [ ./hosts/delta ];
         };
       };
 
