@@ -43,6 +43,8 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
 
+  environment.enableAllTerminfo = true;
+
   programs = {
     mosh = {
       enable = true;
