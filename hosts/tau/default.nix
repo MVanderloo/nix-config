@@ -1,9 +1,6 @@
-{
-  nix.settings = {
-    builders = "ssh-ng://theta x86_64-linux - - nixos-test,big-parallel,kvm";
-    builders-use-substitutes = true;
-  };
+{ pkgs, ... }:
 
+{
   imports = [
     ./home.nix
 
@@ -18,4 +15,25 @@
   ];
 
   nixpkgs.config.allowUnfree = true;
+
+  nix = {
+    package = pkgs.nix;
+    distributedBuilds = true;
+    buildMachines = [
+      {
+        hostName = "theta";
+        protocol = "ssh-ng";
+        systems = [ "x86_64-linux" ];
+        sshUser = "mv";
+        maxJobs = 8;
+        supportedFeatures = [
+          "benchmark"
+          "big-parallel"
+          "kvm"
+          "nixos-test"
+        ];
+      }
+    ];
+    settings.builders-use-substitutes = true;
+  };
 }
