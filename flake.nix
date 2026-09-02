@@ -106,15 +106,28 @@
         };
       };
 
-      deploy.nodes.theta = {
-        hostname = "theta";
-        sshUser = "mv";
-        interactiveSudo = true;
-        remoteBuild = true;
+      deploy.nodes = {
+        delta = {
+          hostname = "delta";
+          sshUser = "mv";
+          remoteBuild = true;
 
-        profiles.system = {
-          user = "root";
-          path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.theta;
+          profiles.system = {
+            user = "mv";
+            path = deploy-rs.lib.x86_64-linux.activate.home-manager self.homeConfigurations."mv@delta";
+          };
+        };
+
+        theta = {
+          hostname = "theta";
+          sshUser = "mv";
+          interactiveSudo = true;
+          remoteBuild = true;
+
+          profiles.system = {
+            user = "root";
+            path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.theta;
+          };
         };
       };
 
