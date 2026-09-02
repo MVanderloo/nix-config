@@ -17,6 +17,7 @@
     ./disk.nix
     ./hardware-configuration.nix
     ./preservation.nix
+    ./services/trmnl-terminus.nix
   ];
 
   home-manager = {
