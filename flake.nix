@@ -110,6 +110,7 @@
         hostname = "theta";
         sshUser = "mv";
         interactiveSudo = true;
+        remoteBuild = true;
 
         profiles.system = {
           user = "root";
