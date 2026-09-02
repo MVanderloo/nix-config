@@ -53,6 +53,15 @@ NixOS
 Theta
 - ensure firmware is updated
 - configure remote builder
+- finish Wake-on-LAN setup for delta:
+  - deploy theta with deploy-rs and enter theta's sudo password
+  - enable magic-packet wake for delta's wired NetworkManager connection
+  - verify delta's BIOS/UEFI permits Wake-on-LAN and `ethtool enp5s0`
+    reports `Wake-on: g`
+  - create a RootsShell "Run Command over SSH" shortcut using the theta
+    profile and `/run/current-system/sw/bin/wake-delta`
+  - add the shortcut to the iOS Home Screen or Control Center and verify it
+    wakes delta from suspend before relying on it remotely
 - finish Hermes Agent setup after deploying its container:
   - rebuild theta so the SOPS template and container are restarted
   - run `sudo podman exec -it --user hermes hermes-agent hermes auth add openai-codex`
