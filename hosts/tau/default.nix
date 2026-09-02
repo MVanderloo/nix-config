@@ -23,15 +23,8 @@
       {
         hostName = "theta";
         protocol = "ssh-ng";
-        systems = [ "x86_64-linux" ];
         sshUser = "mv";
         maxJobs = 8;
-        supportedFeatures = [
-          "benchmark"
-          "big-parallel"
-          "kvm"
-          "nixos-test"
-        ];
       }
     ];
     settings.builders-use-substitutes = true;
