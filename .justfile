@@ -1,15 +1,33 @@
-format:
+set shell := ["bash", "-eu", "-o", "pipefail", "-c"]
+
+_default:
+    @just --list
+
+fmt:
     nix fmt
 
-check:
-    statix check .
-    deadnix .
+check *args:
+    nix flake check {{args}}
 
-sops-hermes:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    sudo -v
-    nix shell nixpkgs#sops nixpkgs#ssh-to-age -c bash -c '
-      export SOPS_AGE_KEY_CMD="sudo -n $(command -v ssh-to-age) -private-key -i /etc/ssh/ssh_host_ed25519_key"
-      exec sops secrets/theta-hermes.yaml
-    '
+update *inputs:
+    nix flake update {{inputs}}
+
+deploy host *args:
+    nix run .#deploy -- ".#{{host}}" {{args}}
+
+deploy-all *args:
+    nix run .#deploy -- . {{args}}
+
+[confirm("This will repartition the target and install NixOS. Continue?")]
+install host target *args:
+    nix run .#nixos-anywhere -- \
+    --flake ".#{{host}}" --target-host "{{target}}" {{args}}
+
+sops *args:
+    nix run .#sops -- {{args}}
+
+secret file:
+    nix run .#sops -- edit "{{file}}"
+
+rekey file:
+    nix run .#sops -- updatekeys "{{file}}"
