@@ -55,9 +55,24 @@ Theta
 - configure remote builder
 - finish Wake-on-LAN setup for delta:
   - deploy theta with deploy-rs and enter theta's sudo password
-  - enable magic-packet wake for delta's wired NetworkManager connection
-  - verify delta's BIOS/UEFI permits Wake-on-LAN and `ethtool enp5s0`
-    reports `Wake-on: g`
+  - configure delta's one-hour idle suspend in Home Manager's Noctalia module:
+    - replace the legacy `noctalia:...` idle commands with the canonical v5
+      `lock`, `screen_off`, and `lock_and_suspend` actions
+    - keep lock at 300 seconds and screen-off at 360 seconds
+    - add `lock_and_suspend` at 3600 seconds and set `behavior_order` to
+      `[ "lock" "screen-off" "suspend" ]`
+  - activate the `mv@delta` Home Manager flake and validate the Noctalia config;
+    the current generation does not manage Niri/Noctalia and
+    `~/.config/noctalia/config.toml` is a dangling symlink
+  - enable magic-packet wake for delta's wired NetworkManager connection with
+    `sudo nmcli connection modify "Wired connection 1" 802-3-ethernet.wake-on-lan magic`
+    (this and the firmware setting are system-level bootstrap steps, not cleanly
+    managed by standalone Home Manager)
+  - reboot delta or reactivate its wired connection, then verify the profile with
+    `nmcli -g 802-3-ethernet.wake-on-lan connection show "Wired connection 1"`
+  - enable Wake-on-LAN/PCIe wake in delta's BIOS/UEFI, disable ErP if necessary,
+    and verify `sudo ethtool enp5s0` reports `Wake-on: g`
+  - confirm Noctalia caffeine/application idle inhibitors prevent automatic sleep
   - create a RootsShell "Run Command over SSH" shortcut using the theta
     profile and `/run/current-system/sw/bin/wake-delta`
   - add the shortcut to the iOS Home Screen or Control Center and verify it
