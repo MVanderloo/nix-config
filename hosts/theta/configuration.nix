@@ -1,5 +1,7 @@
 { config, pkgs, ... }:
 {
+  nix.settings.trusted-users = [ "mv" ];
+
   users.users.mv = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
