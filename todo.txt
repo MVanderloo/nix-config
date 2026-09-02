@@ -31,6 +31,7 @@ Neovim
 - convert nvim config to nix (try nvf)
 - make neovim clipboard work through ssh
 - try 0.13 for new directory module
+- figure out actually good diff settings
 
 Tmux
 - how can I name/preview sessions/windows better so I know what is happening
