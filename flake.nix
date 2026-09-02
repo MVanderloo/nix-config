@@ -50,14 +50,6 @@
       ...
     }:
     let
-      linuxSystem = "x86_64-linux";
-      darwinSystem = "aarch64-darwin";
-
-      systems = [
-        linuxSystem
-        darwinSystem
-      ];
-
       overlay =
         final: _:
         let
@@ -83,7 +75,7 @@
       overlays.default = overlay;
 
       nixosConfigurations.theta = nixpkgs.lib.nixosSystem {
-        system = linuxSystem;
+        system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [
           overlayModule
@@ -92,7 +84,7 @@
       };
 
       darwinConfigurations.work-mac = darwin.lib.darwinSystem {
-        system = darwinSystem;
+        system = "aarch64-darwin";
         specialArgs = { inherit inputs; };
         modules = [
           overlayModule
@@ -102,13 +94,13 @@
 
       homeConfigurations = {
         "mv@tau" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.${linuxSystem}.extend overlay;
+          pkgs = nixpkgs.legacyPackages.x86_64-linux.extend overlay;
           extraSpecialArgs = { inherit inputs; };
           modules = [ ./hosts/tau ];
         };
 
         "mv@delta" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.${linuxSystem}.extend overlay;
+          pkgs = nixpkgs.legacyPackages.x86_64-linux.extend overlay;
           extraSpecialArgs = { inherit inputs; };
           modules = [ ./hosts/delta ];
         };
@@ -121,12 +113,14 @@
 
         profiles.system = {
           user = "root";
-          path = deploy-rs.lib.${linuxSystem}.activate.nixos self.nixosConfigurations.theta;
+          path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.theta;
         };
       };
 
-      checks.${linuxSystem} = deploy-rs.lib.${linuxSystem}.deployChecks self.deploy;
+      checks.x86_64-linux = deploy-rs.lib.x86_64-linux.deployChecks self.deploy;
 
-      formatter = nixpkgs.lib.genAttrs systems (sys: nixpkgs.legacyPackages.${sys}.nixfmt-tree);
+      formatter = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-darwin" ] (
+        sys: nixpkgs.legacyPackages.${sys}.nixfmt-tree
+      );
     };
 }
