@@ -5,6 +5,8 @@
     ../../modules/home-manager/fish.nix
     ../../modules/home-manager/ghostty.nix
     ../../modules/home-manager/neovim.nix
+    ../../modules/home-manager/niri.nix
+    ../../modules/home-manager/noctalia.nix
     ../../modules/home-manager/pi.nix
     ../../modules/home-manager/python.nix
     ../../modules/home-manager/shell.nix
