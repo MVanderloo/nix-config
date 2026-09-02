@@ -43,7 +43,19 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
 
-  environment.enableAllTerminfo = true;
+  environment = {
+    enableAllTerminfo = true;
+    systemPackages = [
+      pkgs.wakeonlan
+      (pkgs.writeShellApplication {
+        name = "wake-delta";
+        runtimeInputs = [ pkgs.wakeonlan ];
+        text = ''
+          exec wakeonlan -i 192.168.0.255 -p 9 10:ff:e0:c4:56:ed
+        '';
+      })
+    ];
+  };
 
   programs = {
     mosh = {
