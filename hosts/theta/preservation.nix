@@ -50,6 +50,12 @@ in
           directory = "/var/lib/tailscale";
           mode = "0700";
         }
+        {
+          directory = "/var/lib/containers/storage/volumes";
+          mode = "0700";
+          configureParent = true;
+          parent.mode = "0700";
+        }
         "/var/lib/atuin"
       ];
     };
