@@ -14,7 +14,7 @@
   };
 
   programs = {
-    atuin.settings.sync_address = "http:omega:8888";
+    atuin.settings.sync_address = "http://theta:8888";
     docker-cli.enable = true;
     git.settings.user = {
       name = "Michael van der Loo";

@@ -15,7 +15,7 @@
   };
 
   programs = {
-    atuin.settings.sync_address = "http:omega:8888";
+    atuin.settings.sync_address = "http://theta:8888";
     git.settings.user = {
       name = "Michael van der Loo";
       email = "me@mvanderloo.com";

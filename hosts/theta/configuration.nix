@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   nix = {
     settings = {
@@ -91,6 +96,16 @@
   };
 
   services = {
+    atuin = {
+      enable = true;
+      host = "127.0.0.1";
+      openRegistration = false;
+      database = {
+        createLocally = false;
+        uri = "sqlite:///var/lib/atuin/atuin.db";
+      };
+    };
+
     tailscale = {
       enable = true;
       extraSetFlags = [ "--ssh" ];
@@ -99,22 +114,58 @@
   };
 
   systemd = {
-    tmpfiles.rules = [
-      "d /var/lib/atuin 0755 root root -"
-    ];
-
-    services.atuin-server = {
-      description = "Atuin sync server";
-      wantedBy = [ "default.target" ];
-      path = [ pkgs.atuin ];
-      environment = {
-        ATUIN_HOST = "0.0.0.0";
-        ATUIN_PORT = "8888";
-        ATUIN_OPEN_REGISTRATION = "true";
-        ATUIN_DB_URI = "sqlite:///var/lib/atuin/atuin.db";
+    services = {
+      atuin.serviceConfig = {
+        DynamicUser = lib.mkForce false;
+        User = config.users.users.mv.name;
+        Group = config.users.users.mv.group;
+        StateDirectory = "atuin";
+        StateDirectoryMode = "0700";
+        Restart = "on-failure";
+        RestartSec = "5s";
       };
-      script = "atuin-server start";
+
+      atuin-tailscale-serve = {
+        description = "Expose Atuin through Tailscale Serve";
+        wantedBy = [ "multi-user.target" ];
+        requires = [
+          "atuin.service"
+          "tailscaled.service"
+        ];
+        after = [
+          "atuin.service"
+          "tailscaled.service"
+        ];
+
+        script = ''
+          ${pkgs.tailscale}/bin/tailscale serve \
+            --yes \
+            --bg \
+            --http=${toString config.services.atuin.port} \
+            --set-path=/ \
+            http://${config.services.atuin.host}:${toString config.services.atuin.port}
+        '';
+
+        preStop = ''
+          ${pkgs.tailscale}/bin/tailscale serve \
+            --yes \
+            --http=${toString config.services.atuin.port} \
+            --set-path=/ \
+            off
+        '';
+
+        serviceConfig = {
+          Type = "oneshot";
+          RemainAfterExit = true;
+          Restart = "on-failure";
+          RestartSec = "5s";
+        };
+      };
     };
+
+    tmpfiles.rules = [
+      "Z /var/lib/atuin - ${config.users.users.mv.name} ${config.users.users.mv.group} - -"
+    ];
   };
 
   system.stateVersion = "26.05";

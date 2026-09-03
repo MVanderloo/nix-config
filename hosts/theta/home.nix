@@ -29,7 +29,7 @@
   };
 
   programs = {
-    atuin.settings.sync_address = "http:localhost:8888";
+    atuin.settings.sync_address = "http://127.0.0.1:8888";
     docker-cli.enable = true;
     git.settings.user = {
       name = "Michael van der Loo";

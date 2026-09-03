@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ config, lib, ... }:
 
 let
   enablePreservation = false;
@@ -56,7 +56,12 @@ in
           configureParent = true;
           parent.mode = "0700";
         }
-        "/var/lib/atuin"
+        {
+          directory = "/var/lib/atuin";
+          user = config.users.users.mv.name;
+          group = config.users.users.mv.group;
+          mode = "0700";
+        }
       ];
     };
   };
