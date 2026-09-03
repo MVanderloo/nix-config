@@ -1,23 +1,22 @@
 General
-- integrate worktrunk, pi
-- ssh and gpg config: GPG authenticates everything
 - synchronized color schemes
-- pinentry ?
 - gcroots
 - glab, gh
 - fix git aliases
 - look into workmux
 - fix bash and zsh configs so that there is feature parity. Bonus: respect XDG
+- give bash a distinguished look
 - create standalone .bashrc, .tmux.conf, and .vimrc for copying onto servers
 - try new niri and aerospace keybindings to have better window movement behavior
 - nixpkgs multiverse
 - Update tmux / prompt to make it clear when I am in ssh or not
-- fish cursor
 - configure yazi: keybindings closer to nvim/oil
 - atuin global search very slow - may be because I'm building nodejs-slim from source
 - keymap for ephemeral floating btop window (bonus: keep it running so it's already populated?)
 - allow shell detect nerd fonts to change prompt
 - backup strategy
+- fix cursor in fish and nvim when using tmux and not from rootshell and not
+- fix clipboard going through all of rootshell, ghostty, tmux, ssh, nvim
 
 Secrets
 - per device SSH key
@@ -36,6 +35,7 @@ Neovim
 Tmux
 - how can I name/preview sessions/windows better so I know what is happening
 - config for mobile UI
+- change color depending on local or remote tmux server
 
 NixOS
 - installable ISO
@@ -43,10 +43,7 @@ NixOS
 - fail2ban
 - only allow ssh over VPN
 - harden SSH config
-- only open required ports
-- disable IP forwarding
 - automatic security updates
-- automated patch updates
 - running nixos-rebuild over ssh breaks something
 - checkout nixos-hardware for custom hardware patches
 
@@ -54,7 +51,6 @@ Theta
 - ensure firmware is updated
 - configure remote builder
 - finish Wake-on-LAN setup for delta:
-  - deploy theta with deploy-rs and enter theta's sudo password
   - configure delta's one-hour idle suspend in Home Manager's Noctalia module:
     - replace the legacy `noctalia:...` idle commands with the canonical v5
       `lock`, `screen_off`, and `lock_and_suspend` actions
