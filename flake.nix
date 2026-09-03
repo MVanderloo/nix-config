@@ -28,11 +28,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    maki = {
-      url = "github:tontinton/maki";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
-    };
-
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -63,7 +58,6 @@
         in
         {
           inherit (stablePkgs) llama-cpp open-webui;
-          maki = inputs.maki.packages.${system}.default;
           rayfish = final.callPackage ./packages/rayfish.nix { };
         };
 

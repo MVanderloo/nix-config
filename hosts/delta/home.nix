@@ -8,7 +8,6 @@
 
     packages = with pkgs; [
       codex
-      maki
       mosh
       podman-compose
       rayfish
