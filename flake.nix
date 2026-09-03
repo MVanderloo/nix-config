@@ -68,6 +68,10 @@
     {
       overlays.default = overlay;
 
+      apps = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-darwin" ] (system: {
+        deploy = deploy-rs.apps.${system}.default;
+      });
+
       nixosConfigurations.theta = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
