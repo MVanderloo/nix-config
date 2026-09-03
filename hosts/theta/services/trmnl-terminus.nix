@@ -9,6 +9,8 @@ let
   environmentFile = "${stateDirectory}/terminus.env";
   network = "trmnl-terminus";
   port = 2300;
+  backendPort = 2301;
+  tailscaleAdminPort = 8443;
   lanInterfaces = [
     "eno1"
     "wlp1s0"
@@ -20,6 +22,14 @@ let
     API_URI = lanUrl;
     HANAMI_PORT = toString port;
     TZ = config.time.timeZone;
+  };
+
+  backendUrl = "http://127.0.0.1:${toString backendPort}";
+  deviceGetProxy = {
+    proxyPass = backendUrl;
+    extraConfig = ''
+      limit_except GET { deny all; }
+    '';
   };
 in
 {
@@ -34,12 +44,43 @@ in
     };
   };
 
+  # The physical display gets only its firmware API and generated files. The
+  # full Terminus UI and server API are available through Tailscale Serve.
+  services.nginx = {
+    enable = true;
+    recommendedProxySettings = true;
+    serverTokens = false;
+
+    virtualHosts.terminus-device = {
+      default = true;
+      listen = [
+        {
+          addr = "0.0.0.0";
+          inherit port;
+        }
+      ];
+
+      locations = {
+        "= /api/display" = deviceGetProxy;
+        "= /api/setup" = deviceGetProxy;
+        "= /api/log" = {
+          proxyPass = backendUrl;
+          extraConfig = ''
+            limit_except POST { deny all; }
+          '';
+        };
+        "= /assets/setup.bmp" = deviceGetProxy;
+        "^~ /uploads/" = deviceGetProxy;
+        "/".return = 404;
+      };
+    };
+  };
+
   networking.firewall.interfaces = {
     eno1 = {
       allowedTCPPorts = [ port ];
       allowedUDPPorts = [ 5353 ];
     };
-    tailscale0.allowedTCPPorts = [ port ];
     wlp1s0 = {
       allowedTCPPorts = [ port ];
       allowedUDPPorts = [ 5353 ];
@@ -99,7 +140,7 @@ in
           "--security-opt=no-new-privileges"
           "--shm-size=1g"
         ];
-        ports = [ "${toString port}:${toString port}/tcp" ];
+        ports = [ "127.0.0.1:${toString backendPort}:${toString port}/tcp" ];
         pull = "missing";
         volumes = [ "trmnl-terminus-uploads:/app/public/uploads" ];
       };
@@ -239,8 +280,55 @@ in
         requires = [ "podman-trmnl-terminus.service" ];
         after = [ "podman-trmnl-terminus.service" ];
       };
+
+      nginx = {
+        requires = [ "podman-trmnl-terminus.service" ];
+        after = [ "podman-trmnl-terminus.service" ];
+      };
+
+      trmnl-terminus-tailscale-serve = {
+        description = "Expose Terminus administration through Tailscale Serve";
+        wantedBy = [ "multi-user.target" ];
+        requires = [
+          "podman-trmnl-terminus.service"
+          "tailscaled.service"
+        ];
+        after = [
+          "podman-trmnl-terminus.service"
+          "tailscaled.service"
+        ];
+
+        script = ''
+          ${pkgs.tailscale}/bin/tailscale serve \
+            --yes \
+            --bg \
+            --https=${toString tailscaleAdminPort} \
+            --set-path=/ \
+            http://127.0.0.1:${toString backendPort}
+        '';
+
+        preStop = ''
+          ${pkgs.tailscale}/bin/tailscale serve \
+            --yes \
+            --https=${toString tailscaleAdminPort} \
+            --set-path=/ \
+            off
+        '';
+
+        serviceConfig = {
+          Type = "oneshot";
+          RemainAfterExit = true;
+          Restart = "on-failure";
+          RestartSec = "5s";
+        };
+      };
     };
   };
 
-  preservation.preserveAt."/persist".directories = [ stateDirectory ];
+  preservation.preserveAt."/persist".directories = [
+    {
+      directory = stateDirectory;
+      mode = "0700";
+    }
+  ];
 }
