@@ -1,6 +1,7 @@
 {
   imports = [
     ./home.nix
+    ./gpu.nix
 
     ../../modules/home-manager/fish.nix
     ../../modules/home-manager/ghostty.nix
