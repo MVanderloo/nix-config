@@ -3,6 +3,7 @@
     ./home.nix
     ./gpu.nix
 
+    ../../modules/home-manager/codex.nix
     ../../modules/home-manager/fish.nix
     ../../modules/home-manager/ghostty.nix
     ../../modules/home-manager/neovim.nix

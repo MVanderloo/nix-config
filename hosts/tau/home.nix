@@ -7,7 +7,6 @@
     homeDirectory = "/home/mv";
 
     packages = with pkgs; [
-      codex
       devenv
       rayfish
       vesktop
