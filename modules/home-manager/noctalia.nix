@@ -1,4 +1,4 @@
-{ config, ... }:
+{ ... }:
 {
   programs.noctalia = {
     enable = true;
@@ -121,8 +121,8 @@
       };
 
       wallpaper = {
-        directory = "${config.home.homeDirectory}/Pictures/aesthetic-wallpapers/images";
-        default.path = "${config.home.homeDirectory}/Pictures/aesthetic-wallpapers/images/mecha-nostalgia.png";
+        directory = "${../../assets/wallpapers}";
+        default.path = "${../../assets/wallpapers}/mecha-nostalgia.png";
       };
     };
   };
