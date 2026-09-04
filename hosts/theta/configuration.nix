@@ -29,6 +29,10 @@
       efi.canTouchEfiVariables = true;
     };
     kernelPackages = pkgs.linuxPackages_latest;
+
+    # Mask malfunctioning AHCI port 4 (ata5), which adds
+    # about 45 seconds of IDENTIFY timeouts to boot.
+    kernelParams = [ "ahci.mask_port_map=0x2f" ];
   };
 
   networking = {

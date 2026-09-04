@@ -50,6 +50,15 @@ NixOS
 
 Theta
 - ensure firmware is updated
+- explore boot-to-network-ready optimizations (current baseline: wired network
+  online around 31 seconds after power-on; Tailscale around 33 seconds):
+  - reduce `boot.loader.timeout` from 5 to 1 second
+  - add `e1000e` to `boot.initrd.availableKernelModules` so Ethernet link
+    negotiation overlaps initrd startup
+  - test BIOS Fast Boot and disable unused PXE/network/USB boot paths
+  - consider static IPv4 only after reserving the address on the router
+  - keep `NetworkManager-wait-online` enabled and measure actual carrier, DHCP,
+    network-online, and Tailscale readiness after each change
 - configure remote builder
 - finish Wake-on-LAN setup for delta:
   - configure delta's one-hour idle suspend in Home Manager's Noctalia module:
