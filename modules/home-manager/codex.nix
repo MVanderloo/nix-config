@@ -1,6 +1,8 @@
+{ lib, pkgs, ... }:
+
 {
   programs.codex = {
-    enable = true;
+    enable = false;
 
     settings = {
       approval_policy = "on-request";

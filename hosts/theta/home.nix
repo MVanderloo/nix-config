@@ -7,7 +7,7 @@
 {
   imports = [
     ../../modules/home-manager/bash.nix
-    ../../modules/home-manager/codex.nix
+    # ../../modules/home-manager/codex.nix
     ../../modules/home-manager/fish.nix
     ../../modules/home-manager/neovim.nix
     ../../modules/home-manager/ssh.nix
@@ -24,6 +24,7 @@
 
     packages = with pkgs; [
       devenv
+      codex
       opencode
     ];
   };

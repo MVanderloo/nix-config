@@ -64,6 +64,7 @@
 
   environment = {
     enableAllTerminfo = true;
+    variables.CODEX_HOME = "/home/mv/.config/codex";
     systemPackages = [
       pkgs.wakeonlan
       (pkgs.writeShellApplication {
