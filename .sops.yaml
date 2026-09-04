@@ -13,3 +13,8 @@ creation_rules:
       - age:
           - *mv
           - *theta
+  - path_regex: secrets/theta-trmnl.yaml$
+    key_groups:
+      - age:
+          - *mv
+          - *theta
