@@ -17,6 +17,7 @@ General
 - backup strategy
 - fix cursor in fish and nvim when using tmux and not from rootshell and not
 - fix clipboard going through all of rootshell, ghostty, tmux, ssh, nvim
+- cd_after_ls has different eza config than ls
 
 Secrets
 - per device SSH key
