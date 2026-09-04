@@ -6,6 +6,8 @@
 
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
 
+    waylandcraft-desktop.url = "path:/home/mv/waylandcraft-desktop";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";

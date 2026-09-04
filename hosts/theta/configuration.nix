@@ -35,6 +35,8 @@
     kernelParams = [ "ahci.mask_port_map=0x2f" ];
   };
 
+  hardware.graphics.enable = true;
+
   networking = {
     hostName = "theta";
     networkmanager.enable = true;
