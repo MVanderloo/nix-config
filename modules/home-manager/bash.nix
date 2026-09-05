@@ -53,5 +53,4 @@
     yazi.enableBashIntegration = true;
     zoxide.enableBashIntegration = true;
   };
-
 }

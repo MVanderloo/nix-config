@@ -1,4 +1,5 @@
 { config, pkgs, ... }:
+
 let
   modelsDir = "${config.home.homeDirectory}/Models";
   models = {
