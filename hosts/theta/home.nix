@@ -4,6 +4,7 @@
   pkgs,
   ...
 }:
+
 {
   imports = [
     ../../modules/home-manager/bash.nix
@@ -45,4 +46,6 @@
       IdentitiesOnly = true;
     };
   };
+
+  services.syncthing.deviceName = "theta";
 }

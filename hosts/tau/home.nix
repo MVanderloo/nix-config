@@ -28,4 +28,6 @@
     nh.flake = "${config.home.homeDirectory}/Repositories/nix-config";
     # ssh.settings."github.com".IdentityFile = "~/.ssh/id_ed25519";
   };
+
+  services.syncthing.deviceName = "tau";
 }
