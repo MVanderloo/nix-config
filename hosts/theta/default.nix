@@ -11,6 +11,7 @@
     ../../modules/nix-settings.nix
     ../../modules/nixos/bash.nix
     ../../modules/nixos/console.nix
+    ../../modules/nixos/mosh.nix
     ../../modules/nixos/penguin-plymouth.nix
     ../../modules/nixos/services/hermes-agent.nix
     ../../modules/nixos/tailscale.nix
