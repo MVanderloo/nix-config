@@ -4,19 +4,8 @@
   pkgs,
   ...
 }:
-{
-  nix = {
-    settings = {
-      trusted-users = [ "mv" ];
-      auto-optimise-store = true;
-    };
-    gc = {
-      automatic = true;
-      dates = "daily";
-      options = "--delete-older-than 10d";
-    };
-  };
 
+{
   users.users.mv = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
