@@ -13,6 +13,7 @@
     ../../modules/nixos/console.nix
     ../../modules/nixos/penguin-plymouth.nix
     ../../modules/nixos/services/hermes-agent.nix
+    ../../modules/nixos/tailscale.nix
 
     ./configuration.nix
     ./disk.nix

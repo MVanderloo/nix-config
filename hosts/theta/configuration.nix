@@ -6,6 +6,8 @@
 }:
 
 {
+  networking.hostName = "theta";
+
   users.users.mv = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
@@ -27,21 +29,8 @@
   hardware.graphics.enable = true;
 
   networking = {
-    hostName = "theta";
     networkmanager.enable = true;
-
-    # firewall.allowedTCPPorts = [ ... ];
-    # firewall.allowedUDPPorts = [ ... ];
-    # firewall.enable = false;
-    firewall.interfaces.tailscale0 = {
-      allowedTCPPorts = [ 22000 ];
-      allowedUDPPortRanges = [
-        {
-          from = 60000;
-          to = 61000;
-        }
-      ];
-    };
+    firewall.enable = true;
 
     nameservers = [
       "1.1.1.1"
@@ -102,10 +91,7 @@
       };
     };
 
-    tailscale = {
-      enable = true;
-      extraSetFlags = [ "--ssh" ];
-    };
+    tailscale.extraSetFlags = [ "--ssh" ];
     fwupd.enable = true;
   };
 
