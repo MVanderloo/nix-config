@@ -1,6 +1,8 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
+  home.packages = [ pkgs.codex ];
+
   programs.codex = {
     enable = false;
 
