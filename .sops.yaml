@@ -1,20 +1,27 @@
 keys:
-  - &mv age1s7d2xjdwuhqms7z40r8th55xs8w7rza4kacaghkcxeu97u6ux3qq94jnur
+  - &pgp "298958C755761091831D3ED9B7A966815CB4846F!"
   - &theta age1ksteyguuh9m656srltrvyz5vj93amndlw9gjsqqnvrf6znk6kqxss4k7qm
 
 creation_rules:
   - path_regex: secrets/theta-github-ssh-key$
     key_groups:
-      - age:
-          - *mv
+      - pgp:
+          - *pgp
+        age:
           - *theta
+  - path_regex: secrets/omega-github-ssh-key$
+    key_groups:
+      - pgp:
+          - *pgp
   - path_regex: secrets/theta-hermes.yaml$
     key_groups:
-      - age:
-          - *mv
+      - pgp:
+          - *pgp
+        age:
           - *theta
   - path_regex: secrets/theta-trmnl.yaml$
     key_groups:
-      - age:
-          - *mv
+      - pgp:
+          - *pgp
+        age:
           - *theta

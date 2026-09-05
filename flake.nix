@@ -47,6 +47,13 @@
       ...
     }:
     let
+      yubikeySshKey =
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMORzMFgBS/sBelTYYrsmJfQOalUdVb3Lz7HXHBzjsdL openpgp:0x4213379A";
+
+      sharedArgs = {
+        inherit inputs yubikeySshKey;
+      };
+
       overlay =
         final: _:
         let
@@ -76,16 +83,25 @@
 
       nixosConfigurations.theta = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
+        specialArgs = sharedArgs;
         modules = [
           overlayModule
           ./hosts/theta
         ];
       };
 
+      nixosConfigurations.omega = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = sharedArgs;
+        modules = [
+          overlayModule
+          ./hosts/omega
+        ];
+      };
+
       darwinConfigurations.work-mac = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
-        specialArgs = { inherit inputs; };
+        specialArgs = sharedArgs;
         modules = [
           overlayModule
           ./hosts/work-mac
@@ -95,13 +111,13 @@
       homeConfigurations = {
         "mv@tau" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux.extend overlay;
-          extraSpecialArgs = { inherit inputs; };
+          extraSpecialArgs = sharedArgs;
           modules = [ ./hosts/tau ];
         };
 
         "mv@delta" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux.extend overlay;
-          extraSpecialArgs = { inherit inputs; };
+          extraSpecialArgs = sharedArgs;
           modules = [ ./hosts/delta ];
         };
       };

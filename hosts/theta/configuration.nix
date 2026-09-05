@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  yubikeySshKey,
   ...
 }:
 
@@ -12,6 +13,7 @@
     isNormalUser = true;
     extraGroups = [ "wheel" ];
     linger = true;
+    openssh.authorizedKeys.keys = [ yubikeySshKey ];
   };
 
   boot = {
