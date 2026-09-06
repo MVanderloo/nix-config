@@ -47,11 +47,11 @@
       ...
     }:
     let
-      yubikeySshKey =
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMORzMFgBS/sBelTYYrsmJfQOalUdVb3Lz7HXHBzjsdL openpgp:0x4213379A";
+      yubikeySshKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMORzMFgBS/sBelTYYrsmJfQOalUdVb3Lz7HXHBzjsdL openpgp:0x4213379A";
+      adminPasswordSopsFile = ./secrets/admin-password.yaml;
 
       sharedArgs = {
-        inherit inputs yubikeySshKey;
+        inherit adminPasswordSopsFile inputs yubikeySshKey;
       };
 
       overlay =
@@ -90,12 +90,12 @@
         ];
       };
 
-      nixosConfigurations.omega = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.alpha = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = sharedArgs;
         modules = [
           overlayModule
-          ./hosts/omega
+          ./hosts/alpha
         ];
       };
 

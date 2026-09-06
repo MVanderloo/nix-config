@@ -74,7 +74,7 @@ Theta
   - add a VM reboot test for preserved and ephemeral state
 - services: homepage, arcane, freshrss, SOTD,
 
-Omega:
+Alpha:
 - create VM
 - setup config
 - services: caddy, pocketid

@@ -1,8 +1,16 @@
 keys:
   - &pgp "298958C755761091831D3ED9B7A966815CB4846F!"
   - &theta age1ksteyguuh9m656srltrvyz5vj93amndlw9gjsqqnvrf6znk6kqxss4k7qm
+  - &alpha age1zxxf2k3tmve08qmmxm8pmn3jdwl0zndmw7k09st57dw4a0zs0shq0hmejg
 
 creation_rules:
+  - path_regex: secrets/admin-password.yaml$
+    key_groups:
+      - pgp:
+          - *pgp
+        age:
+          - *theta
+          - *alpha
   - path_regex: secrets/theta-hermes.yaml$
     key_groups:
       - pgp:

@@ -1,4 +1,5 @@
 {
+  adminPasswordSopsFile,
   config,
   lib,
   pkgs,
@@ -9,11 +10,16 @@
 {
   networking.hostName = "theta";
 
-  users.users.mv = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
-    linger = true;
-    openssh.authorizedKeys.keys = [ yubikeySshKey ];
+  users = {
+    mutableUsers = false;
+
+    users.mv = {
+      isNormalUser = true;
+      extraGroups = [ "wheel" ];
+      hashedPasswordFile = config.sops.secrets."admin-password-hash".path;
+      linger = true;
+      openssh.authorizedKeys.keys = [ yubikeySshKey ];
+    };
   };
 
   boot = {
@@ -64,7 +70,14 @@
     publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
   };
 
-  sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+  sops = {
+    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+
+    secrets."admin-password-hash" = {
+      sopsFile = adminPasswordSopsFile;
+      neededForUsers = true;
+    };
+  };
 
   services = {
     atuin = {
