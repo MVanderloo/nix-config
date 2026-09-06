@@ -114,7 +114,9 @@
       overlays.default = localOverlay;
 
       apps = forAllSystems (system: {
-        deploy = deploy-rs.apps.${system}.default;
+        deploy = deploy-rs.apps.${system}.default // {
+          meta.description = "Deploy this flake with deploy-rs";
+        };
       });
 
       packages.${linuxSystem} = {
