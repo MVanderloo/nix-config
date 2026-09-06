@@ -8,7 +8,6 @@
     enable = true;
     enableDefaultConfig = false;
     settings."*" = {
-      ForwardAgent = true;
       AddKeysToAgent = "yes";
       Compression = true;
       ServerAliveInterval = 0;
