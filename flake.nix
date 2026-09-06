@@ -118,7 +118,7 @@
       });
 
       packages.${linuxSystem} = {
-        inherit (linuxPkgs) ladybird neovim-head rayfish;
+        inherit (linuxPkgs) neovim-head rayfish;
       };
       packages.${darwinSystem} = {
         inherit (darwinPkgs) neovim-head;
