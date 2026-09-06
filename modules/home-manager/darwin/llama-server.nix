@@ -79,7 +79,7 @@ in
         "-config"
         "${configFile}"
         "-listen"
-        ":8041"
+        "127.0.0.1:8041"
       ];
       KeepAlive = true;
       RunAtLoad = true;

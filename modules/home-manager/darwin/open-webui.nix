@@ -11,7 +11,7 @@ in
   home.packages = [ openWebui ];
 
   launchd.agents.open-webui = {
-    enable = true;
+    enable = false;
     config = {
       ProgramArguments = [
         (lib.getExe openWebui)
@@ -23,7 +23,8 @@ in
       ];
 
       EnvironmentVariables = {
-        WEBUI_SECRET_KEY = "a1fb890f7ccfec5314f60e02e32fd1bcfbe00aa1261ef4cf3cead40a127b1072";
+        # TODO create new key and add to SOPS
+        # WEBUI_SECRET_KEY = "a1fb890f7ccfec5314f60e02e32fd1bcfbe00aa1261ef4cf3cead40a127b1072";
         DATA_DIR = "${config.home.homeDirectory}/.local/share/open-webui";
       };
 
