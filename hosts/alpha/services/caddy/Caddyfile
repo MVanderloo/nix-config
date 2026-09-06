@@ -1,0 +1,27 @@
+{
+	admin 127.0.0.1:2019
+}
+
+mvanderloo.com {
+	reverse_proxy https://10.116.0.3 {
+		header_up Host mvanderloo.com
+
+		transport http {
+			tls_server_name mvanderloo.com
+		}
+	}
+}
+
+shape-of-the-day.com {
+	reverse_proxy https://10.116.0.3 {
+		header_up Host shape-of-the-day.com
+
+		transport http {
+			tls_server_name shape-of-the-day.com
+		}
+	}
+}
+
+rss.mvanderloo.com {
+	reverse_proxy http://100.85.203.4:8082
+}
