@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
   imports = [
@@ -17,8 +17,6 @@
     username = "mv";
     homeDirectory = "/home/mv";
     stateVersion = "26.05";
-
-    # packages = with pkgs; [ ];
   };
 
   programs = {
