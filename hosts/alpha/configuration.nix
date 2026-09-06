@@ -28,6 +28,10 @@
     Defaults lecture = never
   '';
 
+  nix.settings.trusted-public-keys = [
+    "alpha-deploy-1:2ktAcE8zWZMsjmGTxnZF0LlWIlRPrwCW/iO6IqOkI9E="
+  ];
+
   programs.ssh.knownHosts.github = {
     hostNames = [ "github.com" ];
     publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
