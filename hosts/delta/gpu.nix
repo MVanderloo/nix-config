@@ -17,8 +17,8 @@ let
   steamWithNvidia32 = pkgs.steam.override {
     # Home Manager's generic-Linux GPU module currently exposes only the
     # native driver. Steam's 32-bit bootstrap needs the matching lib32 output.
-    extraLibraries = steamPkgs:
-      if steamPkgs.stdenv.hostPlatform.is32bit then [ nvidiaDriver.lib32 ] else [ ];
+    extraLibraries =
+      steamPkgs: if steamPkgs.stdenv.hostPlatform.is32bit then [ nvidiaDriver.lib32 ] else [ ];
   };
 in
 

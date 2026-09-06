@@ -35,8 +35,7 @@ in
   assertions = [
     {
       assertion =
-        deviceMac == null
-        || builtins.match "[[:xdigit:]]{2}(:[[:xdigit:]]{2}){5}" deviceMac != null;
+        deviceMac == null || builtins.match "[[:xdigit:]]{2}(:[[:xdigit:]]{2}){5}" deviceMac != null;
       message = "TRMNL Node Lite deviceMac must be a colon-separated MAC address";
     }
   ];
