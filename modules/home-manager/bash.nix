@@ -42,7 +42,7 @@
 
       initExtra = ''
         cd() {
-          builtin cd "$@" && ls
+          builtin cd "$@" && ls -a
         }
       '';
     };

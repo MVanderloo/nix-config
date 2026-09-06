@@ -1,4 +1,6 @@
 {
+  imports = [ ./shell.nix ];
+
   programs.zsh = {
     enable = true;
 
