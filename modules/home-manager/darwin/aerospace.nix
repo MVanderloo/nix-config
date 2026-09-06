@@ -1,4 +1,7 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
+let
+  vicinaeLogDir = "${config.xdg.stateHome}/vicinae";
+in
 {
   home.packages = [ pkgs.vicinae ];
 
@@ -11,8 +14,9 @@
       ];
       RunAtLoad = true;
       KeepAlive = true;
-      StandardOutPath = "/tmp/vicinae.log";
-      StandardErrorPath = "/tmp/vicinae.err.log";
+      StandardOutPath = "${vicinaeLogDir}/stdout.log";
+      StandardErrorPath = "${vicinaeLogDir}/stderr.log";
+      Umask = 63;
     };
   };
 

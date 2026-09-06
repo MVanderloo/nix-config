@@ -6,6 +6,7 @@
 }:
 let
   dataDir = "${config.xdg.dataHome}/open-webui";
+  logDir = "${config.xdg.stateHome}/open-webui";
 in
 {
   home.packages = [ openWebui ];
@@ -33,8 +34,9 @@ in
       KeepAlive = true;
       RunAtLoad = true;
 
-      StandardOutPath = "/tmp/open-webui.log";
-      StandardErrorPath = "/tmp/open-webui.err.log";
+      StandardOutPath = "${logDir}/stdout.log";
+      StandardErrorPath = "${logDir}/stderr.log";
+      Umask = 63;
     };
   };
 }

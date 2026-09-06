@@ -8,6 +8,7 @@
 
 let
   modelsDir = "${config.home.homeDirectory}/Models";
+  logDir = "${config.xdg.stateHome}/llama-swap";
   models = {
     "Qwen2.5 0.5B" = {
       file = "qwen2.5-0.5b-q4.gguf";
@@ -83,8 +84,9 @@ in
       ];
       KeepAlive = true;
       RunAtLoad = true;
-      StandardOutPath = "/tmp/llama-swap.log";
-      StandardErrorPath = "/tmp/llama-swap.err.log";
+      StandardOutPath = "${logDir}/stdout.log";
+      StandardErrorPath = "${logDir}/stderr.log";
+      Umask = 63;
     };
   };
 }
