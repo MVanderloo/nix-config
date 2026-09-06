@@ -1,10 +1,20 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  yubikeySshKey,
+  ...
+}:
 
 {
   home = {
     stateVersion = "26.05";
     username = "mv";
     homeDirectory = "/home/mv";
+
+    file.".ssh/authorized_keys" = {
+      force = true;
+      text = "${yubikeySshKey}\n";
+    };
 
     packages = with pkgs; [
       devenv

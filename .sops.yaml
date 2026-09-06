@@ -3,16 +3,6 @@ keys:
   - &theta age1ksteyguuh9m656srltrvyz5vj93amndlw9gjsqqnvrf6znk6kqxss4k7qm
 
 creation_rules:
-  - path_regex: secrets/theta-github-ssh-key$
-    key_groups:
-      - pgp:
-          - *pgp
-        age:
-          - *theta
-  - path_regex: secrets/omega-github-ssh-key$
-    key_groups:
-      - pgp:
-          - *pgp
   - path_regex: secrets/theta-hermes.yaml$
     key_groups:
       - pgp:

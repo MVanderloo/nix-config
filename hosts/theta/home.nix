@@ -1,6 +1,5 @@
 {
   config,
-  githubSshKey,
   pkgs,
   ...
 }:
@@ -41,10 +40,6 @@
       email = "me@mvanderloo.com";
     };
     nh.flake = "${config.home.homeDirectory}/nix-config";
-    ssh.settings."github.com" = {
-      IdentityFile = githubSshKey;
-      IdentitiesOnly = true;
-    };
   };
 
   services.syncthing.deviceName = "theta";

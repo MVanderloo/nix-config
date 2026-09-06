@@ -1,22 +1,34 @@
-{ pkgs, ... }:
+{ pkgs, yubikeySshKey, ... }:
+
+let
+  yubikeyIdentity = {
+    IdentitiesOnly = true;
+    IdentityFile = "~/.ssh/yubikey.pub";
+  };
+in
 {
   home.packages = with pkgs; [ openssh ];
 
-  services.ssh-agent.enable = true;
+  home.file.".ssh/yubikey.pub".text = "${yubikeySshKey}\n";
 
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
-    settings."*" = {
-      AddKeysToAgent = "yes";
-      Compression = true;
-      ServerAliveInterval = 0;
-      ServerAliveCountMax = 3;
-      HashKnownHosts = false;
-      UserKnownHostsFile = "~/.ssh/known_hosts";
-      ControlMaster = "auto";
-      ControlPath = "~/.ssh/master-%r@%h:%p";
-      ControlPersist = "10m";
+    settings = {
+      "*" = {
+        AddKeysToAgent = "no";
+        Compression = true;
+        ControlMaster = "auto";
+        ControlPath = "~/.ssh/master-%r@%h:%p";
+        ControlPersist = "10m";
+        ForwardAgent = false;
+        HashKnownHosts = false;
+        ServerAliveCountMax = 3;
+        ServerAliveInterval = 0;
+        UserKnownHostsFile = "~/.ssh/known_hosts";
+      };
+
+      "github.com" = yubikeyIdentity;
     };
   };
 }

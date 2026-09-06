@@ -1,4 +1,4 @@
-{ config, inputs, ... }:
+{ inputs, yubikeySshKey, ... }:
 
 {
   imports = [
@@ -30,8 +30,7 @@
     useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = {
-      inherit inputs;
-      githubSshKey = config.sops.secrets.github-ssh-key.path;
+      inherit inputs yubikeySshKey;
     };
   };
 }
