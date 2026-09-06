@@ -86,6 +86,17 @@
       };
     };
 
+    openssh = {
+      enable = true;
+      openFirewall = false;
+      settings = {
+        AllowUsers = [ "mv" ];
+        KbdInteractiveAuthentication = false;
+        PasswordAuthentication = false;
+        PermitRootLogin = "no";
+      };
+    };
+
     tailscale.extraSetFlags = [ "--ssh" ];
     fwupd.enable = true;
   };
