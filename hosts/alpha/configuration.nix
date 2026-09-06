@@ -13,6 +13,20 @@
   networking.firewall.enable = true;
   time.timeZone = "America/New_York";
 
+  zramSwap = {
+    enable = true;
+    memoryPercent = 100;
+    priority = 100;
+  };
+
+  swapDevices = [
+    {
+      device = "/persist/swapfile";
+      size = 1024;
+      priority = 10;
+    }
+  ];
+
   users = {
     mutableUsers = false;
 
