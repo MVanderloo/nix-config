@@ -1,15 +1,20 @@
-{ config, pkgs, ... }:
+{
+  config,
+  lib,
+  openWebui,
+  ...
+}:
 let
   dataDir = "${config.xdg.dataHome}/open-webui";
 in
 {
-  home.packages = [ pkgs.open-webui ];
+  home.packages = [ openWebui ];
 
   launchd.agents.open-webui = {
     enable = true;
     config = {
       ProgramArguments = [
-        "${pkgs.open-webui}/bin/open-webui"
+        (lib.getExe openWebui)
         "serve"
         "--host"
         "127.0.0.1"

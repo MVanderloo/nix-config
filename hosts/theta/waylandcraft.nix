@@ -1,12 +1,10 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
-  nixpkgs.config.allowUnfreePredicate =
-    pkg:
-    builtins.elem (lib.getName pkg) [
-      "discord"
-      "discord-unwrapped"
-    ];
+  nixpkgs.config.allowUnfreePackages = [
+    "discord"
+    "discord-unwrapped"
+  ];
 
   programs.waylandcraft-desktop = {
     enable = true;

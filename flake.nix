@@ -6,8 +6,6 @@
 
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
 
-    # waylandcraft-desktop.url = "path:/home/mv/waylandcraft-desktop";
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -34,135 +32,113 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # waylandcraft-desktop.url = "path:/home/mv/waylandcraft-desktop";
   };
 
   outputs =
     inputs@{
       self,
       nixpkgs,
-      nixpkgs-stable,
       home-manager,
       darwin,
       deploy-rs,
       ...
     }:
     let
-      yubikeySshKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMORzMFgBS/sBelTYYrsmJfQOalUdVb3Lz7HXHBzjsdL openpgp:0x4213379A";
-      adminPasswordSopsFile = ./secrets/admin-password.yaml;
+      linuxSystem = "x86_64-linux";
+      darwinSystem = "aarch64-darwin";
+      forAllSystems = nixpkgs.lib.genAttrs [
+        linuxSystem
+        darwinSystem
+      ];
 
-      sharedArgs = {
-        inherit adminPasswordSopsFile inputs yubikeySshKey;
+      secrets = {
+        adminPassword = ./secrets/admin-password.yaml;
+        thetaHermes = ./secrets/theta-hermes.yaml;
+        thetaTrmnl = ./secrets/theta-trmnl.yaml;
       };
 
-      overlay =
-        final: _:
-        let
-          system = final.stdenv.hostPlatform.system;
+      sshPublicKeys = {
+        yubikey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMORzMFgBS/sBelTYYrsmJfQOalUdVb3Lz7HXHBzjsdL openpgp:0x4213379A";
+      };
 
-          stablePkgs = import nixpkgs-stable {
-            inherit system;
+      commonArgs = {
+        inherit inputs sshPublicKeys;
+      };
 
-            config.allowUnfreePackages = [ "open-webui" ];
+      localOverlay = final: _previous: {
+        rayfish = final.callPackage ./packages/rayfish.nix { };
+      };
+      overlayModule = {
+        nixpkgs.overlays = [ localOverlay ];
+      };
+      linuxPkgs = nixpkgs.legacyPackages.${linuxSystem}.extend localOverlay;
+
+      mkNixos =
+        module:
+        nixpkgs.lib.nixosSystem {
+          system = linuxSystem;
+          specialArgs = commonArgs // {
+            inherit secrets;
           };
-        in
-        {
-          inherit (stablePkgs) llama-cpp open-webui;
-          rayfish = final.callPackage ./packages/rayfish.nix { };
+          modules = [
+            overlayModule
+            module
+          ];
         };
 
-      overlayModule = {
-        nixpkgs.overlays = [ overlay ];
-      };
+      mkDarwin =
+        module:
+        darwin.lib.darwinSystem {
+          system = darwinSystem;
+          specialArgs = commonArgs;
+          modules = [
+            overlayModule
+            module
+          ];
+        };
+
+      mkHome =
+        module:
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = linuxPkgs;
+          extraSpecialArgs = commonArgs;
+          modules = [ module ];
+        };
     in
     {
-      overlays.default = overlay;
+      overlays.default = localOverlay;
 
-      apps = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-darwin" ] (system: {
+      apps = forAllSystems (system: {
         deploy = deploy-rs.apps.${system}.default;
       });
 
-      nixosConfigurations.theta = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = sharedArgs;
-        modules = [
-          overlayModule
-          ./hosts/theta
-        ];
+      packages.${linuxSystem} = {
+        inherit (linuxPkgs) rayfish;
       };
 
-      nixosConfigurations.alpha = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = sharedArgs;
-        modules = [
-          overlayModule
-          ./hosts/alpha
-        ];
+      nixosConfigurations = {
+        alpha = mkNixos ./hosts/alpha;
+        theta = mkNixos ./hosts/theta;
       };
 
-      darwinConfigurations.work-mac = darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        specialArgs = sharedArgs;
-        modules = [
-          overlayModule
-          ./hosts/work-mac
-        ];
+      darwinConfigurations = {
+        work-mac = mkDarwin ./hosts/work-mac;
       };
 
       homeConfigurations = {
-        "mv@tau" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux.extend overlay;
-          extraSpecialArgs = sharedArgs;
-          modules = [ ./hosts/tau ];
-        };
-
-        "mv@delta" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux.extend overlay;
-          extraSpecialArgs = sharedArgs;
-          modules = [ ./hosts/delta ];
-        };
+        "mv@tau" = mkHome ./hosts/tau;
+        "mv@delta" = mkHome ./hosts/delta;
       };
 
-      deploy.nodes = {
-        alpha = {
-          hostname = "alpha";
-          sshUser = "mv";
-          interactiveSudo = true;
-          remoteBuild = false;
-
-          profiles.system = {
-            user = "root";
-            path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.alpha;
-          };
-        };
-
-        delta = {
-          hostname = "delta";
-          sshUser = "mv";
-          remoteBuild = true;
-
-          profiles.system = {
-            user = "mv";
-            path = deploy-rs.lib.x86_64-linux.activate.home-manager self.homeConfigurations."mv@delta";
-          };
-        };
-
-        theta = {
-          hostname = "theta";
-          sshUser = "mv";
-          interactiveSudo = true;
-          remoteBuild = true;
-
-          profiles.system = {
-            user = "root";
-            path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.theta;
-          };
-        };
+      deploy = import ./deploy.nix {
+        inherit deploy-rs;
+        inherit (self) homeConfigurations nixosConfigurations;
       };
 
-      checks.x86_64-linux = deploy-rs.lib.x86_64-linux.deployChecks self.deploy;
+      checks.${linuxSystem} = deploy-rs.lib.${linuxSystem}.deployChecks self.deploy;
 
-      formatter = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-darwin" ] (
-        sys: nixpkgs.legacyPackages.${sys}.nixfmt-tree
-      );
+      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
     };
 }

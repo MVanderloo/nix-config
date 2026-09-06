@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  secrets,
   ...
 }:
 
@@ -43,11 +44,11 @@ in
   sops = {
     secrets = {
       node-lite-secret-key = {
-        sopsFile = ../../../secrets/theta-trmnl.yaml;
+        sopsFile = secrets.thetaTrmnl;
         restartUnits = [ "trmnl-node-lite.service" ];
       };
       node-lite-device-access-token = {
-        sopsFile = ../../../secrets/theta-trmnl.yaml;
+        sopsFile = secrets.thetaTrmnl;
         restartUnits = [ "trmnl-node-lite.service" ];
       };
     };

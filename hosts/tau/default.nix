@@ -15,8 +15,6 @@
     ../../modules/home-manager/xdg.nix
   ];
 
-  nixpkgs.config.allowUnfree = true;
-
   nix = {
     package = pkgs.nix;
     distributedBuilds = true;

@@ -1,4 +1,10 @@
-{ config, pkgs, ... }:
+{
+  config,
+  lib,
+  llamaCpp,
+  pkgs,
+  ...
+}:
 
 let
   modelsDir = "${config.home.homeDirectory}/Models";
@@ -45,7 +51,7 @@ let
     m:
     let
       base = [
-        "${pkgs.llama-cpp}/bin/llama-server"
+        (lib.getExe' llamaCpp "llama-server")
         "--model"
         "${modelsDir}/${m.file}"
         "--port"

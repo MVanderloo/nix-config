@@ -1,4 +1,4 @@
-{ pkgs, yubikeySshKey, ... }:
+{ pkgs, sshPublicKeys, ... }:
 
 let
   yubikeyIdentity = {
@@ -9,7 +9,7 @@ in
 {
   home.packages = with pkgs; [ openssh ];
 
-  home.file.".ssh/yubikey.pub".text = "${yubikeySshKey}\n";
+  home.file.".ssh/yubikey.pub".text = "${sshPublicKeys.yubikey}\n";
 
   programs.ssh = {
     enable = true;

@@ -11,10 +11,11 @@
 {
   fetchurl,
   runCommand,
-  system,
+  stdenv,
 }:
 
 let
+  system = stdenv.hostPlatform.system;
   version = "0.3.0";
   release = "v${version}";
 

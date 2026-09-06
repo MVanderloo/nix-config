@@ -7,6 +7,11 @@ let
   user = "mi30175";
   proxy = "http://llproxy.llan.ll.mit.edu:8080";
   no_proxy = ".ll.mit.edu,.mit.edu,localhost,127.0.0.1";
+
+  stablePkgs = import inputs.nixpkgs-stable {
+    inherit (pkgs.stdenv.hostPlatform) system;
+    config.allowUnfreePackages = [ "open-webui" ];
+  };
 in
 {
   imports = [
@@ -20,7 +25,10 @@ in
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = {
+      llamaCpp = stablePkgs.llama-cpp;
+      openWebui = stablePkgs.open-webui;
+    };
     users.${user} = ./home.nix;
   };
 

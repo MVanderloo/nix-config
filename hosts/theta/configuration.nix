@@ -1,9 +1,9 @@
 {
-  adminPasswordSopsFile,
   config,
   lib,
   pkgs,
-  yubikeySshKey,
+  secrets,
+  sshPublicKeys,
   ...
 }:
 
@@ -18,7 +18,7 @@
       extraGroups = [ "wheel" ];
       hashedPasswordFile = config.sops.secrets."admin-password-hash".path;
       linger = true;
-      openssh.authorizedKeys.keys = [ yubikeySshKey ];
+      openssh.authorizedKeys.keys = [ sshPublicKeys.yubikey ];
     };
   };
 
@@ -74,7 +74,7 @@
     age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
 
     secrets."admin-password-hash" = {
-      sopsFile = adminPasswordSopsFile;
+      sopsFile = secrets.adminPassword;
       neededForUsers = true;
     };
   };

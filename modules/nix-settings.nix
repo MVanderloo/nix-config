@@ -1,3 +1,5 @@
+{ lib, pkgs, ... }:
+
 {
   nix = {
     settings = {
@@ -9,10 +11,21 @@
       use-xdg-base-directories = true;
     };
 
-    gc = {
-      automatic = true;
-      dates = "daily";
-      options = "--delete-older-than 10d";
-    };
+    gc =
+      {
+        automatic = true;
+        options = "--delete-older-than 10d";
+      }
+      // lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
+        dates = "daily";
+      }
+      // lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
+        interval = [
+          {
+            Hour = 3;
+            Minute = 15;
+          }
+        ];
+      };
   };
 }

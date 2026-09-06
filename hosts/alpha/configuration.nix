@@ -1,7 +1,7 @@
 {
-  adminPasswordSopsFile,
   config,
-  yubikeySshKey,
+  secrets,
+  sshPublicKeys,
   ...
 }:
 
@@ -20,7 +20,7 @@
       isNormalUser = true;
       extraGroups = [ "wheel" ];
       hashedPasswordFile = config.sops.secrets."admin-password-hash".path;
-      openssh.authorizedKeys.keys = [ yubikeySshKey ];
+      openssh.authorizedKeys.keys = [ sshPublicKeys.yubikey ];
     };
   };
 
@@ -60,7 +60,7 @@
     age.sshKeyPaths = [ "/persist/etc/ssh/ssh_host_ed25519_key" ];
 
     secrets."admin-password-hash" = {
-      sopsFile = adminPasswordSopsFile;
+      sopsFile = secrets.adminPassword;
       neededForUsers = true;
     };
   };

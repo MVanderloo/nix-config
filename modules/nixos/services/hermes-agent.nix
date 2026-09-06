@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  secrets,
+  ...
+}:
 
 let
   stateDirectory = "/var/lib/hermes-agent";
@@ -45,9 +50,9 @@ in
 {
   sops = {
     secrets = {
-      hermes-dashboard-password.sopsFile = ../../../secrets/theta-hermes.yaml;
-      hermes-dashboard-session-secret.sopsFile = ../../../secrets/theta-hermes.yaml;
-      hermes-openrouter-api-key.sopsFile = ../../../secrets/theta-hermes.yaml;
+      hermes-dashboard-password.sopsFile = secrets.thetaHermes;
+      hermes-dashboard-session-secret.sopsFile = secrets.thetaHermes;
+      hermes-openrouter-api-key.sopsFile = secrets.thetaHermes;
     };
 
     templates."hermes-agent.env" = {

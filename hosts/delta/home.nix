@@ -1,7 +1,7 @@
 {
   config,
   pkgs,
-  yubikeySshKey,
+  sshPublicKeys,
   ...
 }:
 
@@ -13,7 +13,7 @@
 
     file.".ssh/authorized_keys" = {
       force = true;
-      text = "${yubikeySshKey}\n";
+      text = "${sshPublicKeys.yubikey}\n";
     };
 
     packages = with pkgs; [
