@@ -6,17 +6,10 @@
     recursive = true;
   };
 
-  # home = {
-  #   shellAliases = {
-  #     vim = "nvim";
-  #     vimdiff = "nvim -d";
-  #   };
-  #
-  #   sessionVariables = {
-  #     EDITOR = "nvim";
-  #     VISUAL = "nvim";
-  #   };
-  # };
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    VISUAL = "nvim";
+  };
 
   programs.neovim = {
     enable = true;
