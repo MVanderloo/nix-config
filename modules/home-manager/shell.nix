@@ -65,6 +65,7 @@
   programs = {
     atuin = {
       enable = true;
+      flags = [ "--disable-up-arrow" ];
       forceOverwriteSettings = true;
       daemon.enable = true;
       settings = {
