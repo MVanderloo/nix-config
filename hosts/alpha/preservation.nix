@@ -41,7 +41,6 @@ in
       directories = [
         "/etc/nixos"
         "/srv"
-        "/var/lib/cloud"
         {
           directory = "/var/lib/containers";
           mode = "0700";
@@ -77,7 +76,10 @@ in
       ];
 
       unitConfig.DefaultDependencies = false;
-      serviceConfig.Type = "oneshot";
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+      };
 
       script = ''
         set -euo pipefail
