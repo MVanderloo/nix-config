@@ -1,16 +1,12 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended",
-    "docker:pinDigests"
-  ],
+  "extends": ["config:recommended", "docker:pinDigests"],
+  "enabledManagers": ["custom.regex"],
   "customManagers": [
     {
       "customType": "regex",
       "description": "Update OCI images in Nix modules",
-      "managerFilePatterns": [
-        "/\\.nix$/"
-      ],
+      "managerFilePatterns": ["/\\.nix$/"],
       "matchStrings": [
         "\\bimage\\s*=\\s*\"(?<depName>[^\"@\\s]+):(?<currentValue>[^\"@\\s]+)(?:@(?<currentDigest>sha256:[a-f0-9]{64}))?\""
       ],
