@@ -123,6 +123,18 @@
       };
 
       deploy.nodes = {
+        alpha = {
+          hostname = "alpha";
+          sshUser = "mv";
+          interactiveSudo = true;
+          remoteBuild = false;
+
+          profiles.system = {
+            user = "root";
+            path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.alpha;
+          };
+        };
+
         delta = {
           hostname = "delta";
           sshUser = "mv";
