@@ -1,5 +1,3 @@
-{ ... }:
-
 let
   biosGrubPartitionType = "21686148-6449-6E6F-744E-656564454649";
   mountOptions = [
