@@ -9,10 +9,8 @@ General
 - create standalone .bashrc, .tmux.conf, and .vimrc for copying onto servers
 - try new niri and aerospace keybindings to have better window movement behavior
 - nixpkgs multiverse
-- Update tmux / prompt to make it clear when I am in ssh or not
 - configure yazi: keybindings closer to nvim/oil
 - atuin global search very slow - may be because I'm building nodejs-slim from source
-- keymap for ephemeral floating btop window (bonus: keep it running so it's already populated?)
 - allow shell detect nerd fonts to change prompt
 - backup strategy
 - fix cursor in fish and nvim when using tmux and not from rootshell and not
@@ -20,82 +18,63 @@ General
 - cd_after_ls has different eza config than ls
 
 Secrets
-- per device SSH key
-- master GPG key stored on yubikeys for all secrets and SSH access
-- SOPS setup for per machine secrets
 - bootstrap procedure: create ssh, git auth, tailscale, onepassword, etc.
 
 Neovim
-- nvim [z for spell
 - neovim cold startup is bad
 - convert nvim config to nix (try nvf)
-- make neovim clipboard work through ssh
-- try 0.13 for new directory module
+- normal mode cursor in rootshell is line
 - figure out actually good diff settings
+- try 0.13
 
 Tmux
 - how can I name/preview sessions/windows better so I know what is happening
 - config for mobile UI
 - change color depending on local or remote tmux server
+- configure remote tmux sessions to connect to local clipboard
+- in bash shell, prefix+] adds the ~[200 stuff
+- holding Ctrl-d to scroll down will eventually hit the bottom, exit select, and close every fucking shell
 
 NixOS
 - installable ISO
-- disable password auth, only ssh key
 - fail2ban
-- only allow ssh over VPN
-- harden SSH config
 - automatic security updates
 - running nixos-rebuild over ssh breaks something
 - checkout nixos-hardware for custom hardware patches
 
 Theta
-- ensure firmware is updated
-- explore boot-to-network-ready optimizations (current baseline: wired network
-  online around 31 seconds after power-on; Tailscale around 33 seconds):
+- explore boot-to-network-ready optimizations (current baseline: wired network online around 31 seconds after power-on; Tailscale around 33 seconds):
   - reduce `boot.loader.timeout` from 5 to 1 second
-  - add `e1000e` to `boot.initrd.availableKernelModules` so Ethernet link
-    negotiation overlaps initrd startup
+  - add `e1000e` to `boot.initrd.availableKernelModules` so Ethernet link negotiation overlaps initrd startup
   - test BIOS Fast Boot and disable unused PXE/network/USB boot paths
   - consider static IPv4 only after reserving the address on the router
-  - keep `NetworkManager-wait-online` enabled and measure actual carrier, DHCP,
-    network-online, and Tailscale readiness after each change
+  - keep `NetworkManager-wait-online` enabled and measure actual carrier, DHCP, network-online, and Tailscale readiness after each change
 - configure remote builder
 - finish Wake-on-LAN setup for delta:
   - configure delta's one-hour idle suspend in Home Manager's Noctalia module:
-    - replace the legacy `noctalia:...` idle commands with the canonical v5
-      `lock`, `screen_off`, and `lock_and_suspend` actions
+    - replace the legacy `noctalia:...` idle commands with the canonical v5 `lock`, `screen_off`, and `lock_and_suspend` actions
     - keep lock at 300 seconds and screen-off at 360 seconds
-    - add `lock_and_suspend` at 3600 seconds and set `behavior_order` to
-      `[ "lock" "screen-off" "suspend" ]`
-  - activate the `mv@delta` Home Manager flake and validate the Noctalia config;
-    the current generation does not manage Niri/Noctalia and
-    `~/.config/noctalia/config.toml` is a dangling symlink
-  - enable magic-packet wake for delta's wired NetworkManager connection with
-    `sudo nmcli connection modify "Wired connection 1" 802-3-ethernet.wake-on-lan magic`
-    (this and the firmware setting are system-level bootstrap steps, not cleanly
-    managed by standalone Home Manager)
-  - reboot delta or reactivate its wired connection, then verify the profile with
-    `nmcli -g 802-3-ethernet.wake-on-lan connection show "Wired connection 1"`
-  - enable Wake-on-LAN/PCIe wake in delta's BIOS/UEFI, disable ErP if necessary,
-    and verify `sudo ethtool enp5s0` reports `Wake-on: g`
+    - add `lock_and_suspend` at 3600 seconds and set `behavior_order` to `[ "lock" "screen-off" "suspend" ]`
+  - enable magic-packet wake for delta's wired NetworkManager connection with `sudo nmcli connection modify "Wired connection 1" 802-3-ethernet.wake-on-lan magic` (this and the firmware setting are system-level bootstrap steps, not cleanly managed by standalone Home Manager)
+  - reboot delta or reactivate its wired connection, then verify the profile with `nmcli -g 802-3-ethernet.wake-on-lan connection show "Wired connection 1"`
+  - enable Wake-on-LAN/PCIe wake in delta's BIOS/UEFI, disable ErP if necessary, and verify `sudo ethtool enp5s0` reports `Wake-on: g`
   - confirm Noctalia caffeine/application idle inhibitors prevent automatic sleep
-  - create a RootsShell "Run Command over SSH" shortcut using the theta
-    profile and `/run/current-system/sw/bin/wake-delta`
-  - add the shortcut to the iOS Home Screen or Control Center and verify it
-    wakes delta from suspend before relying on it remotely
+  - create a RootsShell "Run Command over SSH" shortcut using the theta profile and `/run/current-system/sw/bin/wake-delta`
+  - add the shortcut to the iOS Home Screen or Control Center and verify it wakes delta from suspend before relying on it remotely
 - finish Hermes Agent setup after deploying its container:
   - rebuild theta so the SOPS template and container are restarted
-  - run `sudo podman exec -it --user hermes hermes-agent hermes auth add openai-codex`
-    and complete the ChatGPT device-code login
-  - if Tailscale Serve reports that HTTPS is disabled, follow its admin-console
-    link once to enable tailnet certificates, then restart
-    `hermes-agent-tailscale-serve.service`
-  - verify Hermes WebUI at https://theta.bongo-sidemirror.ts.net and use that
-    URL plus the dashboard password in Hermex
-  - verify the native dashboard at https://theta.bongo-sidemirror.ts.net:9443
-    from a tailnet device
+  - run `sudo podman exec -it --user hermes hermes-agent hermes auth add openai-codex` and complete the ChatGPT device-code login
+  - if Tailscale Serve reports that HTTPS is disabled, follow its admin-console link once to enable tailnet certificates, then restart `hermes-agent-tailscale-serve.service`
+  - verify Hermes WebUI at https://theta.bongo-sidemirror.ts.net and use that URL plus the dashboard password in Hermex
+  - verify the native dashboard at https://theta.bongo-sidemirror.ts.net:9443 from a tailnet device
 - finish Preservation rollout:
   - create and seed /persist, then enable it in a boot generation
   - make / and /var ephemeral while keeping /home persistent initially
   - remove one preserved path at a time, quarantine old state, and validate across two reboots
   - add a VM reboot test for preserved and ephemeral state
+- services: homepage, arcane, freshrss, SOTD,
+
+Omega:
+- create VM
+- setup config
+- services: caddy, pocketid
