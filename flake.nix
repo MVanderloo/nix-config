@@ -33,6 +33,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
+
     # waylandcraft-desktop.url = "path:/home/mv/waylandcraft-desktop";
   };
 
@@ -67,13 +69,14 @@
         inherit inputs sshPublicKeys;
       };
 
-      localOverlay = final: _previous: {
-        rayfish = final.callPackage ./packages/rayfish.nix { };
+      localOverlay = import ./packages {
+        inherit (inputs) neovim-nightly;
       };
       overlayModule = {
         nixpkgs.overlays = [ localOverlay ];
       };
       linuxPkgs = nixpkgs.legacyPackages.${linuxSystem}.extend localOverlay;
+      darwinPkgs = nixpkgs.legacyPackages.${darwinSystem}.extend localOverlay;
 
       mkNixos =
         module:
@@ -115,7 +118,10 @@
       });
 
       packages.${linuxSystem} = {
-        inherit (linuxPkgs) rayfish;
+        inherit (linuxPkgs) ladybird neovim-head rayfish;
+      };
+      packages.${darwinSystem} = {
+        inherit (darwinPkgs) neovim-head;
       };
 
       nixosConfigurations = {
