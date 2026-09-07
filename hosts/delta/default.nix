@@ -16,6 +16,7 @@
     ../../modules/home-manager/syncthing.nix
     ../../modules/home-manager/tailscale-ssh.nix
     ../../modules/home-manager/tmux.nix
+    ../../modules/home-manager/tsshd.nix
     ../../modules/home-manager/version-control.nix
     ../../modules/home-manager/xdg.nix
   ];
