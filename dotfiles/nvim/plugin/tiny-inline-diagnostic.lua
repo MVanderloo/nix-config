@@ -1,6 +1,4 @@
 Config.now(function()
-  vim.pack.add({ 'https://github.com/rachartier/tiny-inline-diagnostic.nvim' }, { confirm = false })
-
   vim.diagnostic.config {
     underline = true,
     severity_sort = true,

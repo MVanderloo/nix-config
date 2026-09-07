@@ -5,8 +5,6 @@ vim.g.maplocalleader = '\\'
 -- Setup global Config table with useful things
 _G.Config = {}
 
--- Load mini.nvim to use mini.misc
-vim.pack.add({ 'https://github.com/nvim-mini/mini.nvim' }, { confirm = false })
 local misc = require 'mini.misc'
 
 -- Execute immediately. For what must be executed during startup, like UI elements.

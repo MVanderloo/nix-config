@@ -1,6 +1,4 @@
 Config.later(function()
-  vim.pack.add({ 'https://github.com/stevearc/quicker.nvim' }, { confirm = false })
-
   local quicker = require 'quicker'
 
   quicker.setup {

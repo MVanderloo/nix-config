@@ -1,6 +1,4 @@
 -- to optimize startup we can delay loading unless there is a directory as an argument
-vim.pack.add({ 'https://github.com/stevearc/oil.nvim' }, { confirm = false })
-
 require('oil').setup {
   default_file_explorer = true,
   watch_for_changes = true,

@@ -1,11 +1,4 @@
 Config.now(function()
-  vim.pack.add({
-    { src = 'https://github.com/saghen/blink.cmp', version = 'v1.10.2' },
-    'https://github.com/xzbdmw/colorful-menu.nvim',
-    'https://github.com/mikavilpas/blink-ripgrep.nvim',
-    'https://github.com/rafamadriz/friendly-snippets',
-  }, { confirm = false })
-
   vim.lsp.config('*', { capabilities = require('blink.cmp').get_lsp_capabilities() })
 
   require('blink.cmp').setup {

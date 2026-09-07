@@ -1,5 +1,3 @@
-vim.pack.add({ 'https://github.com/a7lavinraj/fyler.nvim' }, { confirm = false })
-
 require('fyler').setup {
   auto_confirm_simple_mutation = true,
   use_as_default_explorer = false,

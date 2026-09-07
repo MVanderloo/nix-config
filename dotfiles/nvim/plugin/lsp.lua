@@ -1,8 +1,3 @@
-vim.pack.add({
-  'https://github.com/b0o/SchemaStore.nvim',
-  'https://github.com/neovim/nvim-lspconfig',
-}, { confirm = false })
-
 vim.lsp.enable {
   'ansiblels',
   'awk_ls',
@@ -13,7 +8,7 @@ vim.lsp.enable {
   'emmylua_ls',
   'fish_lsp',
   'gopls',
-  'html_ls',
+  'html',
   'jqls',
   'jsonls',
   'just',

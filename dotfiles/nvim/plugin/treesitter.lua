@@ -1,8 +1,3 @@
-vim.pack.add({
-  'https://github.com/nvim-treesitter/nvim-treesitter',
-  'https://github.com/nvim-treesitter/nvim-treesitter-textobjects',
-}, { confirm = false })
-
 require('nvim-treesitter-textobjects').setup {
   select = {
     lookahead = true,
@@ -48,31 +43,18 @@ require('nvim-treesitter-textobjects').setup {
 --   n_lines = 100,
 -- }
 
--- Enable treesitter features and auto-install parsers
+-- Enable treesitter features for parsers provided by Nix.
 vim.api.nvim_create_autocmd('FileType', {
   group = Config.my_augroup,
   desc = 'Enable treesitter',
   callback = function(args)
-    local treesitter = require 'nvim-treesitter'
     local lang = vim.treesitter.language.get_lang(args.match)
 
-    if not vim.list_contains(treesitter.get_available(), lang) then return end
+    if not lang or not vim.api.nvim_buf_is_valid(args.buf) then return end
+    if not pcall(vim.treesitter.start, args.buf, lang) then return end
 
-    local function enable(buf)
-      if not vim.api.nvim_buf_is_valid(buf) then return end
-      vim.treesitter.start(buf)
-      vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-      vim.wo[vim.fn.bufwinid(buf)].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-      vim.wo[vim.fn.bufwinid(buf)].foldmethod = 'expr'
-    end
-
-    if vim.list_contains(treesitter.get_installed(), lang) then
-      enable(args.buf)
-    else
-      -- async install, non-blocking; enable treesitter once it's ready
-      treesitter.install(lang):await(function(err)
-        if not err then enable(args.buf) end
-      end)
-    end
+    vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    vim.wo[vim.fn.bufwinid(args.buf)].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+    vim.wo[vim.fn.bufwinid(args.buf)].foldmethod = 'expr'
   end,
 })

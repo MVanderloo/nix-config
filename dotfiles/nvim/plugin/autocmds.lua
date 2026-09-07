@@ -74,21 +74,6 @@ vim.api.nvim_create_autocmd({ 'BufDelete', 'BufWipeout' }, {
   group = Config.my_augroup,
 })
 
--- Install tree-sitter parser
--- vim.api.nvim_create_autocmd('FileType', {
---   callback = function(event)
---     local lang = vim.treesitter.language.get_lang(event.match)
---     if not lang then return end
---     local ok = pcall(vim.treesitter.start, event.buf, lang)
---     if not ok then
---       local parsers = require 'nvim-treesitter.parsers'
---       if not parsers[lang] then return end
---       require('nvim-treesitter').install { lang }
---       vim.notify('Installing tree-sitter parser for ' .. lang, vim.log.levels.INFO)
---     end
---   end,
--- })
-
 -- -- Auto resize
 -- vim.api.nvim_create_autocmd('VimResized', {
 --   callback = function() vim.cmd.wincmd '=' end,

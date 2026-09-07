@@ -1,6 +1,4 @@
 Config.now(function()
-  vim.pack.add({ 'https://github.com/nvim-lualine/lualine.nvim' }, { confirm = false })
-
   local function macro_recording()
     local reg = vim.fn.reg_recording()
     if reg == '' then return '' end

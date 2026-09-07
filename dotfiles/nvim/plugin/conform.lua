@@ -1,6 +1,4 @@
 Config.later(function()
-  vim.pack.add({ 'https://github.com/stevearc/conform.nvim' }, { confirm = false })
-
   require('conform').setup {
     notify_on_error = true,
     default_format_opts = { lsp_format = 'fallback' },
