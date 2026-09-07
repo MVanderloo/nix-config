@@ -1,4 +1,4 @@
-{ inputs, sshPublicKeys, ... }:
+{ inputs, ... }:
 
 {
   imports = [
@@ -24,8 +24,5 @@
 
     useGlobalPkgs = true;
     useUserPackages = true;
-    extraSpecialArgs = {
-      inherit sshPublicKeys;
-    };
   };
 }
