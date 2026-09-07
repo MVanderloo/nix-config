@@ -40,7 +40,7 @@
         behavior_order = [
           "lock"
           "screen-off"
-          "hibernate"
+          "suspend"
         ];
         behavior = {
           lock = {
@@ -53,9 +53,8 @@
             enabled = true;
             timeout = 360;
           };
-          hibernate = {
-            action = "command";
-            command = "systemctl hibernate";
+          suspend = {
+            action = "lock_and_suspend";
             enabled = true;
             timeout = 3600;
           };
