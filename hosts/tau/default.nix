@@ -24,6 +24,7 @@
         hostName = "delta";
         protocol = "ssh-ng";
         sshUser = "mv";
+        systems = [ "x86_64-linux" ];
         maxJobs = 8;
         speedFactor = 2;
       }
@@ -31,6 +32,7 @@
         hostName = "theta";
         protocol = "ssh-ng";
         sshUser = "mv";
+        systems = [ "x86_64-linux" ];
         maxJobs = 8;
       }
     ];
