@@ -18,7 +18,7 @@
         '';
         ls_after_cd = {
           onVariable = "PWD";
-          body = "ls -a";
+          body = "la";
         };
       };
     };
