@@ -20,6 +20,13 @@
     distributedBuilds = true;
     buildMachines = [
       {
+        hostName = "delta";
+        protocol = "ssh-ng";
+        sshUser = "mv";
+        maxJobs = 8;
+        speedFactor = 2;
+      }
+      {
         hostName = "theta";
         protocol = "ssh-ng";
         sshUser = "mv";

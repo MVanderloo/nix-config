@@ -6,11 +6,23 @@
 
 let
   activate = deploy-rs.lib.x86_64-linux.activate;
+  tailnetDomain = "bongo-sidemirror.ts.net.";
 in
 {
+  # deploy-rs invokes OpenSSH directly, so reproduce the transport and host-key
+  # verification that the `tailscale ssh` wrapper normally supplies.
+  sshOpts = [
+    "-o"
+    "ProxyCommand=tailscale nc %h %p"
+    "-o"
+    "StrictHostKeyChecking=yes"
+    "-o"
+    "UserKnownHostsFile=%d/.config/tailscale/ssh_known_hosts"
+  ];
+
   nodes = {
     alpha = {
-      hostname = "alpha";
+      hostname = "alpha.${tailnetDomain}";
       sshUser = "mv";
       interactiveSudo = true;
       remoteBuild = false;
@@ -22,7 +34,7 @@ in
     };
 
     delta = {
-      hostname = "delta";
+      hostname = "delta.${tailnetDomain}";
       sshUser = "mv";
       remoteBuild = true;
 
@@ -33,7 +45,7 @@ in
     };
 
     theta = {
-      hostname = "theta";
+      hostname = "theta.${tailnetDomain}";
       sshUser = "mv";
       interactiveSudo = true;
       remoteBuild = true;
