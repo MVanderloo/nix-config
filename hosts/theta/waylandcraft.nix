@@ -18,7 +18,10 @@
       };
       desktop.logout = {
         key = "key.keyboard.q";
-        modifiers = [ "control" "super" ];
+        modifiers = [
+          "control"
+          "super"
+        ];
       };
     };
     extraPackages = with pkgs; [
