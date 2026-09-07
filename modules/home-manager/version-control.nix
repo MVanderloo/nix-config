@@ -72,7 +72,7 @@
         "Thumbs.db"
       ];
       settings = {
-        aliases = {
+        alias = {
           co = "checkout";
           sm = "submodule";
           sw = "switch";
