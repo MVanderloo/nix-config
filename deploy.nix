@@ -46,6 +46,17 @@ in
       };
     };
 
+    tau = {
+      hostname = "tau.${tailnetDomain}";
+      sshUser = "mv";
+      remoteBuild = true;
+
+      profiles.system = {
+        user = "mv";
+        path = activate.home-manager homeConfigurations."mv@tau";
+      };
+    };
+
     theta = {
       hostname = "theta.${tailnetDomain}";
       sshUser = "mv";
