@@ -1,19 +1,5 @@
 { pkgs, ... }:
 
-let
-  select-undo-nvim = pkgs.vimUtils.buildVimPlugin {
-    pname = "select-undo.nvim";
-    version = "0-unstable-2026-07-05";
-
-    src = pkgs.fetchFromGitHub {
-      owner = "sunnytamang";
-      repo = "select-undo.nvim";
-      rev = "d3e9658f8dbcbf67267f5d07505917543beac376";
-      hash = "sha256-mzSEyYEg4UQ8UCW4dAGooSlB9sSKS9PLu4gGJQZPV5E=";
-    };
-  };
-in
-
 {
   xdg.configFile."nvim" = {
     source = ../../dotfiles/nvim;
@@ -32,35 +18,33 @@ in
     vimAlias = true;
     vimdiffAlias = true;
 
-    plugins =
-      (with pkgs.vimPlugins; [
-        mini-nvim
+    plugins = with pkgs.vimPlugins; [
+      mini-nvim
 
-        blink-cmp
-        blink-ripgrep-nvim
-        bullets-vim
-        colorful-menu-nvim
-        conform-nvim
-        csvview-nvim
-        friendly-snippets
-        fyler-nvim
-        gitsigns-nvim
-        guess-indent-nvim
-        helpview-nvim
-        indent-blankline-nvim
-        lualine-nvim
-        markview-nvim
-        neovim-ayu
-        nvim-lspconfig
-        nvim-treesitter-textobjects
-        nvim-treesitter.withAllGrammars
-        oil-nvim
-        quicker-nvim
-        SchemaStore-nvim
-        tiny-inline-diagnostic-nvim
-        treesj
-      ])
-      ++ [ select-undo-nvim ];
+      blink-cmp
+      blink-ripgrep-nvim
+      bullets-vim
+      colorful-menu-nvim
+      conform-nvim
+      csvview-nvim
+      friendly-snippets
+      fyler-nvim
+      gitsigns-nvim
+      guess-indent-nvim
+      helpview-nvim
+      indent-blankline-nvim
+      lualine-nvim
+      markview-nvim
+      neovim-ayu
+      nvim-lspconfig
+      nvim-treesitter-textobjects
+      nvim-treesitter.withAllGrammars
+      oil-nvim
+      quicker-nvim
+      SchemaStore-nvim
+      tiny-inline-diagnostic-nvim
+      treesj
+    ];
 
     extraPackages = with pkgs; [
       curl
