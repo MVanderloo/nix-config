@@ -10,7 +10,7 @@
     ../../modules/home-manager/codex.nix
     ../../modules/home-manager/fish.nix
     ../../modules/home-manager/neovim.nix
-    ../../modules/home-manager/ssh.nix
+    ../../modules/home-manager/ssh-yubikey.nix
     ../../modules/home-manager/syncthing.nix
     ../../modules/home-manager/tmux.nix
     ../../modules/home-manager/version-control.nix

@@ -7,17 +7,19 @@
 let
   activate = deploy-rs.lib.x86_64-linux.activate;
   tailnetDomain = "bongo-sidemirror.ts.net.";
+  deploySshConfig = builtins.toFile "deploy-ssh.conf" ''
+    Host *.${tailnetDomain}
+      ProxyCommand tailscale nc %h %p
+      StrictHostKeyChecking yes
+      UserKnownHostsFile %d/.config/tailscale/ssh_known_hosts
+  '';
 in
 {
-  # deploy-rs invokes OpenSSH directly, so reproduce the transport and host-key
-  # verification that the `tailscale ssh` wrapper normally supplies.
+  # Keep the spaced ProxyCommand in a config file: deploy-rs flattens sshOpts
+  # when passing them to remote Nix builds through NIX_SSHOPTS.
   sshOpts = [
-    "-o"
-    "ProxyCommand=tailscale nc %h %p"
-    "-o"
-    "StrictHostKeyChecking=yes"
-    "-o"
-    "UserKnownHostsFile=%d/.config/tailscale/ssh_known_hosts"
+    "-F"
+    "${deploySshConfig}"
   ];
 
   nodes = {

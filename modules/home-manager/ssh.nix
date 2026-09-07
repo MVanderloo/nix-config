@@ -1,15 +1,7 @@
-{ pkgs, sshPublicKeys, ... }:
+{ pkgs, ... }:
 
-let
-  yubikeyIdentity = {
-    IdentitiesOnly = true;
-    IdentityFile = "~/.ssh/yubikey.pub";
-  };
-in
 {
   home.packages = with pkgs; [ openssh ];
-
-  home.file.".ssh/yubikey.pub".text = "${sshPublicKeys.yubikey}\n";
 
   programs.ssh = {
     enable = true;
@@ -27,8 +19,6 @@ in
         ServerAliveInterval = 0;
         UserKnownHostsFile = "~/.ssh/known_hosts";
       };
-
-      "github.com" = yubikeyIdentity;
     };
   };
 }

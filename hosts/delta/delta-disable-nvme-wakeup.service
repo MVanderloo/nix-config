@@ -1,0 +1,11 @@
+[Unit]
+Description=Disable spurious wakeups from delta's NVMe root port
+ConditionPathExists=/sys/bus/pci/devices/0000:00:01.1/power/wakeup
+Before=sleep.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/sh -c 'echo disabled > /sys/bus/pci/devices/0000:00:01.1/power/wakeup'
+
+[Install]
+WantedBy=sleep.target
