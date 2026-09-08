@@ -8,6 +8,7 @@
     ../../modules/home-manager/fish.nix
     ../../modules/home-manager/neovim.nix
     ../../modules/home-manager/python.nix
+    ../../modules/home-manager/ssh.nix
     ../../modules/home-manager/version-control.nix
     ../../modules/home-manager/xdg.nix
 
