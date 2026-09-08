@@ -22,6 +22,8 @@
       rayfish
       uv
     ];
+
+    sessionVariables.LOCAL_KEY = "${config.xdg.configHome}/nix/alpha-deploy.sec";
   };
 
   programs = {

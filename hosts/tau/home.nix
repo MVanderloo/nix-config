@@ -21,6 +21,8 @@
       rayfish
       vesktop
     ];
+
+    sessionVariables.LOCAL_KEY = "${config.xdg.configHome}/nix/alpha-deploy.sec";
   };
 
   programs = {

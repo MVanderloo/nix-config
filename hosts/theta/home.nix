@@ -23,6 +23,8 @@
     homeDirectory = "/home/mv";
     stateVersion = "26.05";
 
+    sessionVariables.LOCAL_KEY = "${config.xdg.configHome}/nix/alpha-deploy.sec";
+
     packages = with pkgs; [
       devenv
       opencode
