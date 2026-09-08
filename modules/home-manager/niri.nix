@@ -2,8 +2,6 @@
   wayland.windowManager.niri = {
     enable = true;
 
-    # Arch owns niri, its session file, systemd units, Xwayland, and portals.
-    # Home Manager only owns the compositor configuration.
     package = null;
     systemd.enable = false;
     xwaylandSatellitePackage = null;
