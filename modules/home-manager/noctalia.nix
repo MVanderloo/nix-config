@@ -65,14 +65,8 @@
 
       lockscreen_widgets = {
         enabled = true;
-        widget_order = [
-          "lockscreen-login-box@DP-1"
-          "clock"
-          "weather"
-        ];
         widget = {
           clock = {
-            cx = 960.0;
             cy = 200.0;
             output = "eDP-1";
             type = "clock";
@@ -81,16 +75,7 @@
               format = "{:%H:%M}";
             };
           };
-          "lockscreen-login-box@DP-1" = {
-            box_height = 70.0;
-            box_width = 400.0;
-            cx = 1280.0;
-            cy = 1321.0;
-            output = "DP-1";
-            type = "login_box";
-          };
           weather = {
-            cx = 960.0;
             cy = 880.0;
             output = "eDP-1";
             type = "weather";
@@ -120,10 +105,7 @@
         ];
       };
 
-      wallpaper = {
-        directory = "${../../assets/wallpapers}";
-        default.path = "${../../assets/wallpapers}/mecha-nostalgia.png";
-      };
+      wallpaper.directory = "${../../assets/wallpapers}";
     };
   };
 }

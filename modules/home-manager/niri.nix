@@ -15,26 +15,6 @@
 
       debug.honor-xdg-activation-with-invalid-serial = { };
 
-      input = {
-        keyboard = {
-          repeat-delay = 200;
-          repeat-rate = 20;
-          xkb.options = "caps:ctrl_modifier";
-        };
-
-        touchpad = {
-          tap = { };
-          natural-scroll = { };
-          accel-speed = -1.0;
-          accel-profile = "flat";
-        };
-
-        mouse = {
-          natural-scroll = { };
-          accel-speed = 0.2;
-        };
-      };
-
       prefer-no-csd = { };
       screenshot-path = "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png";
 
@@ -260,12 +240,5 @@
         }
       ];
     };
-
-    # These are intentionally mutable. local.kdl is host-local and Noctalia
-    # regenerates noctalia.kdl whenever its palette changes.
-    extraConfig = ''
-      include optional=true "local.kdl"
-      include optional=true "noctalia.kdl"
-    '';
   };
 }
