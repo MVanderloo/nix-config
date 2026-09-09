@@ -113,7 +113,7 @@
         theme_background = true;
         vim_keys = true;
         rounded_corners = true;
-        update_ms = 1000;
+        update_ms = 200;
         base_10_sizes = false;
         background_update = true;
         base_10_bitrate = "Auto";
