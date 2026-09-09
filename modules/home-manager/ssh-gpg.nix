@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  imports = [ ./ssh-yubikey.nix ];
+  imports = [ ./ssh.nix ];
 
   services.gpg-agent = {
     enable = true;

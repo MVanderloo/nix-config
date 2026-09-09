@@ -64,13 +64,10 @@
         thetaTrmnl = ./secrets/theta-trmnl.yaml;
       };
 
-      sshPublicKeys = {
-        yubikey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMORzMFgBS/sBelTYYrsmJfQOalUdVb3Lz7HXHBzjsdL openpgp:0x4213379A";
+      commonArgs = {
+        inherit inputs;
       };
 
-      commonArgs = {
-        inherit inputs sshPublicKeys;
-      };
 
       localOverlay = import ./packages {
         inherit (inputs) neovim-nightly;

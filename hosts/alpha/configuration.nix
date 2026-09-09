@@ -1,7 +1,6 @@
 {
   config,
   secrets,
-  sshPublicKeys,
   ...
 }:
 
@@ -34,7 +33,6 @@
       isNormalUser = true;
       extraGroups = [ "wheel" ];
       hashedPasswordFile = config.sops.secrets."admin-password-hash".path;
-      openssh.authorizedKeys.keys = [ sshPublicKeys.yubikey ];
     };
   };
 

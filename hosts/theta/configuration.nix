@@ -3,7 +3,6 @@
   lib,
   pkgs,
   secrets,
-  sshPublicKeys,
   ...
 }:
 
@@ -18,7 +17,6 @@
       extraGroups = [ "wheel" ];
       hashedPasswordFile = config.sops.secrets."admin-password-hash".path;
       linger = true;
-      openssh.authorizedKeys.keys = [ sshPublicKeys.yubikey ];
     };
   };
 

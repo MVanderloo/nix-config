@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  sshPublicKeys,
   ...
 }:
 
@@ -10,11 +9,6 @@
     stateVersion = "26.05";
     username = "mv";
     homeDirectory = "/home/mv";
-
-    file.".ssh/authorized_keys" = {
-      force = true;
-      text = "${sshPublicKeys.yubikey}\n";
-    };
 
     packages = with pkgs; [
       mosh
