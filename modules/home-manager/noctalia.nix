@@ -103,6 +103,7 @@
         corner_radius_scale = 0.0;
         font_family = "MesloLGM Nerd Font";
         niri_overview_type_to_launch_enabled = true;
+        setup_wizard_enabled = false;
         animation.speed = 1.2;
         panel.transparency_mode = "glass";
       };
