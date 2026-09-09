@@ -1,25 +1,29 @@
+---
 keys:
-  - &pgp "298958C755761091831D3ED9B7A966815CB4846F!"
+  - &pgp 298958C755761091831D3ED9B7A966815CB4846F!
   - &theta age1ksteyguuh9m656srltrvyz5vj93amndlw9gjsqqnvrf6znk6kqxss4k7qm
   - &alpha age1zxxf2k3tmve08qmmxm8pmn3jdwl0zndmw7k09st57dw4a0zs0shq0hmejg
-
+  - &tau age1gnc6kz5hrqytfjyaa7wvt6hmqn4460l8umccsqn07p6fxd5akquscxdyrh
 creation_rules:
-  - path_regex: secrets/admin-password.yaml$
+  - path_regex: secrets/atuin.yaml$
     key_groups:
-      - pgp:
-          - *pgp
+      - pgp: [*pgp]
         age:
           - *theta
           - *alpha
+          - *tau
+  - path_regex: secrets/admin-password.yaml$
+    key_groups:
+      - pgp: [*pgp]
+        age:
+          - *theta
+          - *alpha
+          - *tau
   - path_regex: secrets/theta-hermes.yaml$
     key_groups:
-      - pgp:
-          - *pgp
-        age:
-          - *theta
+      - pgp: [*pgp]
+        age: [*theta]
   - path_regex: secrets/theta-trmnl.yaml$
     key_groups:
-      - pgp:
-          - *pgp
-        age:
-          - *theta
+      - pgp: [*pgp]
+        age: [*theta]
