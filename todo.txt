@@ -36,6 +36,8 @@ NixOS
 - automatic security updates
 - running nixos-rebuild over ssh breaks something
 - checkout nixos-hardware for custom hardware patches
+- migrate to quadlet
+- restic backups
 
 Theta
 - explore boot-to-network-ready optimizations (current baseline: wired network online around 31 seconds after power-on; Tailscale around 33 seconds):
@@ -55,7 +57,18 @@ Theta
   - make / and /var ephemeral while keeping /home persistent initially
   - remove one preserved path at a time, quarantine old state, and validate across two reboots
   - add a VM reboot test for preserved and ephemeral state
-- services: homepage, arcane, freshrss, SOTD,
 
-Alpha:
-- pocketid
+Services:
+- caddy and pocketid on alpha
+- homepage
+- arcane or other container manager
+- observability: logs, metrics, traces, alerts,
+- git server
+- CI server
+- freshrss
+- paperless
+- SOTD
+- telegram
+- hermes agent
+- llama-swap
+- plane or other issue tracker
