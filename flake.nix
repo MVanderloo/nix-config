@@ -93,7 +93,7 @@
           modules = [
             overlayModule
             module
-            quadlet-nix
+            quadlet-nix.nixosModules.quadlet
           ];
         };
 
