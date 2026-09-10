@@ -18,6 +18,7 @@
     ./preservation.nix
 
     ./services/caddy
+    ./services/pocket-id
   ];
 
   home-manager = {
