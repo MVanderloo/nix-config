@@ -13,15 +13,15 @@
     ../../modules/nixos/console.nix
     ../../modules/nixos/mosh.nix
     ../../modules/nixos/penguin-plymouth.nix
-    ../../modules/nixos/services/hermes-agent.nix
     ../../modules/nixos/tailscale.nix
 
     ./configuration.nix
     ./disk.nix
     ./hardware-configuration.nix
     ./preservation.nix
-    # ./services/trmnl-node-lite.nix
     # ./waylandcraft.nix
+    # ./services/trmnl-node-lite.nix
+    ./services/hermes-agent.nix
   ];
 
   home-manager = {
