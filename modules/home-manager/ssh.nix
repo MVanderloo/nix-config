@@ -7,8 +7,6 @@
     enable = true;
     enableDefaultConfig = false;
     settings = {
-      # Allow GitHub authentication with local or forwarded agent keys.
-      "github.com".IdentitiesOnly = false;
       "*" = {
         AddKeysToAgent = "no";
         Compression = true;
@@ -21,6 +19,9 @@
         ServerAliveInterval = 0;
         UserKnownHostsFile = "~/.ssh/known_hosts";
       };
+
+      # Allow GitHub authentication with local or forwarded agent keys.
+      "github.com".IdentitiesOnly = false;
     };
   };
 }

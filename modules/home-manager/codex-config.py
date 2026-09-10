@@ -1,11 +1,11 @@
 """Apply managed Codex settings while retaining local state and TOML comments."""
 
 import os
-from collections.abc import MutableMapping
-from pathlib import Path
 import stat
 import sys
 import tempfile
+from collections.abc import MutableMapping
+from pathlib import Path
 
 import tomlkit
 

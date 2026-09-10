@@ -58,9 +58,7 @@
       (pkgs.writeShellApplication {
         name = "wake-delta";
         runtimeInputs = [ pkgs.wakeonlan ];
-        text = ''
-          exec wakeonlan -i 192.168.0.255 -p 9 10:ff:e0:c4:56:ed
-        '';
+        text = "exec wakeonlan -i 192.168.0.255 -p 9 10:ff:e0:c4:56:ed";
       })
     ];
   };
