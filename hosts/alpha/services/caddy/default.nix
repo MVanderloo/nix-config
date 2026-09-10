@@ -4,7 +4,7 @@
 
     containers.caddy = {
       containerConfig = {
-        image = "ghcr.io/11notes/caddy:2.11.4";
+        image = "ghcr.io/11notes/caddy:2.11.4@sha256:1d7827cc08df2ea2076b6bdc52401d3324797bdf190c0787e1c75260d56f60f3";
 
         exec = [
           "run"

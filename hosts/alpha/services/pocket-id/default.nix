@@ -41,7 +41,7 @@ in
       };
 
       containerConfig = {
-        image = "ghcr.io/11notes/pocket-id:2.14.0";
+        image = "ghcr.io/11notes/pocket-id:2.14.0@sha256:3b163b8018446ddce7014bfbe5fd608b99ccaee9bf565125a51db333b8ac394f";
 
         networks = [ config.virtualisation.quadlet.networks.auth.ref ];
 
