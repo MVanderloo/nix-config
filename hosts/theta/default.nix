@@ -25,7 +25,6 @@
   ];
 
   home-manager = {
-    backupFileExtension = "hm-backup";
     users.mv = ./home.nix;
 
     useGlobalPkgs = true;
