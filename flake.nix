@@ -33,6 +33,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    quadlet-nix.url = "github:SEIAROTg/quadlet-nix";
+
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
 
     # waylandcraft-desktop.url = "path:/home/mv/waylandcraft-desktop";
@@ -45,6 +47,7 @@
       home-manager,
       darwin,
       deploy-rs,
+      quadlet-nix,
       ...
     }:
     let
@@ -88,6 +91,7 @@
           modules = [
             overlayModule
             module
+            quadlet-nix
           ];
         };
 

@@ -1,30 +1,45 @@
-{ config, ... }:
-
 {
-  assertions = [
-    {
-      assertion = config.services.tailscale.enable;
-      message = "The transitional Caddy configuration requires Tailscale to reach FreshRSS on omega";
-    }
-  ];
-
-  services.caddy = {
+  virtualisation.quadlet = {
     enable = true;
-    configFile = ./Caddyfile;
-    openFirewall = true;
-  };
 
-  systemd.services.caddy = {
-    requires = [ "tailscaled.service" ];
-    after = [ "tailscaled.service" ];
+    containers.caddy = {
+      containerConfig = {
+        image = "ghcr.io/11notes/caddy:2.11.4";
+
+        exec = [
+          "run"
+          "--config"
+          "/caddy/etc/Caddyfile"
+        ];
+
+        volumes = [
+          "${./Caddyfile}:/caddy/etc/Caddyfile:ro"
+          "/var/lib/caddy:/caddy/var"
+        ];
+
+        publishPorts = [
+          "80:80"
+          "443:443"
+          "443:443/udp"
+        ];
+      };
+
+      serviceConfig.Restart = "always";
+    };
   };
 
   preservation.preserveAt."/persist".directories = [
     {
       directory = "/var/lib/caddy";
-      user = "caddy";
-      group = "caddy";
-      mode = "0700";
+      mode = "0750";
     }
   ];
+
+  networking.firewall = {
+    allowedTCPPorts = [
+      80
+      443
+    ];
+    allowedUDPPorts = [ 443 ];
+  };
 }
