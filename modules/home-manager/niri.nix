@@ -26,7 +26,7 @@
         "Mod+Space".spawn-sh = "noctalia msg panel-toggle launcher";
         "Mod+D".spawn-sh = "noctalia msg panel-toggle launcher";
         "Mod+Ctrl+Q".spawn-sh = "noctalia msg session lock";
-        "Mod+B".spawn-sh = "helium";
+        "Mod+B".spawn-sh = "helium-browser";
         "MOD+E".spawn-sh = "nautilus";
 
         "XF86AudioRaiseVolume" = {
