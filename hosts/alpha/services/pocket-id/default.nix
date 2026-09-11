@@ -8,6 +8,7 @@
 let
   encryptionKey = config.sops.secrets.pocket-id-encryption-key;
   secretUnits = lib.optional config.sops.useSystemdActivation "sops-install-secrets.service";
+  image = "ghcr.io/11notes/pocket-id:2.14.0@sha256:3b163b8018446ddce7014bfbe5fd608b99ccaee9bf565125a51db333b8ac394f";
 in
 {
   sops.secrets.pocket-id-encryption-key = {
@@ -47,14 +48,14 @@ in
       };
 
       containerConfig = {
-        image = "ghcr.io/11notes/pocket-id:2.14.0@sha256:3b163b8018446ddce7014bfbe5fd608b99ccaee9bf565125a51db333b8ac394f";
+        image = image;
 
         networks = [ config.virtualisation.quadlet.networks.auth.ref ];
 
         networkAliases = [ "pocket-id" ];
 
         environments = {
-          APP_URL = "https://id.example.com";
+          APP_URL = "https://id.mvanderloo.com";
 
           # Only connect trusted services to the auth network.
           TRUST_PROXY = "true";
