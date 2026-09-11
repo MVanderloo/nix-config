@@ -32,6 +32,11 @@
     kernelParams = [ "ahci.mask_port_map=0x2f" ];
   };
 
+  console = {
+    packages = [ pkgs.terminus_font ];
+    font = "ter-v24n";
+  };
+
   hardware.graphics.enable = true;
 
   networking = {
