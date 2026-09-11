@@ -8,6 +8,7 @@
     ./preservation.nix
 
     ../../modules/nix-settings.nix
+    ../../modules/nixos/audio.nix
     ../../modules/nixos/bash.nix
     ../../modules/nixos/console.nix
     ../../modules/nixos/mosh.nix

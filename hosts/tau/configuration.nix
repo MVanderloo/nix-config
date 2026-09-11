@@ -54,7 +54,6 @@
     };
   };
 
-
   console = {
     font = "ter-v32n";
     packages = [ pkgs.terminus_font ];
@@ -163,14 +162,6 @@
         PermitRootLogin = "no";
       };
     };
-    pipewire = {
-      enable = true;
-      alsa = {
-        enable = true;
-        support32Bit = true;
-      };
-      pulse.enable = true;
-    };
     printing.enable = true;
     tailscale.extraSetFlags = [ "--ssh" ];
     thermald.enable = true;
@@ -179,7 +170,6 @@
   };
 
   security = {
-    rtkit.enable = true;
     sudo = {
       # TODO: Require authentication again after unattended reinstall is stable.
       wheelNeedsPassword = false;
