@@ -20,27 +20,7 @@
     sessionVariables.LOCAL_KEY = "${config.xdg.configHome}/nix/alpha-deploy.sec";
   };
 
-  wayland.windowManager.niri = {
-    settings.input = {
-      keyboard = {
-        xkb.options = "caps:ctrl_modifier";
-        repeat-delay = 200;
-        repeat-rate = 20;
-      };
-
-      mouse = {
-        natural-scroll = { };
-        accel-speed = 0.2;
-      };
-    };
-
-    # These are intentionally mutable. local.kdl is host-local and Noctalia
-    # regenerates noctalia.kdl whenever its palette changes.
-    extraConfig = ''
-      include optional=true "local.kdl"
-      include optional=true "noctalia.kdl"
-    '';
-  };
+  services.syncthing.deviceName = "delta";
 
   programs = {
     atuin.settings.sync_address = "http://theta:8888";
@@ -101,5 +81,23 @@
     };
   };
 
-  services.syncthing.deviceName = "delta";
+  wayland.windowManager.niri = {
+    settings.input = {
+      keyboard = {
+        xkb.options = "caps:ctrl_modifier";
+        repeat-delay = 200;
+        repeat-rate = 20;
+      };
+
+      mouse = {
+        natural-scroll = { };
+        accel-speed = 0.2;
+      };
+    };
+
+    extraConfig = ''
+      include optional=true "local.kdl"
+      include optional=true "noctalia.kdl"
+    '';
+  };
 }
