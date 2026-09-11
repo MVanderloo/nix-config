@@ -22,6 +22,8 @@
           "443:443"
           "443:443/udp"
         ];
+
+        sysctl."net.ipv4.ip_unprivileged_port_start" = "80";
       };
 
       serviceConfig.Restart = "always";

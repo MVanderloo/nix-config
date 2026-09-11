@@ -75,6 +75,7 @@ in
         dropCapabilities = [ "ALL" ];
 
         # Retain the image's built-in health command.
+        healthCmd = ''["CMD","/usr/local/bin/pocket-id","healthcheck"]'';
         healthInterval = "60s";
         healthTimeout = "5s";
         healthStartPeriod = "30s";
