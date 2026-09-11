@@ -49,11 +49,12 @@ in
     tau = {
       hostname = "tau.${tailnetDomain}";
       sshUser = "mv";
-      remoteBuild = true;
+      interactiveSudo = true;
+      remoteBuild = false;
 
       profiles.system = {
-        user = "mv";
-        path = activate.home-manager homeConfigurations."mv@tau";
+        user = "root";
+        path = activate.nixos nixosConfigurations.tau;
       };
     };
 

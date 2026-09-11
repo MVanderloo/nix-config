@@ -1,24 +1,37 @@
-{ pkgs, ... }:
+{ inputs, ... }:
 
 {
   imports = [
-    ./home.nix
+    ./configuration.nix
+    ./disk.nix
+    ./hardware-configuration.nix
+    ./preservation.nix
 
-    ../../modules/home-manager/codex.nix
-    ../../modules/home-manager/fish.nix
-    ../../modules/home-manager/ghostty.nix
-    ../../modules/home-manager/neovim.nix
-    ../../modules/home-manager/ssh-gpg.nix
-    ../../modules/home-manager/syncthing.nix
-    ../../modules/home-manager/tailscale-ssh.nix
-    ../../modules/home-manager/tmux.nix
-    ../../modules/home-manager/tsshd.nix
-    ../../modules/home-manager/version-control.nix
-    ../../modules/home-manager/xdg.nix
+    ../../modules/nix-settings.nix
+    ../../modules/nixos/bash.nix
+    ../../modules/nixos/console.nix
+    ../../modules/nixos/mosh.nix
+    ../../modules/nixos/noctalia.nix
+    ../../modules/nixos/penguin-plymouth.nix
+    ../../modules/nixos/security.nix
+    ../../modules/nixos/tailscale.nix
+    ../../modules/nixos/zram-swap.nix
+
+    inputs.disko.nixosModules.disko
+    inputs.helium.nixosModules.default
+    inputs.home-manager.nixosModules.home-manager
+    inputs.nixos-hardware.nixosModules.lenovo-thinkpad-x1-7th-gen
+    inputs.preservation.nixosModules.preservation
+    inputs.sops-nix.nixosModules.sops
   ];
 
+  home-manager = {
+    users.mv = ./home.nix;
+    useGlobalPkgs = true;
+    useUserPackages = true;
+  };
+
   nix = {
-    package = pkgs.nix;
     distributedBuilds = true;
     buildMachines = [
       {

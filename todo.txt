@@ -1,7 +1,5 @@
 General
 - synchronized color schemes
-- gcroots
-- glab, gh
 - fix git aliases
 - look into workmux
 - fix bash and zsh configs so that there is feature parity. Bonus: respect XDG
@@ -13,46 +11,87 @@ General
 - allow shell detect nerd fonts to change prompt
 - fix cursor in fish and nvim when using tmux and not from rootshell and not
 - fix clipboard going through all of rootshell, ghostty, tmux, ssh, nvim
-
-Secrets
-- bootstrap procedure: create ssh, git auth, tailscale, onepassword, etc.
+  - Review: tmux clipboard/passthrough and Neovim's SSH OSC 52 provider are configured. Test copy and paste separately through each hop; include the remote-tmux TODO below.
+- verify tau's Plymouth password prompt is clearly visible after reboot
+- noctalia plugins: timer, home assistant, kde connect, calculator, password, emoji picker
+- convert shell.nix's custom Readline configuration to programs.readline while retaining the XDG inputrc path
+- finish Bat configuration and review eza options (existing inline TODOs in shell.nix)
+- try nix-direnv (direnv is enabled; nix-direnv is still commented out)
 
 Neovim
+- [P1] Stop BufLeave autosave from overwriting concurrent edits (dotfiles/nvim/plugin/autocmds.lua)
+  - Review: update with bang=true overwrote a newer external edit in a disposable reproduction. Remove the forced write and verify conflicts preserve the external contents.
 - neovim cold startup is bad
 - convert nvim config to nix (try nvf)
-- normal mode cursor in rootshell is line
 - figure out actually good diff settings
 - try 0.13
 
 Tmux
 - how can I name/preview sessions/windows better so I know what is happening
 - config for mobile UI
-- change color depending on local or remote tmux server
 - configure remote tmux sessions to connect to local clipboard
+  - Review: validate as part of the General clipboard task; the basic tmux/OSC 52 configuration exists.
 - in bash shell, prefix+] adds the ~[200 stuff
+  - Review: capture the exact terminal/SSH/tmux route and pasted bytes to isolate bracketed-paste handling.
 - holding Ctrl-d to scroll down will eventually hit the bottom, exit select, and close every fucking shell
+  - Review: copy-mode-vi C-d already disables scroll-exit before halfpage-down in dotfiles/tmux.conf. Reload the running server and verify held-key behavior before considering this resolved.
 
 NixOS
+- [P2] Fix standalone homeConfigurations."mv@tau" evaluation
+  - Review: hosts/tau/home.nix generates nix.conf without nix.package; activationPackage evaluation fails its assertion. Supply the package or remove the standalone Nix configuration as appropriate.
+- [P2] Make tau's distributed builders effective for the Nix daemon
+  - Review: builders are currently only in Home Manager's user configuration, while the daemon trusts only root. Configure builders and their SSH authentication at the NixOS level, then verify a remote build.
+- [P2] Restore tau's Syncthing identity during full-disk reinstall
+  - Review: peers pin tau's device ID, but the reinstall currently restores only its SSH/SOPS identity. Capture and restore Syncthing's cert.pem/key.pem before its first start, then verify the device ID and peer connection.
+- TODO: Encrypt disk
+  - Review: intentionally deferred until tau's unattended reinstall loop is stable; include swap/hibernation in the encryption work.
+  - Until then, confirm tau's TPM support and consider Tailscale's TPM-backed --encrypt-state daemon flag for its node credentials.
+  - after restoring LUKS, verify tau's Plymouth password prompt is clearly visible
+- TODO: Restore sudo authentication on tau after unattended reinstall is stable
+  - Review: wheelNeedsPassword=false is intentional for the current reinstall workflow; restore it with the later hardening work.
+- TODO: Add authenticated automatic reinstall resume with locking and in-flight operation checks
+  - Review: private phase checkpoints, verified SSH pins, install inputs, and Nix GC roots now survive controller failures from staging onward. A saved phase does not prove a remote install stopped; reconcile it before any destructive replay. There is no --resume command yet.
+- TODO: Migrate the remaining explicit path:$PWD Just recipes to the filtered-worktree launcher, then garbage-collect legacy raw source snapshots after confirming they have no live roots
+  - Review: reinstall now excludes root .git metadata before its first Nix import; older store snapshots and unrelated check/deploy/install recipes still need the same hygiene.
 - automatic security updates
+  - Review: define how flake.lock updates are proposed, checked, deployed, and rolled back; scheduled rebuilds alone will keep using the same pinned inputs.
 - running nixos-rebuild over ssh breaks something
+  - Review: needs a concrete command, error, and affected unit/session; distinguish activation failures from SSH disconnects and the deploy-rs workflow.
 - checkout nixos-hardware for custom hardware patches
 - migrate to quadlet
 - restic backups
 
+Validation
+- verify a complete tau coldboot -> RAM installer -> install -> reboot verification cycle
+  - Review: controller exports/checks, automatic host-key capture, explicit remote /bin/sh, Disko target validation, and SSH-to-age SOPS checks are implemented. Verify the complete cycle, including recovery-copy retention on failure and cleanup only after installed-system and reboot checks succeed.
+- run tau's existing Disko install/reboot test on a Linux host with KVM and include it in routine validation
+  - Review: hosts/tau/disk.nix already checks swap, stable machine-id, persistent markers, and root reset. Its derivation evaluates, but the current delta controller has no /dev/kvm or kvm Nix system feature, so run it on a KVM-capable Linux host.
+- add explicit evaluation checks for work-mac and both standalone Home Manager activation packages
+  - Review: routine flake checks missed the standalone mv@tau assertion. The review's explicit work-mac and mv@delta evaluations passed.
+
+Work mac
+- [P3] Create llama-swap and Vicinae log directories during Home Manager activation
+  - Review: their launch agents specify stdout/stderr paths under xdg.stateHome without creating the parent directories. Verify log capture on a fresh activation.
+- before enabling Open WebUI, replace its placeholder WEBUI_SECRET_KEY with a fresh SOPS-managed runtime secret and create its data, working, and log directories
+  - Review: this incorporates open-webui.nix's inline secret TODO; its launch agent is currently disabled.
+
 Theta
 - explore boot-to-network-ready optimizations (current baseline: wired network online around 31 seconds after power-on; Tailscale around 33 seconds):
+  - Review: preserve this recorded baseline and change one variable at a time; the review did not remeasure boot readiness.
   - reduce `boot.loader.timeout` from 5 to 1 second
   - add `e1000e` to `boot.initrd.availableKernelModules` so Ethernet link negotiation overlaps initrd startup
   - test BIOS Fast Boot and disable unused PXE/network/USB boot paths
   - consider static IPv4 only after reserving the address on the router
   - keep `NetworkManager-wait-online` enabled and measure actual carrier, DHCP, network-online, and Tailscale readiness after each change
 - finish Hermes Agent setup after deploying its container:
+  - Review: the module, SOPS templates, and restart hooks are configured. Deployment, device-code enrollment, and tailnet access still need runtime verification.
   - rebuild theta so the SOPS template and container are restarted
   - run `sudo podman exec -it --user hermes hermes-agent hermes auth add openai-codex` and complete the ChatGPT device-code login
   - if Tailscale Serve reports that HTTPS is disabled, follow its admin-console link once to enable tailnet certificates, then restart `hermes-agent-tailscale-serve.service`
   - verify Hermes WebUI at https://theta.bongo-sidemirror.ts.net and use that URL plus the dashboard password in Hermex
   - verify the native dashboard at https://theta.bongo-sidemirror.ts.net:9443 from a tailnet device
 - finish Preservation rollout:
+  - Review: preservation.nix declares the paths but enablePreservation is false. Enabling preservation does not itself make / and /var ephemeral; implement and test the reset mechanism separately.
   - create and seed /persist, then enable it in a boot generation
   - make / and /var ephemeral while keeping /home persistent initially
   - remove one preserved path at a time, quarantine old state, and validate across two reboots
