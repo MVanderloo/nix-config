@@ -57,7 +57,8 @@
 
     ghostty = {
       settings = {
-        adjust-cell-height = "5%";
+        adjust-cell-height = "20%";
+        adjust-cell-width = "10%";
         config-file = "?${config.home.homeDirectory}/.config/ghostty/local";
       };
       systemd.enable = true;
