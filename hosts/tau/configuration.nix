@@ -180,8 +180,6 @@
   };
 
   sops = {
-    # The installer must seed this key under /persist before activation.
-    age.sshKeyPaths = [ "/persist/etc/ssh/ssh_host_ed25519_key" ];
     secrets."admin-password-hash" = {
       sopsFile = secrets.adminPassword;
       neededForUsers = true;
