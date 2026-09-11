@@ -100,7 +100,6 @@
         { id = "gemma4:latest"; }
       ];
     };
-    # ssh.settings."github.com".IdentityFile = "~/.ssh/id_ed25519";
   };
 
   # Steam draws its own notification windows instead of using Noctalia.
