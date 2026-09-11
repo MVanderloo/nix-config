@@ -64,8 +64,6 @@
       systemd.enable = true;
     };
 
-    home-manager.enable = true;
-
     noctalia.settings = {
       lockscreen_widgets = {
         widget_order = [
