@@ -1,11 +1,8 @@
-{ config, lib, ... }:
+{ config, ... }:
 
 let
   stateDirectory = "/var/lib/home-assistant";
-  lanInterfaces = [
-    "eno1"
-    "wlp1s0"
-  ];
+  image = "ghcr.io/11notes/homeassistant:2026.9.1@sha256:8ed9d3329f31fdd1ea0ed5a05c497a3693760c99b4b5756b78fca8041d3acb6c";
 in
 {
   virtualisation.quadlet.containers.home-assistant = {
@@ -18,7 +15,7 @@ in
     };
 
     containerConfig = {
-      image = "ghcr.io/11notes/homeassistant:2026.9.1@sha256:8ed9d3329f31fdd1ea0ed5a05c497a3693760c99b4b5756b78fca8041d3acb6c";
+      image = image;
       environments.TZ = config.time.timeZone;
       readOnly = true;
       noNewPrivileges = true;
@@ -26,6 +23,7 @@ in
 
       # Host networking lets Home Assistant discover devices on the LAN.
       networks = [ "host" ];
+
       volumes = [
         # Keep existing configuration and SQLite data at the same host path.
         # This also hides the image's example PostgreSQL/proxy configuration.
@@ -47,17 +45,17 @@ in
     };
   };
 
-  networking.firewall.interfaces =
-    lib.genAttrs lanInterfaces (_: {
-      # SSDP and mDNS discovery.
-      allowedUDPPorts = [
-        1900
-        5353
-      ];
-    })
-    // {
-      tailscale0.allowedTCPPorts = [ 8123 ];
-    };
+  networking.firewall.interfaces = {
+    eno1.allowedUDPPorts = [
+      1900
+      5353
+    ];
+    wlp1s0.allowedUDPPorts = [
+      1900
+      5353
+    ];
+    tailscale0.allowedTCPPorts = [ 8123 ];
+  };
 
   systemd.tmpfiles.rules = [
     # Match the image's default UID/GID without overriding its user.

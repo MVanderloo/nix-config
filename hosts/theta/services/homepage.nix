@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
 let
+  image = "ghcr.io/gethomepage/homepage:v2.3.0@sha256:f820276654539cdc2cf0169f28188d135919a7984fad76d83d8d5ff1383f3705";
   port = 3000;
   tailscalePort = 8444;
   tailnetDomain = "bongo-sidemirror.ts.net";
@@ -144,7 +145,7 @@ in
     unitConfig.Description = "Homepage dashboard";
 
     containerConfig = {
-      image = "ghcr.io/gethomepage/homepage:v2.3.0@sha256:f820276654539cdc2cf0169f28188d135919a7984fad76d83d8d5ff1383f3705";
+      image = image;
       user = "1000:1000";
       readOnly = true;
       noNewPrivileges = true;
