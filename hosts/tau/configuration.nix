@@ -90,7 +90,6 @@
       brightnessctl
       playerctl
       smartmontools
-      system-config-printer
       usbutils
       xwayland-satellite
     ];
@@ -129,15 +128,6 @@
   };
 
   services = {
-    # Let NetworkManager and Tailscale register DNS per link, avoiding stale
-    # upstream resolvers in Tailscale's openresolv integration.
-    resolved.enable = true;
-
-    avahi = {
-      enable = true;
-      nssmdns4 = true;
-      openFirewall = true;
-    };
     fwupd.enable = true;
     gvfs.enable = true;
     hardware.bolt.enable = true;
@@ -145,9 +135,7 @@
     libinput.enable = true;
     openssh = {
       enable = true;
-      # Tau may use its built-in NIC, a USB dock, Wi-Fi, or Tailscale. SSH is
-      # key-only and restricted to mv below, so do not couple first access to
-      # a topology-derived interface name.
+
       openFirewall = true;
       hostKeys = [
         {
@@ -162,22 +150,13 @@
         PermitRootLogin = "no";
       };
     };
-    printing.enable = true;
     tailscale.extraSetFlags = [ "--ssh" ];
     thermald.enable = true;
     udisks2.enable = true;
     xserver.xkb.options = lib.mkForce "ctrl:nocaps,altwin:swap_lalt_lwin";
   };
 
-  security = {
-    sudo = {
-      # TODO: Require authentication again after unattended reinstall is stable.
-      wheelNeedsPassword = false;
-      extraConfig = ''
-        Defaults lecture = never
-      '';
-    };
-  };
+  security.sudo.extraConfig = "Defaults lecture = never";
 
   sops = {
     secrets."admin-password-hash" = {
