@@ -33,7 +33,7 @@ in
         "${stateDirectory}/.local:/homeassistant/var"
       ];
       tmpfses = [
-        "/homeassistant/tmp:uid=1000,gid=1000,mode=0700"
+        "/homeassistant/tmp:U,mode=0700"
       ];
       stopTimeout = 60;
     };
