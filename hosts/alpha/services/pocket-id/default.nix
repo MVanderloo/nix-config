@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  secrets,
+  ...
+}:
 
 let
   encryptionKey = config.sops.secrets.pocket-id-encryption-key;
@@ -6,6 +11,7 @@ let
 in
 {
   sops.secrets.pocket-id-encryption-key = {
+    sopsFile = secrets.alphaPocketId;
     uid = 1000;
     gid = 1000;
     mode = "0400";

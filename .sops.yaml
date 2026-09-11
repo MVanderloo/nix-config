@@ -19,6 +19,10 @@ creation_rules:
           - *theta
           - *alpha
           - *tau
+  - path_regex: secrets/alpha-pocket-id.yaml$
+    key_groups:
+      - pgp: [*pgp]
+        age: [*alpha]
   - path_regex: secrets/theta-hermes.yaml$
     key_groups:
       - pgp: [*pgp]
