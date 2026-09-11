@@ -17,6 +17,7 @@ General
 - convert shell.nix's custom Readline configuration to programs.readline while retaining the XDG inputrc path
 - finish Bat configuration and review eza options (existing inline TODOs in shell.nix)
 - try nix-direnv (direnv is enabled; nix-direnv is still commented out)
+- git signing using GPG locally and over ssh
 
 Neovim
 - [P1] Stop BufLeave autosave from overwriting concurrent edits (dotfiles/nvim/plugin/autocmds.lua)
