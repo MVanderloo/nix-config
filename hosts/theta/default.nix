@@ -25,6 +25,7 @@
     # ./services/trmnl-node-lite.nix
     ./services/hermes-agent.nix
     ./services/home-assistant.nix
+    ./services/homepage.nix
   ];
 
   home-manager = {

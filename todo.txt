@@ -100,7 +100,6 @@ Theta
 
 Services:
 - caddy and pocketid on alpha
-- homepage
 - arcane or other container manager
 - observability: logs, metrics, traces, alerts,
 - git server
@@ -109,6 +108,5 @@ Services:
 - paperless
 - SOTD
 - telegram
-- hermes agent
 - llama-swap
 - plane or other issue tracker
