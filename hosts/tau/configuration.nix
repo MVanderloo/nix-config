@@ -114,15 +114,6 @@
     };
     dconf.enable = true;
     fish.enable = true;
-    helium = {
-      enable = true;
-      # Helium already bundles uBlock Origin.
-      policies.ExtensionInstallForcelist = [
-        "aeblfdkhhhdcdjpifhhbdiojplfjncoa" # 1Password
-        "hfjbmagddngcpeloejdejnfgbamkjaeg" # Vimium C
-        "pkehgijcmpdhfbdbbnkijodmdjhbjlgp" # Privacy Badger
-      ];
-    };
     niri.enable = true;
     yubikey-manager.enable = true;
   };

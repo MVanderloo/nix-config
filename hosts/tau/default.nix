@@ -11,6 +11,7 @@
     ../../modules/nixos/audio.nix
     ../../modules/nixos/bash.nix
     ../../modules/nixos/console.nix
+    ../../modules/nixos/helium-browser.nix
     ../../modules/nixos/mosh.nix
     ../../modules/nixos/noctalia.nix
     ../../modules/nixos/penguin-plymouth.nix
