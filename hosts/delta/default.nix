@@ -1,7 +1,7 @@
 {
   imports = [
     ./home.nix
-    ./gpu.nix
+    ./gaming.nix
 
     ../../modules/home-manager/codex.nix
     ../../modules/home-manager/fish.nix

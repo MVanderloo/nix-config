@@ -103,24 +103,5 @@
     };
   };
 
-  # Steam draws its own notification windows instead of using Noctalia.
-  wayland.windowManager.niri.settings._children = [
-    {
-      window-rule = {
-        match._props = {
-          app-id = "^steam$";
-          title = "^notificationtoasts_[0-9]+_desktop$";
-        };
-        open-floating = true;
-        open-focused = false;
-        default-floating-position._props = {
-          x = 10;
-          y = 10;
-          relative-to = "bottom-right";
-        };
-      };
-    }
-  ];
-
   services.syncthing.deviceName = "delta";
 }
