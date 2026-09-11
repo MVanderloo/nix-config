@@ -44,24 +44,27 @@
 
   programs = {
     atuin.settings.sync_address = "http://theta:8888";
+
     git.settings.user = {
       name = "Michael van der Loo";
       email = "me@mvanderloo.com";
     };
+
     jujutsu.settings.user = {
       name = "Michael van der Loo";
       email = "me@mvanderloo.com";
     };
+
     ghostty = {
       settings = {
         adjust-cell-height = "5%";
         config-file = "?${config.home.homeDirectory}/.config/ghostty/local";
       };
-      systemd = {
-        enable = true;
-      };
+      systemd.enable = true;
     };
+
     home-manager.enable = true;
+
     noctalia.settings = {
       lockscreen_widgets = {
         widget_order = [
@@ -69,6 +72,7 @@
           "clock"
           "weather"
         ];
+
         widget = {
           clock.cx = 960.0;
           weather.cx = 960.0;
@@ -82,8 +86,10 @@
           };
         };
       };
+
       wallpaper.default.path = "${../../assets/wallpapers}/mecha-nostalgia.png";
     };
+
     pi-coding-agent.models.providers.ollama = {
       api = "openai-completions";
       apiKey = "ollama";
