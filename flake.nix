@@ -82,10 +82,6 @@
         thetaTrmnl = ./secrets/theta-trmnl.yaml;
       };
 
-      commonArgs = {
-        inherit inputs;
-      };
-
       localOverlay = import ./packages {
         inherit (inputs) neovim-nightly;
       };
@@ -120,9 +116,7 @@
         module:
         nixpkgs.lib.nixosSystem {
           system = linuxSystem;
-          specialArgs = commonArgs // {
-            inherit secrets;
-          };
+          specialArgs = { inherit inputs secrets; };
           modules = [
             overlayModule
             module
@@ -134,7 +128,7 @@
         module:
         darwin.lib.darwinSystem {
           system = darwinSystem;
-          specialArgs = commonArgs;
+          specialArgs = { inherit inputs; };
           modules = [
             overlayModule
             module
@@ -145,7 +139,7 @@
         module:
         home-manager.lib.homeManagerConfiguration {
           pkgs = linuxPkgs;
-          extraSpecialArgs = commonArgs;
+          extraSpecialArgs = { inherit inputs; };
           modules = [ module ];
         };
 
