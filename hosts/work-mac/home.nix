@@ -20,7 +20,6 @@
     stateVersion = "26.05";
     username = "mi30175";
     homeDirectory = "/Users/mi30175";
-    sessionVariables.LOCAL_KEY = "${config.xdg.configHome}/nix/alpha-deploy.sec";
     shellAliases = {
       copy = "pbcopy";
     };
