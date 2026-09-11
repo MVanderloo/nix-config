@@ -160,11 +160,9 @@ in
       publishPorts = [ "127.0.0.1:${toString port}:3000" ];
       volumes = [ "${configDirectory}:/app/config:ro" ];
       tmpfses = [
-        "/app/.next/cache:uid=1000,gid=1000,mode=0700"
-        "/tmp:uid=1000,gid=1000,mode=0700"
+        "/app/.next/cache:U,mode=0700"
+        "/tmp:U,mode=0700"
       ];
-
-      healthOnFailure = "kill";
     };
 
     serviceConfig = {
