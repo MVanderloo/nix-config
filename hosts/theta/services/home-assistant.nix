@@ -2,7 +2,7 @@
 
 let
   stateDirectory = "/var/lib/home-assistant";
-  image = "ghcr.io/11notes/homeassistant:2026.9.1@sha256:8ed9d3329f31fdd1ea0ed5a05c497a3693760c99b4b5756b78fca8041d3acb6c";
+  image = "ghcr.io/11notes/homeassistant:2026.9.2@sha256:1c0948a964b16c74453fee28a03207a0f927927c94fb1f8da3611e1bb32fa28e";
 in
 {
   virtualisation.quadlet.containers.home-assistant = {
