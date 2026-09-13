@@ -130,7 +130,7 @@ in
     };
 
     containers.hermes-webui = {
-      image = "ghcr.io/nesquena/hermes-webui:0.52.294@sha256:a6a86ac4d613fd137c3b805f25ee96b85366a314fee4881d3d275cddbf8bb1ed";
+      image = "ghcr.io/nesquena/hermes-webui:0.52.303@sha256:bd59de1f7375611845cb730a0f9b16c51c83337ae951e6aafea32b5277e3394f";
 
       environment = {
         HERMES_API_URL = "http://hermes-agent:8642";
