@@ -20,6 +20,7 @@
       rename
       rsync
       sd
+      sequoia-sq
       sl
       tuxedo
       unzip
