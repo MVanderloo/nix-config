@@ -18,6 +18,7 @@ General
 - finish Bat configuration and review eza options (existing inline TODOs in shell.nix)
 - try nix-direnv (direnv is enabled; nix-direnv is still commented out)
 - git signing using GPG locally and over ssh
+- explore sq for nicer gpg CLI
 
 Neovim
 - [P1] Stop BufLeave autosave from overwriting concurrent edits (dotfiles/nvim/plugin/autocmds.lua)
@@ -36,6 +37,7 @@ Tmux
   - Review: capture the exact terminal/SSH/tmux route and pasted bytes to isolate bracketed-paste handling.
 - holding Ctrl-d to scroll down will eventually hit the bottom, exit select, and close every fucking shell
   - Review: copy-mode-vi C-d already disables scroll-exit before halfpage-down in dotfiles/tmux.conf. Reload the running server and verify held-key behavior before considering this resolved.
+- https://github.com/Kristijan/flash-copy.tmux
 
 NixOS
 - [P2] Fix standalone homeConfigurations."mv@tau" evaluation
@@ -99,7 +101,6 @@ Theta
   - add a VM reboot test for preserved and ephemeral state
 
 Services:
-- caddy and pocketid on alpha
 - arcane or other container manager
 - observability: logs, metrics, traces, alerts,
 - git server
