@@ -91,7 +91,7 @@ in
     backend = "podman";
 
     containers.hermes-agent = {
-      image = "docker.io/nousresearch/hermes-agent:v2026.9.7@sha256:63bfb6d732f49a55d453e801057273785cc61e0f6ee43db3fa2f2a79846301b7";
+      image = "docker.io/nousresearch/hermes-agent:v2026.9.14@sha256:99641e57ec762c59e54cb44aa6746b7fc68c18b3c5ddb088af54234c613d9294";
 
       cmd = [
         "gateway"
