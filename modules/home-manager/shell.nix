@@ -22,7 +22,6 @@
       sd
       sequoia-sq
       sl
-      tuxedo
       unzip
       watchexec
       wget
