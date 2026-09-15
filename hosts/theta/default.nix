@@ -23,6 +23,7 @@
     # ./waylandcraft.nix
 
     # ./services/trmnl-node-lite.nix
+    ./services/atuin.nix
     ./services/hermes-agent.nix
     ./services/home-assistant.nix
     ./services/homepage

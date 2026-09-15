@@ -1,6 +1,5 @@
 {
   config,
-  lib,
   pkgs,
   secrets,
   ...
@@ -72,16 +71,6 @@
   };
 
   services = {
-    atuin = {
-      enable = true;
-      host = "127.0.0.1";
-      openRegistration = false;
-      database = {
-        createLocally = false;
-        uri = "sqlite:///var/lib/atuin/atuin.db";
-      };
-    };
-
     openssh = {
       enable = true;
       openFirewall = false;
@@ -95,61 +84,6 @@
 
     tailscale.extraSetFlags = [ "--ssh" ];
     fwupd.enable = true;
-  };
-
-  systemd = {
-    services = {
-      atuin.serviceConfig = {
-        DynamicUser = lib.mkForce false;
-        User = config.users.users.mv.name;
-        Group = config.users.users.mv.group;
-        StateDirectory = "atuin";
-        StateDirectoryMode = "0700";
-        Restart = "on-failure";
-        RestartSec = "5s";
-      };
-
-      atuin-tailscale-serve = {
-        description = "Expose Atuin through Tailscale Serve";
-        wantedBy = [ "multi-user.target" ];
-        requires = [
-          "atuin.service"
-          "tailscaled.service"
-        ];
-        after = [
-          "atuin.service"
-          "tailscaled.service"
-        ];
-
-        script = ''
-          ${pkgs.tailscale}/bin/tailscale serve \
-            --yes \
-            --bg \
-            --http=${toString config.services.atuin.port} \
-            --set-path=/ \
-            http://${config.services.atuin.host}:${toString config.services.atuin.port}
-        '';
-
-        preStop = ''
-          ${pkgs.tailscale}/bin/tailscale serve \
-            --yes \
-            --http=${toString config.services.atuin.port} \
-            --set-path=/ \
-            off
-        '';
-
-        serviceConfig = {
-          Type = "oneshot";
-          RemainAfterExit = true;
-          Restart = "on-failure";
-          RestartSec = "5s";
-        };
-      };
-    };
-
-    tmpfiles.rules = [
-      "Z /var/lib/atuin - ${config.users.users.mv.name} ${config.users.users.mv.group} - -"
-    ];
   };
 
   system.stateVersion = "26.05";
