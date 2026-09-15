@@ -1,0 +1,131 @@
+set nocompatible
+
+let mapleader = ' '
+let maplocalleader = "\\"
+
+set encoding=utf-8
+filetype plugin indent on
+syntax enable
+
+" Indentation and wrapping
+set tabstop=4
+set softtabstop=0
+set shiftwidth=0
+set expandtab
+set smartindent
+set wrap
+if exists('+breakindent')
+  set breakindent
+endif
+
+" Search
+set incsearch
+set ignorecase
+set smartcase
+set hlsearch
+
+" Appearance
+set number
+if exists('+relativenumber')
+  set relativenumber
+endif
+if exists('+termguicolors')
+  set termguicolors
+endif
+set scrolloff=10
+set cursorline
+set list
+set listchars=tab:│\ ,trail:·,nbsp:␣
+
+" Files and persistent undo
+set autowriteall
+set updatetime=500
+set noswapfile
+set nobackup
+
+if has('persistent_undo')
+  let s:state_home = empty($XDG_STATE_HOME) ? expand('~/.local/state') : $XDG_STATE_HOME
+  let s:undo_dir = s:state_home . '/vim/undo'
+  if !isdirectory(s:undo_dir)
+    call mkdir(s:undo_dir, 'p')
+  endif
+  if has('unix') && exists('*setfperm')
+    call setfperm(s:undo_dir, 'rwx------')
+  endif
+  execute 'set undodir=' . fnameescape(s:undo_dir . '//')
+  set undofile
+  unlet s:state_home s:undo_dir
+endif
+
+" Behavior
+set splitright
+set splitbelow
+set noerrorbells
+set iskeyword+=-
+set virtualedit=block
+set mouse=a
+set completeopt=menuone,noselect
+set timeoutlen=1000
+set ttimeoutlen=0
+set foldlevel=99
+set lazyredraw
+
+if has('clipboard') && (has('macunix') || !empty($DISPLAY) || !empty($WAYLAND_DISPLAY))
+  set clipboard=unnamedplus
+endif
+
+if has('patch-8.0.0000')
+  set diffopt=filler,internal,closeoff,algorithm:histogram
+else
+  set diffopt=filler,closeoff
+endif
+
+" Wrapped-line movement
+nnoremap <silent> <expr> j v:count == 0 ? 'gj' : 'j'
+nnoremap <silent> <expr> k v:count == 0 ? 'gk' : 'k'
+xnoremap <silent> <expr> j v:count == 0 ? 'gj' : 'j'
+xnoremap <silent> <expr> k v:count == 0 ? 'gk' : 'k'
+
+" Search, indentation, navigation, and saving
+nnoremap <silent> <Esc> :nohlsearch<CR>
+xnoremap < <gv
+xnoremap > >gv
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap G Gzz
+xnoremap G Gzz
+nnoremap [t gT
+nnoremap ]t gt
+nnoremap U <C-r>
+nnoremap <silent> <C-s> :update<CR>
+
+" Readline-style movement in insert and command-line modes
+inoremap <C-a> <Home>
+inoremap <C-e> <End>
+inoremap <C-d> <Delete>
+inoremap <C-f> <Right>
+inoremap <C-b> <Left>
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-d> <Delete>
+cnoremap <C-f> <Right>
+cnoremap <C-b> <Left>
+
+augroup personal_vimrc
+  autocmd!
+
+  " Notice external edits after returning to Vim.
+  autocmd FocusGained * checktime
+
+  " Save ordinary modified buffers without forcing over external edits.
+  autocmd BufLeave * if &l:modified && !&l:readonly && expand('%') !=# '' && &l:buftype ==# '' | silent update | endif
+  autocmd FocusLost * silent! wall
+
+  " Return to the last cursor position when reopening a file.
+  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line('$') | execute "normal! g`\"" | endif
+
+  " Match the basic Neovim filetype behavior.
+  autocmd FileType gitcommit setlocal wrap spell linebreak textwidth=72
+  autocmd FileType text setlocal wrap spell
+  autocmd FileType csv,tsv setlocal nowrap number norelativenumber
+augroup END

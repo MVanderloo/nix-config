@@ -3,14 +3,11 @@
 {
   imports = [
     ../../modules/home-manager/bash.nix
-    ../../modules/home-manager/codex.nix
-    ../../modules/home-manager/fish.nix
-    ../../modules/home-manager/neovim.nix
     ../../modules/home-manager/ssh.nix
-    ../../modules/home-manager/syncthing.nix
     ../../modules/home-manager/tmux.nix
     ../../modules/home-manager/tsshd.nix
     ../../modules/home-manager/version-control.nix
+    ../../modules/home-manager/vim.nix
     ../../modules/home-manager/xdg.nix
   ];
 
