@@ -23,6 +23,14 @@ creation_rules:
     key_groups:
       - pgp: [*pgp]
         age: [*alpha]
+  - path_regex: secrets/alpha-vikunja.yaml$
+    key_groups:
+      - pgp: [*pgp]
+        age: [*alpha]
+  - path_regex: secrets/theta-vikunja.yaml$
+    key_groups:
+      - pgp: [*pgp]
+        age: [*theta]
   - path_regex: secrets/theta-hermes.yaml$
     key_groups:
       - pgp: [*pgp]

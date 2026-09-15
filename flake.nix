@@ -71,8 +71,10 @@
       secrets = {
         adminPassword = ./secrets/admin-password.yaml;
         alphaPocketId = ./secrets/alpha-pocket-id.yaml;
+        alphaVikunja = ./secrets/alpha-vikunja.yaml;
         thetaHermes = ./secrets/theta-hermes.yaml;
         thetaTrmnl = ./secrets/theta-trmnl.yaml;
+        thetaVikunja = ./secrets/theta-vikunja.yaml;
       };
 
       localOverlay = import ./packages {

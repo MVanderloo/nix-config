@@ -1,3 +1,5 @@
+{ config, ... }:
+
 {
   virtualisation.quadlet = {
     enable = true;
@@ -16,6 +18,8 @@
           "${./Caddyfile}:/caddy/etc/Caddyfile:ro"
           "/var/lib/caddy:/caddy/var"
         ];
+
+        networks = [ config.virtualisation.quadlet.networks.auth.ref ];
 
         publishPorts = [
           "80:80"

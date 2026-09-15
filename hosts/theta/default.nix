@@ -26,6 +26,7 @@
     ./services/hermes-agent.nix
     ./services/home-assistant.nix
     ./services/homepage.nix
+    ./services/vikunja.nix
   ];
 
   home-manager = {

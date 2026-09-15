@@ -31,6 +31,13 @@ let
           };
         }
         {
+          Vikunja = {
+            icon = "vikunja.svg";
+            href = "https://todo.mvanderloo.com";
+            description = "Tasks and projects · theta";
+          };
+        }
+        {
           Atuin = {
             href = "http://${hostname}:${toString config.services.atuin.port}";
             description = "Shell history sync API";

@@ -22,6 +22,14 @@ shape-of-the-day.com {
 	}
 }
 
+id.mvanderloo.com {
+	reverse_proxy pocket-id:1411
+}
+
 rss.mvanderloo.com {
 	reverse_proxy http://100.85.203.4:8082
+}
+
+todo.mvanderloo.com {
+	reverse_proxy http://theta.bongo-sidemirror.ts.net:3456
 }
