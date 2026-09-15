@@ -29,6 +29,7 @@ in
       approval_policy = "on-request";
       approvals_reviewer = "auto_review";
       service_tier = "fast";
+      shell_environment_policy.set.NVIM_LOG_FILE = "/dev/null";
       tui.theme = "ansi";
 
       projects = {
