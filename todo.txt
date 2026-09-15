@@ -69,12 +69,6 @@ Validation
 - add explicit evaluation checks for work-mac and both standalone Home Manager activation packages
   - Review: routine flake checks missed the standalone mv@tau assertion. The review's explicit work-mac and mv@delta evaluations passed.
 
-Work mac
-- [P3] Create llama-swap and Vicinae log directories during Home Manager activation
-  - Review: their launch agents specify stdout/stderr paths under xdg.stateHome without creating the parent directories. Verify log capture on a fresh activation.
-- before enabling Open WebUI, replace its placeholder WEBUI_SECRET_KEY with a fresh SOPS-managed runtime secret and create its data, working, and log directories
-  - Review: this incorporates open-webui.nix's inline secret TODO; its launch agent is currently disabled.
-
 Theta
 - explore boot-to-network-ready optimizations (current baseline: wired network online around 31 seconds after power-on; Tailscale around 33 seconds):
   - Review: preserve this recorded baseline and change one variable at a time; the review did not remeasure boot readiness.
@@ -83,13 +77,6 @@ Theta
   - test BIOS Fast Boot and disable unused PXE/network/USB boot paths
   - consider static IPv4 only after reserving the address on the router
   - keep `NetworkManager-wait-online` enabled and measure actual carrier, DHCP, network-online, and Tailscale readiness after each change
-- finish Hermes Agent setup after deploying its container:
-  - Review: the module, SOPS templates, and restart hooks are configured. Deployment, device-code enrollment, and tailnet access still need runtime verification.
-  - rebuild theta so the SOPS template and container are restarted
-  - run `sudo podman exec -it --user hermes hermes-agent hermes auth add openai-codex` and complete the ChatGPT device-code login
-  - if Tailscale Serve reports that HTTPS is disabled, follow its admin-console link once to enable tailnet certificates, then restart `hermes-agent-tailscale-serve.service`
-  - verify Hermes WebUI at https://theta.bongo-sidemirror.ts.net and use that URL plus the dashboard password in Hermex
-  - verify the native dashboard at https://theta.bongo-sidemirror.ts.net:9443 from a tailnet device
 - finish Preservation rollout:
   - Review: preservation.nix declares the paths but enablePreservation is false. Enabling preservation does not itself make / and /var ephemeral; implement and test the reset mechanism separately.
   - create and seed /persist, then enable it in a boot generation
