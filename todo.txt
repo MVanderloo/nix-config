@@ -18,7 +18,6 @@ General
 - finish Bat configuration and review eza options (existing inline TODOs in shell.nix)
 - try nix-direnv (direnv is enabled; nix-direnv is still commented out)
 - git signing using GPG locally and over ssh
-- explore sq for nicer gpg CLI
 
 Neovim
 - [P1] Stop BufLeave autosave from overwriting concurrent edits (dotfiles/nvim/plugin/autocmds.lua)
@@ -31,8 +30,6 @@ Neovim
 Tmux
 - how can I name/preview sessions/windows better so I know what is happening
 - config for mobile UI
-- configure remote tmux sessions to connect to local clipboard
-  - Review: validate as part of the General clipboard task; the basic tmux/OSC 52 configuration exists.
 - in bash shell, prefix+] adds the ~[200 stuff
   - Review: capture the exact terminal/SSH/tmux route and pasted bytes to isolate bracketed-paste handling.
 - holding Ctrl-d to scroll down will eventually hit the bottom, exit select, and close every fucking shell
