@@ -1,0 +1,122 @@
+:root {
+  --home-accent: 203 166 247;
+  --home-surface: 24 24 37;
+  --home-text: 205 214 244;
+  --home-muted: 166 173 200;
+}
+
+html {
+  background: #11111b;
+}
+
+body {
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+#background {
+  background-position: center;
+  background-size: cover;
+}
+
+#information-widgets {
+  padding-top: clamp(0.5rem, 2vw, 1.5rem);
+}
+
+.information-widget-greeting {
+  color: rgb(var(--home-text));
+  font-weight: 650;
+  letter-spacing: -0.04em;
+  text-shadow: 0 2px 24px rgb(17 17 27 / 65%);
+}
+
+.service-group-name {
+  color: rgb(186 194 222) !important;
+  font-size: 0.76rem !important;
+  font-weight: 650 !important;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.service-group-icon {
+  opacity: 0.82;
+}
+
+.services-group {
+  margin-bottom: 0.9rem;
+}
+
+.service-card {
+  background: rgb(var(--home-surface) / 76%) !important;
+  border: 1px solid rgb(var(--home-text) / 10%);
+  border-radius: 0.9rem !important;
+  box-shadow: 0 14px 36px rgb(17 17 27 / 24%) !important;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease !important;
+}
+
+.service-card:hover {
+  background: rgb(30 30 46 / 90%) !important;
+  border-color: rgb(var(--home-accent) / 48%);
+  box-shadow: 0 18px 42px rgb(17 17 27 / 36%) !important;
+  transform: translateY(-2px);
+}
+
+.service-card:focus-within {
+  border-color: rgb(var(--home-accent) / 76%);
+  outline: 2px solid rgb(var(--home-accent) / 42%);
+  outline-offset: 2px;
+}
+
+.service-name {
+  color: rgb(var(--home-text));
+  letter-spacing: -0.01em;
+}
+
+.service-description {
+  color: rgb(var(--home-muted)) !important;
+  margin-top: 0.12rem;
+  opacity: 0.82;
+}
+
+.service-icon {
+  opacity: 0.94;
+  transition: transform 160ms ease;
+}
+
+.service-card:hover .service-icon {
+  transform: scale(1.06);
+}
+
+.service[id^="attention-"] .service-card {
+  border-color: rgb(249 226 175 / 24%);
+}
+
+.service[id^="attention-"] .service-card:hover {
+  border-color: rgb(249 226 175 / 62%);
+}
+
+#information-widgets .widget-container,
+#information-widgets .information-widget-search {
+  background: rgb(var(--home-surface) / 62%) !important;
+  border: 1px solid rgb(var(--home-text) / 9%);
+  border-radius: 0.9rem !important;
+  box-shadow: 0 10px 30px rgb(17 17 27 / 18%);
+}
+
+#footer #style {
+  opacity: 0.55;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-card,
+  .service-icon {
+    transition: none !important;
+  }
+
+  .service-card:hover {
+    transform: none;
+  }
+}
