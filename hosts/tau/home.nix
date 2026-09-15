@@ -11,7 +11,7 @@
     ../../modules/home-manager/pi.nix
     ../../modules/home-manager/python.nix
     ../../modules/home-manager/ssh-gpg.nix
-    ../../modules/home-manager/syncthing.nix
+    ./syncthing.nix
     ../../modules/home-manager/tailscale-ssh.nix
     ../../modules/home-manager/tmux.nix
     ../../modules/home-manager/tsshd.nix
@@ -68,8 +68,6 @@
     };
     noctalia.settings.wallpaper.default.path = "${../../assets/wallpapers}/catpuccin_landscape.png";
   };
-
-  services.syncthing.deviceName = "tau";
 
   xdg.mimeApps = {
     enable = true;

@@ -13,7 +13,6 @@
     ../../modules/home-manager/python.nix
     ../../modules/home-manager/shell.nix
     ../../modules/home-manager/ssh-gpg.nix
-    ../../modules/home-manager/syncthing.nix
     ../../modules/home-manager/tailscale-ssh.nix
     ../../modules/home-manager/tmux.nix
     ../../modules/home-manager/tsshd.nix

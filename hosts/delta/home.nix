@@ -5,6 +5,8 @@
 }:
 
 {
+  imports = [ ./syncthing.nix ];
+
   home = {
     stateVersion = "26.05";
     username = "mv";
@@ -19,8 +21,6 @@
 
     sessionVariables.LOCAL_KEY = "${config.xdg.configHome}/nix/alpha-deploy.sec";
   };
-
-  services.syncthing.deviceName = "delta";
 
   programs = {
     atuin.settings.sync_address = "http://theta:8888";

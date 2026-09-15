@@ -11,7 +11,7 @@
     ../../modules/home-manager/fish.nix
     ../../modules/home-manager/neovim.nix
     ../../modules/home-manager/ssh.nix
-    ../../modules/home-manager/syncthing.nix
+    ./syncthing.nix
     ../../modules/home-manager/tmux.nix
     ../../modules/home-manager/tsshd.nix
     ../../modules/home-manager/version-control.nix
@@ -44,6 +44,4 @@
     };
     nh.flake = "${config.home.homeDirectory}/nix-config";
   };
-
-  services.syncthing.deviceName = "theta";
 }
