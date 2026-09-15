@@ -1,5 +1,3 @@
-{ ... }:
-
 {
   imports = [
     ../../modules/home-manager/bash.nix
@@ -18,7 +16,14 @@
   };
 
   programs = {
-    atuin.settings.sync_address = "http://theta:8888";
+    atuin = {
+      # disable daemon to save memory
+      daemon.enable = false;
+      settings = {
+        search_mode = "fuzzy";
+        sync_address = "http://theta:8888";
+      };
+    };
     git.settings.user = {
       name = "Michael van der Loo";
       email = "me@mvanderloo.com";
@@ -27,6 +32,5 @@
       name = "Michael van der Loo";
       email = "me@mvanderloo.com";
     };
-    nh.flake = "/etc/nixos";
   };
 }

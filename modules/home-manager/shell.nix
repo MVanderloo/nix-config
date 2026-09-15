@@ -1,4 +1,9 @@
-{ pkgs, config, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 
 {
   home = {
@@ -67,7 +72,7 @@
       enable = true;
       flags = [ "--disable-up-arrow" ];
       forceOverwriteSettings = true;
-      daemon.enable = true;
+      daemon.enable = lib.mkDefault true;
       settings = {
         update_check = false;
 
@@ -85,7 +90,7 @@
           "command"
         ];
 
-        search_mode = "daemon-fuzzy";
+        search_mode = lib.mkDefault "daemon-fuzzy";
         secrets_filter = true;
         enter_accept = true;
         command_chaining = true;
