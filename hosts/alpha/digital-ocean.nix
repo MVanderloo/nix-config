@@ -1,4 +1,9 @@
-{ modulesPath, ... }:
+{
+  config,
+  lib,
+  modulesPath,
+  ...
+}:
 
 {
   imports = [
@@ -8,31 +13,41 @@
   # Let cloud-init render DigitalOcean's network configuration through networkd.
   networking.useDHCP = false;
 
-  # digital-ocean-config.nix already enables boot.growPartition.
-  fileSystems."/".autoResize = true;
+  # DigitalOcean's grow service assumes / is a disk-backed filesystem.
+  boot.growPartition = lib.mkForce false;
+  fileSystems."/".autoResize = false;
+
+  # Both DigitalOcean and Disko nominate this BIOS disk. Keep one entry while
+  # allowing Disko's test override (priority 70) to select the install disk.
+  boot.loader.grub.devices = lib.mkOverride 90 [ config.disko.devices.disk.main.device ];
 
   virtualisation.digitalOcean = {
     rebuildFromUserData = false;
     setSshKeys = false;
   };
 
-  services.cloud-init = {
-    enable = true;
-    network.enable = true;
+  services = {
+    # save memory
+    do-agent.enable = false;
 
-    settings = {
-      datasource_list = [
-        "ConfigDrive"
-        "DigitalOcean"
-      ];
+    cloud-init = {
+      enable = true;
+      network.enable = true;
 
-      updates.network.when = [ "boot" ];
+      settings = {
+        datasource_list = [
+          "ConfigDrive"
+          "DigitalOcean"
+        ];
 
-      preserve_hostname = true;
+        updates.network.when = [ "boot" ];
 
-      cloud_init_modules = [ ];
-      cloud_config_modules = [ ];
-      cloud_final_modules = [ ];
+        preserve_hostname = true;
+
+        cloud_init_modules = [ ];
+        cloud_config_modules = [ ];
+        cloud_final_modules = [ ];
+      };
     };
   };
 }

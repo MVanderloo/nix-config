@@ -8,6 +8,9 @@
       containerConfig = {
         image = "ghcr.io/11notes/caddy:2.11.4@sha256:1d7827cc08df2ea2076b6bdc52401d3324797bdf190c0787e1c75260d56f60f3";
 
+        # Caddy puts certificates and instance metadata in $XDG_DATA_HOME/caddy.
+        environments.XDG_DATA_HOME = "/caddy/var";
+
         exec = [
           "run"
           "--config"
@@ -17,6 +20,7 @@
         volumes = [
           "${./Caddyfile}:/caddy/etc/Caddyfile:ro"
           "/var/lib/caddy:/caddy/var"
+          "/var/lib/caddy-config:/caddy/backup"
         ];
 
         networks = [ config.virtualisation.quadlet.networks.auth.ref ];
@@ -34,9 +38,17 @@
     };
   };
 
-  preservation.preserveAt."/persist".directories = [
+  preservation.preserveAt."/nix/persist".directories = [
     {
       directory = "/var/lib/caddy";
+      user = "1000";
+      group = "1000";
+      mode = "0750";
+    }
+    {
+      directory = "/var/lib/caddy-config";
+      user = "1000";
+      group = "1000";
       mode = "0750";
     }
   ];

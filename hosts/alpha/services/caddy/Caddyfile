@@ -2,6 +2,12 @@
 	admin 127.0.0.1:2019
 }
 
+# The image's built-in health check only accesses this container-local listener.
+http://127.0.0.1:3000 {
+	bind 127.0.0.1
+	respond / 200
+}
+
 mvanderloo.com {
 	reverse_proxy https://10.116.0.3 {
 		header_up Host mvanderloo.com

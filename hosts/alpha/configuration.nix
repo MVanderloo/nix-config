@@ -20,7 +20,7 @@
 
   swapDevices = [
     {
-      device = "/persist/swapfile";
+      device = "/nix/persist/swapfile";
       size = 1024;
       priority = 10;
     }
@@ -70,7 +70,7 @@
   };
 
   sops = {
-    age.sshKeyPaths = [ "/persist/etc/ssh/ssh_host_ed25519_key" ];
+    age.sshKeyPaths = [ "/nix/persist/etc/ssh/ssh_host_ed25519_key" ];
 
     secrets."admin-password-hash" = {
       sopsFile = secrets.adminPassword;
