@@ -1,6 +1,25 @@
-{ pkgs, config, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
+  configPath = "${config.xdg.configHome}/codex/config.toml";
+  configFile = lib.removePrefix config.home.homeDirectory configPath;
+in
 
 {
+  # Seed a writable config once, then let Codex manage it.
+  home.file.${configFile}.enable = false;
+  home.activation.codexWritableConfig =
+    lib.hm.dag.entryBetween [ "linkGeneration" ] [ "writeBoundary" ]
+      ''
+        if [[ ! -e ${lib.escapeShellArg configPath} || -L ${lib.escapeShellArg configPath} ]]; then
+          run install -Dm600 ${config.home.file.${configFile}.source} ${lib.escapeShellArg configPath}
+        fi
+      '';
+
   home.packages = [ pkgs.codex ];
 
   programs.codex = {
@@ -9,8 +28,6 @@
     settings = {
       approval_policy = "on-request";
       approvals_reviewer = "auto_review";
-      model = "gpt-5.6-sol";
-      model_reasoning_effort = "max";
       service_tier = "fast";
       tui.theme = "ansi";
 
