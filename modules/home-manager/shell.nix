@@ -219,6 +219,7 @@
       extraOptions = [
         "--classify"
         "--color-scale=size"
+        "--color-scale-mode=fixed"
         "--group-directories-first"
         "--time-style=long-iso"
       ];
