@@ -45,7 +45,7 @@ in
             providers:
               pocketid:
                 name: Pocket ID
-                authurl: https://id.mvanderloo.com
+                authurl: https://auth.mvanderloo.com
                 clientid: vikunja
                 clientsecret: ${config.sops.placeholder.vikunja-oidc-client-secret}
                 scope: openid profile email

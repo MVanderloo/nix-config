@@ -99,7 +99,7 @@ let
         }
         {
           "Pocket ID" = {
-            href = "https://id.mvanderloo.com";
+            href = "https://auth.mvanderloo.com";
             description = "Fix reverse proxy: returns HTTP 502";
           };
         }

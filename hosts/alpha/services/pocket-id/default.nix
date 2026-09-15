@@ -111,7 +111,7 @@ in
         networkAliases = [ "pocket-id" ];
 
         environments = {
-          APP_URL = "https://id.mvanderloo.com";
+          APP_URL = "https://auth.mvanderloo.com";
 
           # Only connect trusted services to the auth network.
           TRUST_PROXY = "true";

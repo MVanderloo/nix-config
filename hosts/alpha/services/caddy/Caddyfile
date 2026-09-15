@@ -22,12 +22,12 @@ shape-of-the-day.com {
 	}
 }
 
-id.mvanderloo.com {
+auth.mvanderloo.com {
 	reverse_proxy pocket-id:1411
 }
 
 rss.mvanderloo.com {
-	reverse_proxy http://100.85.203.4:8082
+	reverse_proxy http://omega.bongo-sidemirror.ts.net:8082
 }
 
 todo.mvanderloo.com {
